@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./app-header.module.css";
 import {
   Logo,
   BurgerIcon,
@@ -7,30 +8,50 @@ import {
 }
 from "@ya.praktikum/react-developer-burger-ui-components";
 
-import headerStyles from "./app-header.module.css";
-
 export default function AppHeader() {
+  // spacing from praktikum UI kit
+  const headerSpacings = "pt-4 pb-4 ";
+  const navItemSpacings = "pt-4 pb-4 pr-5 pl-5 ";
+  const linkSpacings = "ml-2 ";
+
   return (
-    <header className="header">
-      <nav className="header__nav nav">
-        <div className="nav__nav-item nav-item">
-          <BurgerIcon className="nav-item__icon" type="primary" />
-          <a className="nav-item__link" href="#" target="_self">
+    <header className={headerSpacings + styles.header}>
+      <nav className={styles.nav + " " + styles["header__nav"]}>
+        <div className={navItemSpacings + styles["nav__item"]}>
+          <BurgerIcon type="primary" />
+          <a 
+            className={linkSpacings + styles["nav__item-link"]}
+            href="#"
+            target="_self"
+          >
             Конструктор
           </a>
         </div>
-        <div className="nav__nav-item nav-item">
-          <ListIcon className="nav-item__icon" type="primary" />
-          <a className="nav-item__link" href="#" target="_self">
+        <div className={navItemSpacings + styles["nav__item"]}>
+          <ListIcon type="secondary" />
+          <a 
+            className={linkSpacings + styles["nav__item-link"]}
+            href="#"
+            target="_self"
+          >
             Лента заказов
           </a>
         </div>
       </nav>
       <Logo className="header__logo" />
-      <div className="hearder__profile-link-block profile-link-block">
-        <ProfileIcon className="profile-link-block__icon" type="primary" />
-        <a className="profile-link-block__link" href="#" target="_self">
-          Лента заказов
+      <div className={
+          navItemSpacings +
+          styles["profile-link"] + " " +
+          styles["header__profile-link"]
+        }
+      >
+        <ProfileIcon type="secondary" />
+        <a 
+          className={linkSpacings + styles["nav__item-link"]}
+          href="#"
+          target="_self"
+        >
+          Личный кабинет
         </a>
       </div>
     </header>

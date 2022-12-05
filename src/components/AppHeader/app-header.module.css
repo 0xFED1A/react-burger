@@ -1,0 +1,51 @@
+/* styles for app-header component */
+
+/* styles for header block */
+.header {
+  background-color: var(--background);
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+/* styles for header__nav element */
+.header__nav {
+  margin-right: 112px;
+}
+
+/* styles for header__profile-link element */
+.header__profile-link {
+  margin-left: 289px;
+}
+
+/* styles for nav block */
+.nav {
+  display: flex;
+}
+
+/* styles for nav__item element */
+.nav__item {
+  display: flex;
+
+  align-items: center;
+}
+
+/* styles for nav__item-link element */
+.nav__item-link {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  text-decoration: none;
+
+  color: var(--text-primary-color);
+}
+
+/* styles for profile-link element */
+.profile-link {
+  display: flex;
+
+  align-items: center;
+}
