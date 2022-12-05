@@ -17,3 +17,11 @@
   font-style: normal;
   font-weight: 700;
 }
+
+/* Iceland Regular */
+@font-face {
+  font-family: "Iceland";
+  src: url("./fonts/Iceland-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+}
