@@ -1,6 +1,6 @@
-/* styles for app-header component */
+/* rules for app-header component */
 
-/* styles for header block */
+/* rules for header block */
 .header {
   background-color: var(--background);
 
@@ -10,42 +10,55 @@
   align-items: center;
 }
 
-/* styles for header__nav element */
+/* rules for header__nav element */
 .header__nav {
   margin-right: 112px;
 }
 
-/* styles for header__profile-link element */
+/* rules for header__profile-link element */
 .header__profile-link {
   margin-left: 289px;
 }
 
-/* styles for nav block */
+/* rules for nav block */
 .nav {
   display: flex;
 }
 
-/* styles for nav__item element */
+/* rules for nav__item element */
 .nav__item {
   display: flex;
 
   align-items: center;
 }
 
-/* styles for nav__item-link element */
+/* rules for nav__item-link element */
 .nav__item-link {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
   text-decoration: none;
 
   color: var(--text-primary-color);
 }
 
-/* styles for profile-link element */
+/* rules for nav__item-link_inactive modifier */
+.nav__item-link_inactive {
+  color: var(--text-inactive-color);
+}
+
+/* rules for profile-link block */
 .profile-link {
   display: flex;
 
   align-items: center;
+}
+
+/* rules for profile-link__link element */
+.profile-link__link {
+  text-decoration: none;
+
+  color: var(--text-primary-color);
+}
+
+/* rules for profile-link__link_inactive modifier */
+.profile-link__link_inactive {
+  color: var(--text-inactive-color);
 }
