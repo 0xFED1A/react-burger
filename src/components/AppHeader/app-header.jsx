@@ -15,7 +15,6 @@ export default function AppHeader() {
           </a>
         </div>
         <div className="nav__nav-item nav-item">
-          <BurgerIcon className="nav-item__icon" type="primary" />
           <a className="nav-item__link" href="#" target="_self">
             Лента заказов
           </a>
