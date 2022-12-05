@@ -1,4 +1,5 @@
 import React from 'react';
+import App from './components/App/app';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
@@ -7,6 +8,6 @@ const rootComponent = ReactDOM.createRoot(rootElement as HTMLElement);
 
 rootComponent.render(
   (
-    null
+    <App />
   )
 )
