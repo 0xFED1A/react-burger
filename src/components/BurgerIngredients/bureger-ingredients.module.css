@@ -1,0 +1,26 @@
+/* rules for burger-ingredients component */
+
+/* rules for burger-ingredients block*/
+.burger-ingredients {
+  width: 600px;
+
+  justify-self: end;
+}
+
+/* rules for burger-ingredients__heading element */
+.burger-ingredients__heading {
+}
+
+/* rules for burger-ingredients__tab-box element */
+.burger-ingredients__tab-box {
+
+}
+
+/* rules for heading block */
+.heading {
+}
+
+/* rules for tab-box block */
+.tab-box {
+  display: flex;
+}
