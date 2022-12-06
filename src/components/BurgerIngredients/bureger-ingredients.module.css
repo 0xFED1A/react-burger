@@ -7,20 +7,17 @@
   justify-self: end;
 }
 
-/* rules for burger-ingredients__heading element */
-.burger-ingredients__heading {
-}
-
-/* rules for burger-ingredients__tab-box element */
-.burger-ingredients__tab-box {
-
-}
-
 /* rules for heading block */
 .heading {
+  color: var(--text-primary-color);
 }
 
 /* rules for tab-box block */
 .tab-box {
   display: flex;
+}
+
+/* rules for ingredients-list block */
+.ingredients-list {
+
 }

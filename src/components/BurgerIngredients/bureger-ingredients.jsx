@@ -5,12 +5,17 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 export default function BurgerIngredients() {
-  // spacing from praktikum UI kit
+  // spacing and typography from praktikum UI kit
+  const headingTypography = "text text_type_main-large ";
+  const headingSpacings = "mt-10 ";
+  const tabBoxSpacings = "mt-5 ";
   return (
       <section className={styles["burger-ingredients"]}>
-        <h1>Соберите бургер</h1>
-        <div className={styles["tab-box"]}>
-          <Tab>Булки</Tab>
+        <h1 className={headingTypography + headingSpacings + styles.heading}>
+          Соберите бургер
+        </h1>
+        <div className={tabBoxSpacings + styles["tab-box"]}>
+          <Tab active={true}>Булки</Tab>
           <Tab>Соусы</Tab>
           <Tab>Начинки</Tab>
         </div>
