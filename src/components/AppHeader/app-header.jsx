@@ -7,11 +7,7 @@ import {
   ProfileIcon
 }
 from "@ya.praktikum/react-developer-burger-ui-components";
-
-// import custom styles as css-modules and UI kit styles
 import styles from "./app-header.module.css";
-import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css?module"
-import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css?module";
 
 // AppHeader component
 export default function AppHeader() {
