@@ -24,7 +24,7 @@ export default function AppHeader() {
             Конструктор
           </a>
         </div>
-        <div className={`pt-4 pb-4 pr-5 pl-5 ${styles["nav__item"]}`}>
+        <div className={`pt-4 pb-4 pr-5 pl-5 ml-2 ${styles["nav__item"]}`}>
           <ListIcon type="secondary" />
           <a
             className= {`text text_type_main-default ml-2
