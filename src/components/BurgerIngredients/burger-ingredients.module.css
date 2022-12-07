@@ -10,6 +10,8 @@
 /* rules for heading block */
 .heading {
   color: var(--text-primary-color);
+  margin: 0;
+  padding: 0;
 }
 
 /* rules for tab-box block */
@@ -17,7 +19,3 @@
   display: flex;
 }
 
-/* rules for ingredients-list block */
-.ingredients-list {
-
-}
