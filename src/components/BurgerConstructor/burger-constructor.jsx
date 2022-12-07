@@ -11,75 +11,111 @@ import styles from "./burger-constructor.module.css";
 export default function BurgerConstructor() {
   return (
     <section
-      className={`${styles["burger-constructor"]} mt-25`}
+      className={`${styles["burger-constructor"]} mt-25 pl-4 pr-4`}
       aria-label="Конструктор бургеров"
     >
-      <div>
-        <ConstructorElement
-          text="Краторная булка N-200i (верх)"
-          thumbnail="https://via.placeholder.com/80x40"
-          price={200}
-          isLocked={false}
-          type="top"
-          extraClass=""
-          handleClose={() => console.log("Handler Ok!")}
-        />
-        <ConstructorElement
-          text="Краторная булка N-200i (верх)"
-          thumbnail="https://via.placeholder.com/80x40"
-          price={200}
-          isLocked={false}
-          extraClass=""
-          handleClose={() => console.log("Handler Ok!")}
-        />
-        <ConstructorElement
-          text="Краторная булка N-200i (верх)"
-          thumbnail="https://via.placeholder.com/80x40"
-          price={200}
-          isLocked={false}
-          extraClass=""
-          handleClose={() => console.log("Handler Ok!")}
-        />
-        <ConstructorElement
-          text="Краторная булка N-200i (верх)"
-          thumbnail="https://via.placeholder.com/80x40"
-          price={200}
-          isLocked={false}
-          extraClass=""
-          handleClose={() => console.log("Handler Ok!")}
-        />
-        <ConstructorElement
-          text="Краторная булка N-200i (верх)"
-          thumbnail="https://via.placeholder.com/80x40"
-          price={200}
-          isLocked={false}
-          extraClass=""
-          handleClose={() => console.log("Handler Ok!")}
-        />
-        <ConstructorElement
-          text="Краторная булка N-200i (верх)"
-          thumbnail="https://via.placeholder.com/80x40"
-          price={200}
-          isLocked={false}
-          extraClass=""
-          handleClose={() => console.log("Handler Ok!")}
-        />
-        <ConstructorElement
-          text="Краторная булка N-200i (верх)"
-          thumbnail="https://via.placeholder.com/80x40"
-          price={200}
-          isLocked={false}
-          type="bottom"
-          extraClass=""
-          handleClose={() => console.log("Handler Ok!")}
-        />
+      <ul className={`${styles["ingredients-list"]}`}>
+        <li>
+          <article className={`${styles["ingredients-list__item"]}`}>
+            <DragIcon type="primary" />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              thumbnail="https://via.placeholder.com/80x40"
+              type="top"
+              price={200}
+              isLocked={false}
+              extraClass=""
+              handleClose={() => console.log("Handler Ok!")}
+            />
+          </article>
+        </li>
+        <li>
+          <article className={`${styles["ingredients-list__item"]}`}>
+            <DragIcon type="primary" />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              thumbnail="https://via.placeholder.com/80x40"
+              price={200}
+              isLocked={false}
+              extraClass=""
+              handleClose={() => console.log("Handler Ok!")}
+            />
+          </article>
+        </li>
+        <li>
+          <article className={`${styles["ingredients-list__item"]}`}>
+            <DragIcon type="primary" />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              thumbnail="https://via.placeholder.com/80x40"
+              price={200}
+              isLocked={false}
+              extraClass=""
+              handleClose={() => console.log("Handler Ok!")}
+            />
+          </article>
+        </li>
+        <li>
+          <article className={`${styles["ingredients-list__item"]}`}>
+            <DragIcon type="primary" />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              thumbnail="https://via.placeholder.com/80x40"
+              price={200}
+              isLocked={false}
+              extraClass=""
+              handleClose={() => console.log("Handler Ok!")}
+            />
+          </article>
+        </li>
+        <li>
+          <article className={`${styles["ingredients-list__item"]}`}>
+            <DragIcon type="primary" />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              thumbnail="https://via.placeholder.com/80x40"
+              price={200}
+              isLocked={false}
+              extraClass=""
+              handleClose={() => console.log("Handler Ok!")}
+            />
+          </article>
+        </li>
+        <li>
+          <article className={`${styles["ingredients-list__item"]}`}>
+            <DragIcon type="primary" />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              thumbnail="https://via.placeholder.com/80x40"
+              price={200}
+              isLocked={false}
+              extraClass=""
+              handleClose={() => console.log("Handler Ok!")}
+            />
+          </article>
+        </li>
+        <li>
+          <article className={`${styles["ingredients-list__item"]}`}>
+            <DragIcon type="primary" />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              thumbnail="https://via.placeholder.com/80x40"
+              type="bottom"
+              price={200}
+              isLocked={false}
+              extraClass=""
+              handleClose={() => console.log("Handler Ok!")}
+            />
+          </article>
+        </li>
+      </ul>
+      <div className={`${styles["ingredients-order-info"]} mt-10`}>
+        <span className="text text_type_digits-medium mr-2">610</span>
+        <CurrencyIcon type="primary"/>
+        <Button htmlType="button" type="primary" size="large" extraClass="mr-8 ml-10">
+          Оформить заказ
+        </Button>
       </div>
-      <DragIcon type="primary" />
-      <span>620</span>
-      <CurrencyIcon type="primary" />
-      <Button htmlType="button" type="primary" size="medium">
-        Оформить заказ
-      </Button>
     </section>
   )
 }
