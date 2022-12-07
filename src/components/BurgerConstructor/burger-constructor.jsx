@@ -14,8 +14,7 @@ export default function BurgerConstructor() {
       className={`${styles["burger-constructor"]} mt-25 pl-4 pr-4`}
       aria-label="Конструктор бургеров"
     >
-      <article className={`${styles["ingredients-list__item"]}`}>
-        <DragIcon type="primary" />
+      <article className={`${styles["ingredients-list__item"]} ml-8`}>
         <ConstructorElement
           text="Краторная булка N-200i (верх)"
           thumbnail="https://via.placeholder.com/80x40"
@@ -119,8 +118,7 @@ export default function BurgerConstructor() {
           </article>
         </li>
       </ul>
-      <article className={`${styles["ingredients-list__item"]}`}>
-        <DragIcon type="primary" />
+      <article className={`${styles["ingredients-list__item"]} ml-8`}>
         <ConstructorElement
           text="Краторная булка N-200i (верх)"
           thumbnail="https://via.placeholder.com/80x40"
