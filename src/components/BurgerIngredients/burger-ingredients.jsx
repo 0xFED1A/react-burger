@@ -6,24 +6,91 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import styles from "./burger-ingredients.module.css";
-import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css?module";
 
 export default function BurgerIngredients() {
-  // spacing and typography from praktikum UI kit
-  const headingTypography = " text text_type_main-large ";
-  const headingSpacings = " mt-10 ";
-  const tabBoxSpacings = " mt-5 ";
-
   return (
-      <section className={styles["burger-ingredients"]}>
-        <h1 className={styles.heading + headingSpacings}>
+      <section className={`${styles["burger-ingredients"]} mt-10`}>
+        <h1 className={`text text_type_main-large`}>
           Соберите бургер
         </h1>
-        <div className={tabBoxSpacings + styles["tab-box"]}>
+        <div className={`${styles["tab-box"]} mt-5`}>
           <Tab active={true}>Булки</Tab>
           <Tab>Соусы</Tab>
           <Tab>Начинки</Tab>
         </div>
+        <section className="mt-10">
+          <h3 className="text text_type_main-medium">Булки</h3> 
+          <ul className={`${styles.list} mt-6 p-4`}>
+            <li>
+              <article className={styles["list-item"]}>
+                <img 
+                  className="pl-4 pr-4 pb-2"
+                  src="https://via.placeholder.com/240x120" 
+                  alt="" 
+                />
+                <Counter count={1} size={"default"} extraClass="" />
+                <div className={`${styles["list-item__price-box"]} mb-2`}>
+                  <span className="text text_type_digits-default">20</span>
+                  <CurrencyIcon type="primary" />
+                </div>
+                <h5 className={`${styles["list-item__item-name"]} text text_type_main-default`}>
+                  Краторная булка N-200i
+                </h5>
+              </article> 
+            </li>
+            <li>
+              <article className={styles["list-item"]}>
+                <img 
+                  className="pl-4 pr-4 pb-2"
+                  src="https://via.placeholder.com/240x120" 
+                  alt="" 
+                />
+                <Counter count={1} size={"default"} extraClass="" />
+                <div className={`${styles["list-item__price-box"]} mb-2`}>
+                  <span className="text text_type_digits-default">20</span>
+                  <CurrencyIcon type="primary" />
+                </div>
+                <h5 className={`${styles["list-item__item-name"]} text text_type_main-default`}>
+                  Краторная булка N-200i
+                </h5>
+              </article> 
+            </li>
+            <li>
+              <article className={styles["list-item"]}>
+                <img 
+                  className="pl-4 pr-4 pb-2"
+                  src="https://via.placeholder.com/240x120" 
+                  alt="" 
+                />
+                <Counter count={1} size={"default"} extraClass="" />
+                <div className={`${styles["list-item__price-box"]} mb-2`}>
+                  <span className="text text_type_digits-default">20</span>
+                  <CurrencyIcon type="primary" />
+                </div>
+                <h5 className={`${styles["list-item__item-name"]} text text_type_main-default`}>
+                  Краторная булка N-200i
+                </h5>
+              </article> 
+            </li>
+            <li>
+              <article className={styles["list-item"]}>
+                <img 
+                  className="pl-4 pr-4 pb-2"
+                  src="https://via.placeholder.com/240x120" 
+                  alt="" 
+                />
+                <Counter count={1} size={"default"} extraClass="" />
+                <div className={`${styles["list-item__price-box"]} mb-2`}>
+                  <span className="text text_type_digits-default">20</span>
+                  <CurrencyIcon type="primary" />
+                </div>
+                <h5 className={`${styles["list-item__item-name"]} text text_type_main-default`}>
+                  Краторная булка N-200i
+                </h5>
+              </article> 
+            </li>
+          </ul>
+        </section>
       </section>
   )
 }
