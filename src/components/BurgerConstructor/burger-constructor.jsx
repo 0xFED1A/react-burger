@@ -14,6 +14,18 @@ export default function BurgerConstructor() {
       className={`${styles["burger-constructor"]} mt-25 pl-4 pr-4`}
       aria-label="Конструктор бургеров"
     >
+      <article className={`${styles["ingredients-list__item"]}`}>
+        <DragIcon type="primary" />
+        <ConstructorElement
+          text="Краторная булка N-200i (верх)"
+          thumbnail="https://via.placeholder.com/80x40"
+          type="top"
+          price={200}
+          isLocked={false}
+          extraClass=""
+          handleClose={() => console.log("Handler Ok!")}
+        />
+      </article>
       <ul className={`${styles["ingredients-list"]}`}>
         <li>
           <article className={`${styles["ingredients-list__item"]}`}>
@@ -21,7 +33,6 @@ export default function BurgerConstructor() {
             <ConstructorElement
               text="Краторная булка N-200i (верх)"
               thumbnail="https://via.placeholder.com/80x40"
-              type="top"
               price={200}
               isLocked={false}
               extraClass=""
@@ -100,7 +111,6 @@ export default function BurgerConstructor() {
             <ConstructorElement
               text="Краторная булка N-200i (верх)"
               thumbnail="https://via.placeholder.com/80x40"
-              type="bottom"
               price={200}
               isLocked={false}
               extraClass=""
@@ -109,6 +119,18 @@ export default function BurgerConstructor() {
           </article>
         </li>
       </ul>
+      <article className={`${styles["ingredients-list__item"]}`}>
+        <DragIcon type="primary" />
+        <ConstructorElement
+          text="Краторная булка N-200i (верх)"
+          thumbnail="https://via.placeholder.com/80x40"
+          type="bottom"
+          price={200}
+          isLocked={false}
+          extraClass=""
+          handleClose={() => console.log("Handler Ok!")}
+        />
+      </article>
       <div className={`${styles["ingredients-order-info"]} mt-10`}>
         <span className="text text_type_digits-medium mr-2">610</span>
         <CurrencyIcon type="primary"/>
