@@ -20,7 +20,7 @@ export default function BurgerConstructor() {
           thumbnail="https://via.placeholder.com/80x40"
           type="top"
           price={200}
-          isLocked={false}
+          isLocked={true}
           extraClass=""
           handleClose={() => console.log("Handler Ok!")}
         />
@@ -137,7 +137,7 @@ export default function BurgerConstructor() {
           thumbnail="https://via.placeholder.com/80x40"
           type="bottom"
           price={200}
-          isLocked={false}
+          isLocked={true}
           extraClass=""
           handleClose={() => console.log("Handler Ok!")}
         />
