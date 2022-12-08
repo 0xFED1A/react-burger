@@ -10,8 +10,11 @@ import styles from "./burger-ingredients.module.css";
 export default function BurgerIngredients(props) {
 
   // this function generates markup from passed props
-  function populateIngredients(ingredientType) {
-    const ingredientsList = props.ingredientsList.filter(item => item.type == ingredientType);
+  // populating ingredients list which available for
+  // burger construction
+  function populateAvailableIngredients(ingredientType) {
+    const ingredientsList =
+      props.ingredientsList.filter(item => item.type == ingredientType);
     return (
       <>
         {
@@ -55,19 +58,19 @@ export default function BurgerIngredients(props) {
           <section className="mt-10">
             <h3 className="text text_type_main-medium">Булки</h3>
             <ul className={`${styles.list} mt-6 pl-4 pr-4`}>
-              {populateIngredients("bun")}
+              {populateAvailableIngredients("bun")}
             </ul>
           </section>
           <section className="mt-10">
             <h3 className="text text_type_main-medium">Соусы</h3>
             <ul className={`${styles.list} mt-6 pl-4 pr-4`}>
-              {populateIngredients("sauce")}
+              {populateAvailableIngredients("sauce")}
             </ul>
           </section>
           <section className="mt-10">
             <h3 className="text text_type_main-medium">Основное</h3>
             <ul className={`${styles.list} mt-6 pl-4 pr-4`}>
-              {populateIngredients("main")}
+              {populateAvailableIngredients("main")}
             </ul>
           </section>
         </div>
