@@ -8,7 +8,7 @@ import {
 import styles from "./burger-constructor.module.css";
 import currIcon from "../../images/vector/currency_icon.svg";
 
-export default function BurgerConstructor() {
+export default function BurgerConstructor(props) {
 
   // this function calculates height to prevent
   // elements from "slicing" apart when scrolling
@@ -34,146 +34,73 @@ export default function BurgerConstructor() {
     }
   }
 
+  // this function generates markup from passed props
+  // populating ingredients list which allready in current burger
+  function populateUsedIngredients() {
+    const allIngredients = props.ingredientsList;
+    const topIngredient = allIngredients[0];
+    const middleIngredients =
+      [...allIngredients].slice(1, allIngredients.length - 1);
+    const bottomIngredient = allIngredients[allIngredients.length - 1];
+
+    return (
+      <>
+        <article className={`${styles["ingredients-list__item"]} ml-8 mb-4`}>
+          <ConstructorElement
+            text={topIngredient.name}
+            thumbnail={topIngredient.image}
+            type="top"
+            price={topIngredient.price}
+            isLocked={true}
+            extraClass=""
+            handleClose={() => console.log("Handler Ok!")}
+          />
+        </article>
+        <ul
+          className={`${styles["ingredients-list"]}`}
+          style={{maxHeight: calcSaneHeight(80, 16)}}
+          id="ingredients-list"
+        >
+          {middleIngredients.map(item =>(
+            <li className={`${styles["ingredients-list__item-wrapper"]}`}>
+              <article className={`${styles["ingredients-list__item"]}`}>
+                <DragIcon type="primary" />
+                <ConstructorElement
+                  text={item.name}
+                  thumbnail={item.image}
+                  price={item.price}
+                  isLocked={false}
+                  extraClass=""
+                  handleClose={() => console.log("Handler Ok!")}
+                />
+              </article>
+            </li>
+          ))}
+        </ul>
+        <article className={`${styles["ingredients-list__item"]} ml-8 mt-4`}>
+          <ConstructorElement
+            text={bottomIngredient.name}
+            thumbnail={bottomIngredient.image}
+            type="bottom"
+            price={bottomIngredient.price}
+            isLocked={true}
+            extraClass=""
+            handleClose={() => console.log("Handler Ok!")}
+          />
+        </article>
+      </>
+    )
+  }
+
   return (
     <section
       className={`${styles["burger-constructor"]} mt-25 pl-4 pr-4`}
       aria-label="Конструктор бургеров"
     >
-      <article className={`${styles["ingredients-list__item"]} ml-8 mb-4`}>
-        <ConstructorElement
-          text="Краторная булка N-200i (верх)"
-          thumbnail="https://via.placeholder.com/80x40"
-          type="top"
-          price={200}
-          isLocked={true}
-          extraClass=""
-          handleClose={() => console.log("Handler Ok!")}
-        />
-      </article>
-      <ul 
-        className={`${styles["ingredients-list"]}`}
-        style={{maxHeight: calcSaneHeight(80, 16)}}
-        id="ingredients-list"
-      >
-        <li className={`${styles["ingredients-list__item-wrapper"]}`}>
-          <article className={`${styles["ingredients-list__item"]}`}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              thumbnail="https://via.placeholder.com/80x40"
-              price={200}
-              isLocked={false}
-              extraClass=""
-              handleClose={() => console.log("Handler Ok!")}
-            />
-          </article>
-        </li>
-        <li className={`${styles["ingredients-list__item-wrapper"]}`}>
-          <article className={`${styles["ingredients-list__item"]}`}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              thumbnail="https://via.placeholder.com/80x40"
-              price={200}
-              isLocked={false}
-              extraClass=""
-              handleClose={() => console.log("Handler Ok!")}
-            />
-          </article>
-        </li>
-        <li className={`${styles["ingredients-list__item-wrapper"]}`}>
-          <article className={`${styles["ingredients-list__item"]}`}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              thumbnail="https://via.placeholder.com/80x40"
-              price={200}
-              isLocked={false}
-              extraClass=""
-              handleClose={() => console.log("Handler Ok!")}
-            />
-          </article>
-        </li>
-        <li className={`${styles["ingredients-list__item-wrapper"]}`}>
-          <article className={`${styles["ingredients-list__item"]}`}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              thumbnail="https://via.placeholder.com/80x40"
-              price={200}
-              isLocked={false}
-              extraClass=""
-              handleClose={() => console.log("Handler Ok!")}
-            />
-          </article>
-        </li>
-        <li className={`${styles["ingredients-list__item-wrapper"]}`}>
-          <article className={`${styles["ingredients-list__item"]}`}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              thumbnail="https://via.placeholder.com/80x40"
-              price={200}
-              isLocked={false}
-              extraClass=""
-              handleClose={() => console.log("Handler Ok!")}
-            />
-          </article>
-        </li>
-        <li className={`${styles["ingredients-list__item-wrapper"]}`}>
-          <article className={`${styles["ingredients-list__item"]}`}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              thumbnail="https://via.placeholder.com/80x40"
-              price={200}
-              isLocked={false}
-              extraClass=""
-              handleClose={() => console.log("Handler Ok!")}
-            />
-          </article>
-        </li>
-        <li className={`${styles["ingredients-list__item-wrapper"]}`}>
-          <article className={`${styles["ingredients-list__item"]}`}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              thumbnail="https://via.placeholder.com/80x40"
-              price={200}
-              isLocked={false}
-              extraClass=""
-              handleClose={() => console.log("Handler Ok!")}
-            />
-          </article>
-        </li>
-        <li className={`${styles["ingredients-list__item-wrapper"]}`}>
-          <article className={`${styles["ingredients-list__item"]}`}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              thumbnail="https://via.placeholder.com/80x40"
-              price={200}
-              isLocked={false}
-              extraClass=""
-              handleClose={() => console.log("Handler Ok!")}
-            />
-          </article>
-        </li>
-      </ul>
-      <article className={`${styles["ingredients-list__item"]} ml-8 mt-4`}>
-        <ConstructorElement
-          text="Краторная булка N-200i (верх)"
-          thumbnail="https://via.placeholder.com/80x40"
-          type="bottom"
-          price={200}
-          isLocked={true}
-          extraClass=""
-          handleClose={() => console.log("Handler Ok!")}
-        />
-      </article>
+      {populateUsedIngredients()}
       <div className={`${styles["ingredients-order-info"]} mt-10`}>
         <span className="text text_type_digits-medium mr-2">610</span>
-        <img 
+        <img
           src={currIcon}
           alt="Валюта"
           width="36px"
