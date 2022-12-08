@@ -11,7 +11,7 @@ import currIcon from "../../images/vector/currency_icon.svg";
 export default function BurgerConstructor() {
 
   // this function calculates height to prevent
-  // elements from "slicing" apart
+  // elements from "slicing" apart when scrolling
   function calcSaneHeight(elemHeight, elemGap) {
     const headerSize = 88;
     const marginTop = 100;
@@ -26,7 +26,11 @@ export default function BurgerConstructor() {
     if (availableHeight < (elemHeight + elemGap)) {
       return elemHeight;
     } else {
-      return (availableHeight / (elemHeight + elemGap) | 0) * (elemHeight + elemGap) - elemGap;
+      return (
+        // use '|0' hack to imitate fast Math.trunc()
+        (availableHeight / (elemHeight + elemGap) | 0) *
+          (elemHeight + elemGap) - elemGap
+      );
     }
   }
 
