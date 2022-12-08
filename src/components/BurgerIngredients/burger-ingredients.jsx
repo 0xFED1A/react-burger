@@ -19,7 +19,7 @@ export default function BurgerIngredients(props) {
       <>
         {
           ingredientsList.map(item => (
-            <li>
+            <li key={item["_id"]}>
               <article className={styles["list-item"]}>
                 <img
                   className="pl-4 pr-4 pb-2"
