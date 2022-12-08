@@ -14,7 +14,8 @@
 
 /* rules for list-wrapper block */
 .list-wrapper {
-  max-height: 756px;
+ /* max-height: 756px; */
+  max-height: 62vh;
 
   overflow-y: auto;
   overflow-x: hidden;
