@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import {
   Tab,
   Counter,
@@ -8,6 +9,10 @@ import {
 import styles from "./burger-ingredients.module.css";
 
 export default function BurgerIngredients(props) {
+  const [currentTab, setTab] = useState("bun");
+  function tabSwitchHandler(value) {
+    setTab(value);
+  }
 
   // this function generates markup from passed props
   // populating ingredients list which available for
@@ -41,7 +46,7 @@ export default function BurgerIngredients(props) {
           ))
         }
       </>
-    )
+    );
   }
 
   return (
@@ -50,9 +55,15 @@ export default function BurgerIngredients(props) {
           Соберите бургер
         </h1>
         <div className={`${styles["tab-box"]} mt-5`}>
-          <Tab active={true}>Булки</Tab>
-          <Tab>Соусы</Tab>
-          <Tab>Начинки</Tab>
+          <Tab value="bun" active={currentTab === "bun"} onClick={tabSwitchHandler}>
+            Булки
+          </Tab>
+          <Tab value="sauce" active={currentTab === "sauce"} onClick={tabSwitchHandler}>
+            Соусы
+          </Tab>
+          <Tab value="main" active={currentTab === "main"} onClick={tabSwitchHandler}>
+            Начинки
+          </Tab>
         </div>
         <div className={styles["list-wrapper"]}>
           <section className="mt-10">
