@@ -95,11 +95,6 @@ export default function BurgerIngredients() {
                   </h5>
                 </article> 
               </li>
-            </ul>
-          </section>
-          <section className="mt-10">
-            <h3 className="text text_type_main-medium">Булки</h3> 
-            <ul className={`${styles.list} mt-6 pl-4 pr-4`}>
               <li>
                 <article className={styles["list-item"]}>
                   <img 
