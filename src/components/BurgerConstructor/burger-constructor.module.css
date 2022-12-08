@@ -7,7 +7,7 @@
 
 /* rules for ingredients-list block */
 .ingredients-list {
-  max-height: 496px;
+  max-height: 464px;
 
   margin: 0;
   padding: 0;
@@ -24,6 +24,8 @@
   scrollbar-width: thin;
   scrollbar-color: var(--text-inactive-color)
     var(--background-element);
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 
 .ingredients-list::-webkit-scrollbar {
@@ -38,6 +40,10 @@
   background: var(--background-element);
 }
 
+.ingredients-list__item-wrapper {
+  display: block;
+  scroll-snap-align: start end;
+}
 
 /* rules for ingredients-list__item element */
 .ingredients-list__item {
