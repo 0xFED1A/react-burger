@@ -1,7 +1,12 @@
 import React from "react";
+import PortalReactDOM from 'react-dom';
 
 export default function Modal() {
-  return (
-    null
-  )
+  const modalEntrypointElement = document.getElementById("modal");
+  return PortalReactDOM.createPortal(
+    (
+      null
+    ),
+    modalEntrypointElement
+  );
 }

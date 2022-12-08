@@ -1,5 +1,6 @@
 import React from "react"
 import { useState, useEffect } from "react";
+import Modal from "../Modal/modal";
 import AppHeader from "../AppHeader/app-header";
 import BurgerIngredients from "../BurgerIngredients/burger-ingredients";
 import BurgerConstructor from "../BurgerConstructor/burger-constructor";
@@ -23,6 +24,7 @@ export default function App() {
   } else {
     return (
       <>
+        <Modal />
         <AppHeader />
         <main className={styles.main}>
           <BurgerIngredients ingredientsList={ingredientsList} />
