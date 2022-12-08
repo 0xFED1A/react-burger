@@ -9,6 +9,27 @@ import styles from "./burger-constructor.module.css";
 import currIcon from "../../images/vector/currency_icon.svg";
 
 export default function BurgerConstructor() {
+
+  // this function calculates height to prevent
+  // elements from "slicing" apart
+  function calcSaneHeight(elemHeight, elemGap) {
+    const headerSize = 88;
+    const marginTop = 100;
+    const marginBottom = 40;
+    const paddingBottom = 52;
+    const lockedElementsSize = 2 * (elemHeight + elemGap);
+
+    const totalUnavailHeight = headerSize + marginTop + marginBottom +
+      paddingBottom + lockedElementsSize;
+    const availableHeight = window.innerHeight - totalUnavailHeight;
+
+    if (availableHeight < (elemHeight + elemGap)) {
+      return elemHeight;
+    } else {
+      return (availableHeight / (elemHeight + elemGap) | 0) * (elemHeight + elemGap) - elemGap;
+    }
+  }
+
   return (
     <section
       className={`${styles["burger-constructor"]} mt-25 pl-4 pr-4`}
@@ -25,7 +46,11 @@ export default function BurgerConstructor() {
           handleClose={() => console.log("Handler Ok!")}
         />
       </article>
-      <ul className={`${styles["ingredients-list"]}`}>
+      <ul 
+        className={`${styles["ingredients-list"]}`}
+        style={{maxHeight: calcSaneHeight(80, 16)}}
+        id="ingredients-list"
+      >
         <li className={`${styles["ingredients-list__item-wrapper"]}`}>
           <article className={`${styles["ingredients-list__item"]}`}>
             <DragIcon type="primary" />
