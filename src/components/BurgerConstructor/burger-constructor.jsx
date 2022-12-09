@@ -43,6 +43,10 @@ export default function BurgerConstructor(props) {
     }
   }
 
+  function calculateCost(arr) {
+    return props.ingredientsList.reduce((acc, val) => acc + val.price, 0);
+  }
+
   // this function generates markup from passed props
   // populating ingredients list which allready in current burger
   function populateUsedIngredients() {
@@ -108,7 +112,7 @@ export default function BurgerConstructor(props) {
     >
       {populateUsedIngredients()}
       <div className={`${styles["ingredients-order-info"]} mt-10`}>
-        <span className="text text_type_digits-medium mr-2">610</span>
+        <span className="text text_type_digits-medium mr-2">{calculateCost()}</span>
         <img
           src={currIcon}
           alt="Валюта"
