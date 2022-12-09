@@ -10,7 +10,7 @@ import styles from "./app.module.css";
 export default function App() {
   const URL = "https://norma.nomoreparties.space/api/ingredients";
   const [ingredientsList, setIngredeintsList] = useState(null);
-  const [isModalOpened, setIsModalOpened] = useState(false);
+  const [modalData, setModalData] = useState({isOpened: false, content: null});
   useEffect(() => {
     const getIngredientsList = async () => {
       const response = await fetch(URL);
@@ -20,18 +20,12 @@ export default function App() {
     getIngredientsList();
   }, []);
 
-  function handleOpenModal() {
-    setIsModalOpened(true);
+  function handleOpenModal(recievedData) {
+    setModalData({isOpened: true, content: recievedData});
   }
 
   function handleCloseModal() {
-    setIsModalOpened(false);
-  }
-
-  let modalContent = null;
-  function handleModalContent(recievedModalContent) {
-    modalContent = recievedModalContent;
-    handleOpenModal();
+    setModalData({isOpened: false, content: null})
   }
 
   if(!ingredientsList) {
@@ -40,19 +34,19 @@ export default function App() {
     return (
       <>
         {
-          isModalOpened && <Modal onCloseModal={handleCloseModal}>
-            {modalContent}
+          modalData.isOpened && <Modal onCloseModal={handleCloseModal}>
+            {modalData.content}
           </Modal>
         }
         <AppHeader />
         <main className={styles.main}>
           <BurgerIngredients
             ingredientsList={ingredientsList}
-            onOpenModal={handleModalContent}
+            onOpenModal={handleOpenModal}
           />
           <BurgerConstructor
             ingredientsList={ingredientsList}
-            onOpenModal={handleModalContent}
+            onOpenModal={handleOpenModal}
           />
         </main>
       </>
