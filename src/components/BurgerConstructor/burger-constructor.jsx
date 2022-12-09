@@ -112,7 +112,13 @@ export default function BurgerConstructor(props) {
           width="36px"
           height="36px"
         />
-        <Button htmlType="button" type="primary" size="large" extraClass="mr-8 ml-10">
+        <Button
+          htmlType="button"
+          type="primary"
+          size="large"
+          extraClass="mr-8 ml-10"
+          onClick={handleButtonClick}
+        >
           Оформить заказ
         </Button>
       </div>
