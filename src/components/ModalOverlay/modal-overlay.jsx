@@ -8,15 +8,15 @@ export default function ModalOverlay(props) {
 
   useEffect(() => {
     const overlayDiv = overlayDivRef.current;
-    overlayDiv.addEventListener("click", props.onOverlayClick);
+    overlayDiv.addEventListener("mousedown", props.onOverlayClick);
 
     return () => {
-      overlayDiv.removeEventListener("click", props.onOverlayClick);
+      overlayDiv.removeEventListener("mousedown", props.onOverlayClick);
     }
   });
 
   return (
-    <div className={styles["modal-overlay"]} ref={overlayDivRef}>
+    <div className={styles["modal-overlay"]} ref={overlayDivRef} id="overlay">
       {props.children}
     </div>
   )
