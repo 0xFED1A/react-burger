@@ -4,14 +4,14 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import IngredientDetails from "../IngredientDetails/ingerdient-details";
+import OrderDetails from "../OrderDetails/order-details";
 
 import styles from "./burger-constructor.module.css";
 import currIcon from "../../images/vector/currency_icon.svg";
 
 export default function BurgerConstructor(props) {
   function handleButtonClick() {
-    props.onOpenModal(<IngredientDetails />);
+    props.onOpenModal(<OrderDetails />);
   }
 
   // this function calculates height to prevent
