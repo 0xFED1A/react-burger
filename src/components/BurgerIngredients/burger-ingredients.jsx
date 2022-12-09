@@ -5,6 +5,7 @@ import {
   Counter,
   CurrencyIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import IngredientDetails from "../IngredientDetails/ingerdient-details";
 
 import styles from "./burger-ingredients.module.css";
 
@@ -16,8 +17,8 @@ export default function BurgerIngredients(props) {
 
   function handleComponentClick(event) {
     const componentToPass =
-      props.ingredientsList.filter(item => item["_id"]=== event.currentTarget.id);
-    console.log(componentToPass);
+      props.ingredientsList.filter(item => item["_id"] === event.currentTarget.id).pop();
+    props.onOpenModal(<IngredientDetails ingredient={componentToPass} />) ;
   }
 
   // this function generates markup from passed props

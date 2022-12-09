@@ -19,5 +19,5 @@ export default function OrderDetails(props) {
         Дождитесь готовности на орбитальной станции
       </p>
     </div>
-  )
+  );
 }
