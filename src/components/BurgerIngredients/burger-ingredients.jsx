@@ -14,6 +14,12 @@ export default function BurgerIngredients(props) {
     setTab(value);
   }
 
+  function handleComponentClick(event) {
+    const componentToPass =
+      props.ingredientsList.filter(item => item["_id"]=== event.currentTarget.id);
+    console.log(componentToPass);
+  }
+
   // this function generates markup from passed props
   // populating ingredients list which available for
   // burger construction
@@ -24,7 +30,11 @@ export default function BurgerIngredients(props) {
       <>
         {
           ingredientsList.map(item => (
-            <li key={item["_id"]}>
+            <li
+              key={item["_id"]}
+              id={item["_id"]}
+              onClick={handleComponentClick}
+            >
               <article className={styles["list-item"]}>
                 <img
                   className="pl-4 pr-4 pb-2"
