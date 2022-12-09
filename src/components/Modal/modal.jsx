@@ -18,6 +18,7 @@ export default function Modal(props) {
             <button className={`${styles["modal__button-close"]}`} type="button">
               <CloseIcon type="primary" />
             </button>
+            {props.children}
           </div>
         </div>
       </ModalOverlay>
