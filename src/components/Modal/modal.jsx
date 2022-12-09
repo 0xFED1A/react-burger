@@ -53,8 +53,8 @@ export default function Modal(props) {
             >
               <CloseIcon type="primary" />
             </button>
-            {props.children}
           </div>
+          {props.children}
         </div>
       </ModalOverlay>
     ),
