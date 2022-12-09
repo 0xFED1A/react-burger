@@ -9,6 +9,9 @@ import styles from "./burger-constructor.module.css";
 import currIcon from "../../images/vector/currency_icon.svg";
 
 export default function BurgerConstructor(props) {
+  function handleButtonClick() {
+    props.onOpenModal();
+  }
 
   // this function calculates height to prevent
   // elements from "slicing" apart when scrolling
