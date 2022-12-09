@@ -12,17 +12,20 @@ export default function Modal(props) {
     function handleCloseOnEscape(event) {
       if (event.key.toLowerCase() === "escape") {
         console.log("esc pressed");
+        props.onCloseModal()
       };
     }
 
     function handleCloseOnOverlayClick(event) {
       if(event.target.id === "overlay") {
         console.log("overlay clicked");
+        props.onCloseModal()
       }
     };
 
     function handleCloseOnButtonClick() {
       console.log("button click!");
+        props.onCloseModal()
     }
 
   const closeButtonRef = useRef(null);

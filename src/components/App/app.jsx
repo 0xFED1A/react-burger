@@ -10,7 +10,7 @@ import styles from "./app.module.css";
 export default function App() {
   const URL = "https://norma.nomoreparties.space/api/ingredients";
   const [ingredientsList, setIngredeintsList] = useState(null);
-  const [isModalOpened, setIsModalOpened] = useState(false);
+  const [isModalOpened, setIsModalOpened] = useState(true);
   useEffect(() => {
     const getIngredientsList = async () => {
       const response = await fetch(URL);
@@ -28,7 +28,8 @@ export default function App() {
     setIsModalOpened(false);
   }
 
-  const modalContent = null
+//  const modalContent = null;
+  const modalContent = <h1>TEST TEST TEST</h1>;
   function handleModalContent(recievedModalContent) {
     modalContent = recievedModalContent;
     handleOpenModal();
