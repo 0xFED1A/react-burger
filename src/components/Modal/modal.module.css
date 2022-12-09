@@ -1,0 +1,19 @@
+/* rules for Modal component */
+
+/* rules for modal block */
+.modal {
+  width: 720px;
+
+  display: block;
+
+  position: absolute;
+  z-index: 2;
+}
+
+/* rules for modal__header element */
+.modal__header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+}
