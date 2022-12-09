@@ -10,7 +10,8 @@ import styles from "./app.module.css";
 export default function App() {
   const URL = "https://norma.nomoreparties.space/api/ingredients";
   const [ingredientsList, setIngredeintsList] = useState(null);
-  const [modalData, setModalData] = useState({isOpened: false, content: null});
+  const [modalData, setModalData] =
+    useState({isOpened: false, content: null, header: null});
   useEffect(() => {
     const getIngredientsList = async () => {
       const response = await fetch(URL);
@@ -21,11 +22,11 @@ export default function App() {
   }, []);
 
   function handleOpenModal(recievedData) {
-    setModalData({isOpened: true, content: recievedData});
+    setModalData(recievedData);
   }
 
   function handleCloseModal() {
-    setModalData({isOpened: false, content: null})
+    setModalData({isOpened: false, content: null, header: null})
   }
 
   if(!ingredientsList) {
@@ -34,7 +35,8 @@ export default function App() {
     return (
       <>
         {
-          modalData.isOpened && <Modal onCloseModal={handleCloseModal}>
+          modalData.isOpened &&
+          <Modal header={modalData.header} onCloseModal={handleCloseModal}>
             {modalData.content}
           </Modal>
         }

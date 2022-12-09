@@ -18,7 +18,12 @@ export default function BurgerIngredients(props) {
   function handleComponentClick(event) {
     const componentToPass =
       props.ingredientsList.filter(item => item["_id"] === event.currentTarget.id).pop();
-    props.onOpenModal(<IngredientDetails ingredient={componentToPass} />) ;
+    const modalData = {
+      isOpened: true,
+      content: (<IngredientDetails ingredient={componentToPass} />),
+      header: "Детали ингредиента"
+    }
+    props.onOpenModal(modalData) ;
   }
 
   // this function generates markup from passed props

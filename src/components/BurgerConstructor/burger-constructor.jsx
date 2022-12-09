@@ -11,7 +11,12 @@ import currIcon from "../../images/vector/currency_icon.svg";
 
 export default function BurgerConstructor(props) {
   function handleButtonClick() {
-    props.onOpenModal(<OrderDetails />);
+    const modalData = {
+      isOpened: true,
+      content: (<OrderDetails />),
+      header: null
+    }
+    props.onOpenModal(modalData);
   }
 
   // this function calculates height to prevent
@@ -57,7 +62,6 @@ export default function BurgerConstructor(props) {
             price={topIngredient.price}
             isLocked={true}
             extraClass=""
-            handleClose={() => console.log("Handler Ok!")}
           />
         </article>
         <ul
@@ -78,7 +82,6 @@ export default function BurgerConstructor(props) {
                   price={item.price}
                   isLocked={false}
                   extraClass=""
-                  handleClose={() => console.log("Handler Ok!")}
                 />
               </article>
             </li>
@@ -92,7 +95,6 @@ export default function BurgerConstructor(props) {
             price={bottomIngredient.price}
             isLocked={true}
             extraClass=""
-            handleClose={() => console.log("Handler Ok!")}
           />
         </article>
       </>

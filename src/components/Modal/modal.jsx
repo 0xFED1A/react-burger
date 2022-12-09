@@ -45,7 +45,7 @@ export default function Modal(props) {
       <ModalOverlay onOverlayClick={handleCloseOnOverlayClick}>
         <div className={`${styles.modal}`}>
           <div className={`${styles["modal__header"]} mt-10 mr-10 ml-10`}>
-            <span className="text text_type_main-large">{props.heading}</span>
+            <span className="text text_type_main-large">{props.header}</span>
             <button
               className={`${styles["modal__button-close"]}`}
               type="button"

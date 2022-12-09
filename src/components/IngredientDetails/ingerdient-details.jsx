@@ -3,7 +3,6 @@ import React from "react";
 import styles from "./ingerdient-details.module.css"
 
 export default function IngredientDetails({ingredient}) {
-  console.log(ingredient)
   return (
     <div className={`${styles["ingredient-details"]}`}>
       <img src={ingredient.image_large} alt={ingredient.name} />
