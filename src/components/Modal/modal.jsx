@@ -15,8 +15,10 @@ export default function Modal(props) {
       };
     }
 
-    function handleCloseOnOverlayClick() {
-      console.log("overlay clicked");
+    function handleCloseOnOverlayClick(event) {
+      if(event.target.id === "overlay") {
+        console.log("overlay clicked");
+      }
     };
 
     function handleCloseOnButtonClick() {
