@@ -13,9 +13,11 @@ export default function Modal(props) {
     (
       <ModalOverlay>
         <div className={`${styles.modal}`}>
-          <div className={`${styles["modal__header"]}`}>
-            <span>{props.heading}</span>
-            <CloseIcon type="primary" />
+          <div className={`${styles["modal__header"]} mt-10 mr-10 ml-10`}>
+            <span className="text text_type_main-large">{props.heading}</span>
+            <button className={`${styles["modal__button-close"]}`} type="button">
+              <CloseIcon type="primary" />
+            </button>
           </div>
         </div>
       </ModalOverlay>

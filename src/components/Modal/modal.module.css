@@ -3,17 +3,45 @@
 /* rules for modal block */
 .modal {
   width: 720px;
+  height: 40vh;
+
+  background-color: var(--background) ;
+
+  border-radius: 40px;
 
   display: block;
 
-  position: absolute;
+  position: relative;
   z-index: 2;
 }
 
-/* rules for modal__header element */
+/* rules for modal header element */
 .modal__header {
   display: flex;
 
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+/* rules for modal__button-close element */
+.modal__button-close {
+  width: 24px;
+  height: 24px;
+
+  padding: 0;
+  margin: 0;
+
+  font-family: inherit;
+  font-size: 0;
+  line-height: 0;
+
+  border: none;
+
+  appearance: none;
+  cursor: pointer;
+
+  background-color: var(--background);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: transparent;
 }
