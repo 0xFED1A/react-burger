@@ -3,7 +3,6 @@
 /* rules for modal block */
 .modal {
   width: 720px;
-  height: 40vh;
 
   background-color: var(--background) ;
 
