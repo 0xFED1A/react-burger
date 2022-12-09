@@ -9,24 +9,21 @@ import ModalOverlay from "../ModalOverlay/modal-overlay";
 import styles from "./modal.module.css";
 
 export default function Modal(props) {
-    function handleCloseOnEscape(event) {
-      if (event.key.toLowerCase() === "escape") {
-        console.log("esc pressed");
-        props.onCloseModal()
-      };
-    }
-
-    function handleCloseOnOverlayClick(event) {
-      if(event.target.id === "overlay") {
-        console.log("overlay clicked");
-        props.onCloseModal()
-      }
+  function handleCloseOnEscape(event) {
+    if (event.key.toLowerCase() === "escape") {
+      props.onCloseModal()
     };
+  }
 
-    function handleCloseOnButtonClick() {
-      console.log("button click!");
-        props.onCloseModal()
+  function handleCloseOnOverlayClick(event) {
+    if(event.target.id === "overlay") {
+      props.onCloseModal()
     }
+  };
+
+  function handleCloseOnButtonClick() {
+    props.onCloseModal()
+  }
 
   const closeButtonRef = useRef(null);
 
@@ -41,7 +38,6 @@ export default function Modal(props) {
       document.removeEventListener("keydown", handleCloseOnEscape);
     }
   }, []);
-
 
   const modalEntrypointElement = document.getElementById("modal");
   return PortalReactDOM.createPortal(
