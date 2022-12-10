@@ -4,17 +4,17 @@ import Modal from "../Modal/modal";
 import AppHeader from "../AppHeader/app-header";
 import BurgerIngredients from "../BurgerIngredients/burger-ingredients";
 import BurgerConstructor from "../BurgerConstructor/burger-constructor";
+import { BURGER_API_URL } from "../../utils/constants";
 
 import styles from "./app.module.css";
 
 export default function App() {
-  const URL = "https://norma.nomoreparties.space/api/ingredients";
   const [ingredientsList, setIngredeintsList] = useState(null);
   const [modalData, setModalData] =
     useState({isOpened: false, content: null, header: null});
   useEffect(() => {
     const getIngredientsList = async () => {
-      const response = await fetch(URL)
+      const response = await fetch(`${BURGER_API_URL}/ingredients`)
         .catch(() => Promise.reject(`Ошибка запроса данных с сервера: ${response.status}`));
       const serverData = await response.json()
         .catch(() => console.log("Ошибка запроса данных с сервера"));
