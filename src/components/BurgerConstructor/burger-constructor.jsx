@@ -1,50 +1,46 @@
+// React import
 import React from "react";
+import { useState } from "react";
+// custom components import
+import Modal from "../Modal/modal"
+import OrderDetails from "../OrderDetails/order-details";
+// UI Kit import
 import {
   Button,
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import OrderDetails from "../OrderDetails/order-details";
+// utils import
 import PropTypes from 'prop-types';
 import { ingredientObjectProp } from "../../utils/propTypes";
-
+// styles import
 import styles from "./burger-constructor.module.css";
 import currIcon from "../../images/vector/currency_icon.svg";
 
 export default function BurgerConstructor(props) {
-  function handleButtonClick() {
-    const modalData = {
+  // this states is required to control rendering
+  // of Modal component
+  const [modalData, setModalData] =
+    useState({isOpened: false, content: null, header: null});
+
+  // this handler is triggered on order button click which
+  // leads to opening modal window
+  function handleOpenModal() {
+    const orderDetailsModalData = {
       isOpened: true,
       content: (<OrderDetails />),
       header: null
     }
-    props.onOpenModal(modalData);
+    setModalData(orderDetailsModalData);
   }
 
-  // this function calculates height to prevent
-  // elements from "slicing" apart when scrolling
-  function calcSaneHeight(elemHeight, elemGap) {
-    const headerSize = 88;
-    const marginTop = 100;
-    const marginBottom = 40;
-    const paddingBottom = 52;
-    const lockedElementsSize = 2 * (elemHeight + elemGap);
-
-    const totalUnavailHeight = headerSize + marginTop + marginBottom +
-      paddingBottom + lockedElementsSize;
-    const availableHeight = window.innerHeight - totalUnavailHeight;
-
-    if (availableHeight < (elemHeight + elemGap)) {
-      return elemHeight;
-    } else {
-      return (
-        // use '|0' hack to imitate fast Math.trunc()
-        (availableHeight / (elemHeight + elemGap) | 0) *
-          (elemHeight + elemGap) - elemGap
-      );
-    }
+  // this handler is trigered on any action which
+  // leads to closing modal window
+  function handleCloseModal() {
+    setModalData({isOpened: false, content: null, header: null})
   }
 
+  // this function calculates total cost
   function calculateCost(arr) {
     return props.ingredientsList.reduce((acc, val) => acc + val.price, 0);
   }
@@ -72,7 +68,6 @@ export default function BurgerConstructor(props) {
         </article>
         <ul
           className={`${styles["ingredients-list"]}`}
-          style={{maxHeight: calcSaneHeight(80, 16)}}
           id="ingredients-list"
         >
           {middleIngredients.map(item =>(
@@ -108,34 +103,41 @@ export default function BurgerConstructor(props) {
   }
 
   return (
-    <section
-      className={`${styles["burger-constructor"]} mt-25 pl-4 pr-4`}
-      aria-label="Конструктор бургеров"
-    >
-      {populateUsedIngredients()}
-      <div className={`${styles["ingredients-order-info"]} mt-10`}>
-        <span className="text text_type_digits-medium mr-2">{calculateCost()}</span>
-        <img
-          src={currIcon}
-          alt="Валюта"
-          width="36px"
-          height="36px"
-        />
-        <Button
-          htmlType="button"
-          type="primary"
-          size="large"
-          extraClass="mr-8 ml-10"
-          onClick={handleButtonClick}
-        >
-          Оформить заказ
-        </Button>
-      </div>
-    </section>
+    <>
+      {
+        modalData.isOpened &&
+          <Modal header={modalData.header} onCloseModal={handleCloseModal}>
+            {modalData.content}
+          </Modal>
+      }
+      <section
+        className={`${styles["burger-constructor"]} mt-25 pl-4 pr-4`}
+        aria-label="Конструктор бургеров"
+      >
+        {populateUsedIngredients()}
+        <div className={`${styles["ingredients-order-info"]} mt-10`}>
+          <span className="text text_type_digits-medium mr-2">{calculateCost()}</span>
+          <img
+            src={currIcon}
+            alt="Валюта"
+            width="36px"
+            height="36px"
+          />
+          <Button
+            htmlType="button"
+            type="primary"
+            size="large"
+            extraClass="mr-8 ml-10"
+            onClick={handleOpenModal}
+          >
+            Оформить заказ
+          </Button>
+        </div>
+      </section>
+    </>
   )
 }
 
 BurgerConstructor.propTypes = {
   ingredientsList: PropTypes.arrayOf(ingredientObjectProp).isRequired,
-  onOpenModal: PropTypes.func.isRequired
 };

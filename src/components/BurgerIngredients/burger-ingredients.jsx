@@ -1,31 +1,51 @@
+// React import
 import React from "react";
 import { useState } from "react";
+// custom components import
+import Modal from "../Modal/modal"
+import IngredientDetails from "../IngredientDetails/ingerdient-details";
+// UI Kit import
 import {
   Tab,
   Counter,
   CurrencyIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import IngredientDetails from "../IngredientDetails/ingerdient-details";
+// utils import
 import PropTypes from 'prop-types';
 import { ingredientObjectProp } from "../../utils/propTypes";
-
+// styles import
 import styles from "./burger-ingredients.module.css";
 
 export default function BurgerIngredients(props) {
+  // this states is required to control rendering
+  // of Modal component
+  const [modalData, setModalData] =
+    useState({isOpened: false, content: null, header: null});
+
+  // this states is required to control rendering
+  // of Tab component
   const [currentTab, setTab] = useState("bun");
   function tabSwitchHandler(value) {
     setTab(value);
   }
 
-  function handleComponentClick(event) {
-    const componentToPass =
-      props.ingredientsList.filter(item => item["_id"] === event.currentTarget.id).pop();
-    const modalData = {
+  // this handler is triggered on order button click which
+  // leads to opening modal window
+  function handleOpenModal(event) {
+    const componentToPass = props.ingredientsList
+      .filter(item => item["_id"] === event.currentTarget.id).pop();
+    const ingredientModalData = {
       isOpened: true,
       content: (<IngredientDetails ingredient={componentToPass} />),
       header: "Детали ингредиента"
     }
-    props.onOpenModal(modalData) ;
+    setModalData(ingredientModalData) ;
+  }
+
+  // this handler is trigered on any action which
+  // leads to closing modal window
+  function handleCloseModal() {
+    setModalData({isOpened: false, content: null, header: null})
   }
 
   // this function generates markup from passed props
@@ -41,7 +61,7 @@ export default function BurgerIngredients(props) {
             <li
               key={item["_id"]}
               id={item["_id"]}
-              onClick={handleComponentClick}
+              onClick={handleOpenModal}
             >
               <article className={styles["list-item"]}>
                 <img
@@ -68,6 +88,13 @@ export default function BurgerIngredients(props) {
   }
 
   return (
+    <>
+      {
+        modalData.isOpened &&
+          <Modal header={modalData.header} onCloseModal={handleCloseModal}>
+            {modalData.content}
+          </Modal>
+      }
       <section className={`${styles["burger-ingredients"]} mt-10`}>
         <h1 className={`text text_type_main-large`}>
           Соберите бургер
@@ -104,10 +131,10 @@ export default function BurgerIngredients(props) {
           </section>
         </div>
       </section>
+    </>
   )
 }
 
 BurgerIngredients.propTypes = {
   ingredientsList: PropTypes.arrayOf(ingredientObjectProp).isRequired,
-  onOpenModal: PropTypes.func.isRequired
 };
