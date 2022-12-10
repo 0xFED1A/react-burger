@@ -15,7 +15,15 @@ export default function App() {
   useEffect(() => {
     const getIngredientsList = async () => {
       const response = await fetch(URL);
+      if (!response.ok) {
+        return Promise.reject("Ошибка: ${response.status}");
+      }
+
       const data = await response.json();
+      if (!data.success) {
+        return "Ошибка получения данных с сервера";
+      }
+
       setIngredeintsList(data.data);
     };
     getIngredientsList();
