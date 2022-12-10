@@ -1,6 +1,6 @@
 // React import
 import React from "react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 // custom components import
 import Modal from "../Modal/modal"
 import OrderDetails from "../OrderDetails/order-details";
@@ -47,6 +47,10 @@ export default function BurgerConstructor(props) {
     const bunsPrice = bun.price * 2;
     return ingredients.reduce((acc, val) => acc + val.price, 0) + bunsPrice;
   }
+
+  // memoisation of computations performed by calculateCost() funct
+  const calculatedCost = 
+    useMemo(() => calculateCost(ingredients, bun), [ingredients, bun]);
 
   // this function generates markup from passed props
   // populating ingredients list which allready in current burger
@@ -119,7 +123,7 @@ export default function BurgerConstructor(props) {
       >
         {populateUsedIngredients()}
         <div className={`${styles["ingredients-order-info"]} mt-10`}>
-          <span className="text text_type_digits-medium mr-2">{calculateCost()}</span>
+          <span className="text text_type_digits-medium mr-2">{calculatedCost}</span>
           <img
             src={currIcon}
             alt="Валюта"
