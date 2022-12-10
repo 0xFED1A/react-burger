@@ -6,6 +6,8 @@ import {
   CurrencyIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientDetails from "../IngredientDetails/ingerdient-details";
+import PropTypes from 'prop-types';
+import { ingredientObjectProp } from "../../utils/propTypes";
 
 import styles from "./burger-ingredients.module.css";
 
@@ -104,3 +106,8 @@ export default function BurgerIngredients(props) {
       </section>
   )
 }
+
+BurgerIngredients.propTypes = {
+  ingredientsList: PropTypes.arrayOf(ingredientObjectProp).isRequired,
+  onOpenModal: PropTypes.func.isRequired
+};
