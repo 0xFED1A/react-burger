@@ -11,6 +11,8 @@ const rootComponent = ReactDOM.createRoot(rootElement as HTMLElement);
 
 rootComponent.render(
   (
-    <App />
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
   )
-)
+);
