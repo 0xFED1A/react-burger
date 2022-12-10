@@ -5,6 +5,8 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import OrderDetails from "../OrderDetails/order-details";
+import PropTypes from 'prop-types';
+import { ingredientObjectProp } from "../../utils/propTypes";
 
 import styles from "./burger-constructor.module.css";
 import currIcon from "../../images/vector/currency_icon.svg";
@@ -132,3 +134,8 @@ export default function BurgerConstructor(props) {
     </section>
   )
 }
+
+BurgerConstructor.propTypes = {
+  ingredientsList: PropTypes.arrayOf(ingredientObjectProp).isRequired,
+  onOpenModal: PropTypes.func.isRequired
+};
