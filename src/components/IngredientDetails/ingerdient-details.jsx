@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from 'prop-types';
+import { ingredientObjectProp } from "../../utils/propTypes";
 
 import styles from "./ingerdient-details.module.css"
 
@@ -28,3 +30,7 @@ export default function IngredientDetails({ingredient}) {
     </div>
   );
 }
+
+IngredientDetails.propTypes = {
+  ingredient: ingredientObjectProp.isRequired,
+};
