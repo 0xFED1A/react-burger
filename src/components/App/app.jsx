@@ -14,17 +14,13 @@ export default function App() {
     useState({isOpened: false, content: null, header: null});
   useEffect(() => {
     const getIngredientsList = async () => {
-      const response = await fetch(URL);
-      if (!response.ok) {
-        return Promise.reject("Ошибка: ${response.status}");
+      const response = await fetch(URL)
+        .catch(() => Promise.reject(`Ошибка запроса данных с сервера: ${response.status}`));
+      const serverData = await response.json()
+        .catch(() => console.log("Ошибка запроса данных с сервера"));
+      if (serverData && serverData.success) {
+        setIngredeintsList(serverData.data);
       }
-
-      const data = await response.json();
-      if (!data.success) {
-        return "Ошибка получения данных с сервера";
-      }
-
-      setIngredeintsList(data.data);
     };
     getIngredientsList();
   }, []);
