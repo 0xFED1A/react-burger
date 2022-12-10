@@ -42,6 +42,7 @@ export default function BurgerConstructor(props) {
 
   const bun = props.ingredientsList.find(ingredient => ingredient.type === 'bun');
   const ingredients = props.ingredientsList.filter(ingredient => ingredient.type !== 'bun');
+
   // this function calculates total cost
   function calculateCost(ingredients, bun) {
     const bunsPrice = bun.price * 2;
@@ -54,61 +55,6 @@ export default function BurgerConstructor(props) {
 
   // this function generates markup from passed props
   // populating ingredients list which allready in current burger
-  function populateUsedIngredients() {
-    const allIngredients = props.ingredientsList;
-    const topIngredient = allIngredients[0];
-    const middleIngredients =
-      [...allIngredients].slice(1, allIngredients.length - 1);
-    const bottomIngredient = allIngredients[allIngredients.length - 1];
-
-    return (
-      <>
-        <article className={`${styles["ingredients-list__item"]} ml-8 mb-4`}>
-          <ConstructorElement
-            text={topIngredient.name}
-            thumbnail={topIngredient.image}
-            type="top"
-            price={topIngredient.price}
-            isLocked={true}
-            extraClass=""
-          />
-        </article>
-        <ul
-          className={`${styles["ingredients-list"]}`}
-          id="ingredients-list"
-        >
-          {middleIngredients.map(item =>(
-            <li
-              className={`${styles["ingredients-list__item-wrapper"]}`}
-              key={item["_id"]}
-            >
-              <article className={`${styles["ingredients-list__item"]}`}>
-                <DragIcon type="primary" />
-                <ConstructorElement
-                  text={item.name}
-                  thumbnail={item.image}
-                  price={item.price}
-                  isLocked={false}
-                  extraClass=""
-                />
-              </article>
-            </li>
-          ))}
-        </ul>
-        <article className={`${styles["ingredients-list__item"]} ml-8 mt-4`}>
-          <ConstructorElement
-            text={bottomIngredient.name}
-            thumbnail={bottomIngredient.image}
-            type="bottom"
-            price={bottomIngredient.price}
-            isLocked={true}
-            extraClass=""
-          />
-        </article>
-      </>
-    )
-  }
-
   return (
     <>
       {
@@ -121,7 +67,45 @@ export default function BurgerConstructor(props) {
         className={`${styles["burger-constructor"]} mt-25 pl-4 pr-4`}
         aria-label="Конструктор бургеров"
       >
-        {populateUsedIngredients()}
+        <article className={`${styles["ingredients-list__item"]} ml-8 mb-4`}>
+          <ConstructorElement
+            text={bun.name + " (верх)"}
+            thumbnail={bun.image}
+            type="top"
+            price={bun.price}
+            isLocked={true}
+          />
+        </article>
+        <ul
+          className={`${styles["ingredients-list"]}`}
+          id="ingredients-list"
+        >
+          {ingredients.map(item =>(
+            <li
+              className={`${styles["ingredients-list__item-wrapper"]}`}
+              key={item["_id"]}
+            >
+              <article className={`${styles["ingredients-list__item"]}`}>
+                <DragIcon type="primary" />
+                <ConstructorElement
+                  text={item.name}
+                  thumbnail={item.image}
+                  price={item.price}
+                  isLocked={false}
+                />
+              </article>
+            </li>
+          ))}
+        </ul>
+        <article className={`${styles["ingredients-list__item"]} ml-8 mt-4`}>
+          <ConstructorElement
+            text={bun.name + " (низ)"}
+            thumbnail={bun.image}
+            type="bottom"
+            price={bun.price}
+            isLocked={true}
+          />
+        </article>
         <div className={`${styles["ingredients-order-info"]} mt-10`}>
           <span className="text text_type_digits-medium mr-2">{calculatedCost}</span>
           <img
