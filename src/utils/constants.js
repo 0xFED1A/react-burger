@@ -1,3 +1,2 @@
-const BURGER_API_URL = "https://norma.nomoreparties.space/api";
-
-export { BURGER_API_URL };
+// server URL without endpoint required for connection
+export const BURGER_API_URL = "https://norma.nomoreparties.space/api";

@@ -1,29 +1,24 @@
+// React import
 import React from "react"
 import { useState, useEffect } from "react";
+// custom components import
 import Modal from "../Modal/modal";
 import AppHeader from "../AppHeader/app-header";
 import BurgerIngredients from "../BurgerIngredients/burger-ingredients";
 import BurgerConstructor from "../BurgerConstructor/burger-constructor";
+// utils import
 import { BURGER_API_URL } from "../../utils/constants";
-
+import { getIngredientsList } from "../../utils/api";
+// styles import
 import styles from "./app.module.css";
 
+// App component
 export default function App() {
   const [ingredientsList, setIngredeintsList] = useState(null);
   const [modalData, setModalData] =
     useState({isOpened: false, content: null, header: null});
-  useEffect(() => {
-    const getIngredientsList = async () => {
-      const response = await fetch(`${BURGER_API_URL}/ingredients`)
-        .catch(() => Promise.reject(`Ошибка запроса данных с сервера: ${response.status}`));
-      const serverData = await response.json()
-        .catch(() => console.log("Ошибка запроса данных с сервера"));
-      if (serverData && serverData.success) {
-        setIngredeintsList(serverData.data);
-      }
-    };
-    getIngredientsList();
-  }, []);
+
+  useEffect(() => {getIngredientsList(setIngredeintsList)}, []);
 
   function handleOpenModal(recievedData) {
     setModalData(recievedData);
