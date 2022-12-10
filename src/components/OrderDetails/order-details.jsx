@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./order-details.module.css"
 
-export default function OrderDetails(props) {
+export default function OrderDetails() {
   return (
     <div className={`${styles["order-details"]} mt-4`}>
       <p className={`${styles["order-details__id"]} text text_type_digits-large`}>
