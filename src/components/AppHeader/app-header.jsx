@@ -14,39 +14,43 @@ export default function AppHeader() {
   return (
     <header className={`${styles.header} pt-4 pb-4`}>
       <nav className={`${styles.nav} ${styles["header__nav"]}`}>
-        <div className={`pt-4 pb-4 pr-5 pl-5 ${styles["nav__item"]}`}>
-          <BurgerIcon type="primary" />
-          <a
-            className={`text text_type_main-default ml-2 ${styles["nav__item-link"]}`}
-            href="#"
-            target="_self"
-          >
-            Конструктор
-          </a>
-        </div>
-        <div className={`pt-4 pb-4 pr-5 pl-5 ml-2 ${styles["nav__item"]}`}>
-          <ListIcon type="secondary" />
-          <a
-            className= {`text text_type_main-default ml-2
-              ${styles["nav__item-link"]} ${styles["nav__item-link_inactive"]}`}
-            href="#"
-            target="_self"
-          >
-            Лента заказов
-          </a>
-        </div>
-      </nav>
-      <Logo className="header__logo" />
-      <div className={`pt-4 pb-4 pr-5 pl-5 ${styles["profile-link"]}
-        ${styles["header__profile-link"]}`}
-      >
-        <ProfileIcon type="secondary" />
         <a
-          className={`text text_type_main-default ml-2
-            ${styles["profile-link__link"]} ${styles["profile-link__link_inactive"]}`}
+          className={`
+            pt-4 pb-4 pr-5 pl-5 text text_type_main-default
+            ${styles["nav__item-link"]}
+          `}
           href="#"
           target="_self"
         >
+          <BurgerIcon type="primary" />
+          Конструктор
+        </a>
+        <a
+          className= {`
+            pt-4 pb-4 pr-5 pl-5 ml-2 text text_type_main-default
+            text text_type_main-default 
+            ${styles["nav__item-link"]} ${styles["nav__item-link_inactive"]}
+          `}
+          href="#"
+          target="_self"
+        >
+          <ListIcon type="secondary" />
+          Лента заказов
+        </a>
+      </nav>
+      <Logo className="header__logo" />
+      {/* i need this wrapper to override mrg: 0 on text class */}
+      <div className={styles["profile-link-wrapper"]}>
+        <a
+          className={`
+            pt-4 pb-4 pr-5 pl-5 ${styles["profile-link_inactive"]}
+            ${styles["profile-link"]} ${styles["header__profile-link"]}
+            text text_type_main-default
+          `}
+          href="#"
+          target="_self"
+        >
+          <ProfileIcon type="secondary" />
           Личный кабинет
         </a>
       </div>

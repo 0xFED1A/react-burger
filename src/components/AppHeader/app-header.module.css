@@ -18,23 +18,8 @@
 /* rules for header__nav element */
 .header__nav {
   margin-right: 112px;
-}
 
-/* rules for header__profile-link element */
-.header__profile-link {
-  margin-left: 289px;
-}
-
-/* rules for nav block */
-.nav {
   display: flex;
-}
-
-/* rules for nav__item element */
-.nav__item {
-  display: flex;
-
-  align-items: center;
 }
 
 /* rules for nav__item-link element */
@@ -42,6 +27,11 @@
   text-decoration: none;
 
   color: var(--text-primary-color);
+
+  display: flex;
+
+  align-items: center;
+  column-gap: 8px;
 }
 
 /* rules for nav__item-link_inactive modifier */
@@ -49,21 +39,24 @@
   color: var(--text-inactive-color);
 }
 
-/* rules for profile-link block */
+/* rules for profile-link element */
 .profile-link {
-  display: flex;
-
-  align-items: center;
-}
-
-/* rules for profile-link__link element */
-.profile-link__link {
   text-decoration: none;
 
   color: var(--text-primary-color);
+
+  display: flex;
+
+  align-items: center;
+  column-gap: 8px;
 }
 
-/* rules for profile-link__link_inactive modifier */
-.profile-link__link_inactive {
+/* rules for profile-link_inactive modifier */
+.profile-link_inactive {
   color: var(--text-inactive-color);
+}
+
+/* rules for .profile-link-wrapper element */
+.profile-link-wrapper {
+  margin-left: 289px;
 }
