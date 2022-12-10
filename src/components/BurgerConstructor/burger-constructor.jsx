@@ -17,7 +17,7 @@ import { ingredientObjectProp } from "../../utils/propTypes";
 import styles from "./burger-constructor.module.css";
 import currIcon from "../../images/vector/currency_icon.svg";
 
-export default function BurgerConstructor(props) {
+export default function BurgerConstructor({ingredientsList}) {
   // this states is required to control rendering
   // of Modal component
   const [modalData, setModalData] =
@@ -40,8 +40,8 @@ export default function BurgerConstructor(props) {
     setModalData({isOpened: false, content: null, header: null})
   }
 
-  const bun = props.ingredientsList.find(ingredient => ingredient.type === 'bun');
-  const ingredients = props.ingredientsList.filter(ingredient => ingredient.type !== 'bun');
+  const bun = ingredientsList.find(ingredient => ingredient.type === 'bun');
+  const ingredients = ingredientsList.filter(ingredient => ingredient.type !== 'bun');
 
   // this function calculates total cost
   function calculateCost(ingredients, bun) {

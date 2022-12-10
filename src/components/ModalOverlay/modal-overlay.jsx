@@ -4,21 +4,21 @@ import PropTypes from 'prop-types';
 
 import styles from "./modal-overlay.module.css"
 
-export default function ModalOverlay(props) {
+export default function ModalOverlay({children, onOverlayClick}) {
   const overlayDivRef = useRef(null);
 
   useEffect(() => {
     const overlayDiv = overlayDivRef.current;
-    overlayDiv.addEventListener("mousedown", props.onOverlayClick);
+    overlayDiv.addEventListener("mousedown", onOverlayClick);
 
     return () => {
-      overlayDiv.removeEventListener("mousedown", props.onOverlayClick);
+      overlayDiv.removeEventListener("mousedown", onOverlayClick);
     }
   });
 
   return (
     <div className={styles["modal-overlay"]} ref={overlayDivRef} id="overlay">
-      {props.children}
+      {children}
     </div>
   )
 }

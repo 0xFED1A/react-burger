@@ -16,7 +16,7 @@ import { ingredientObjectProp } from "../../utils/propTypes";
 // styles import
 import styles from "./burger-ingredients.module.css";
 
-export default function BurgerIngredients(props) {
+export default function BurgerIngredients({ingredientsList}) {
   // this states is required to control rendering
   // of Modal component
   const [modalData, setModalData] =
@@ -32,7 +32,7 @@ export default function BurgerIngredients(props) {
   // this handler is triggered on order button click which
   // leads to opening modal window
   function handleOpenModal(event) {
-    const componentToPass = props.ingredientsList
+    const componentToPass = ingredientsList
       .filter(item => item["_id"] === event.currentTarget.id).pop();
     const ingredientModalData = {
       isOpened: true,
@@ -52,12 +52,12 @@ export default function BurgerIngredients(props) {
   // populating ingredients list which available for
   // burger construction
   function populateAvailableIngredients(ingredientType) {
-    const ingredientsList =
-      props.ingredientsList.filter(item => item.type === ingredientType);
+    const a =
+      ingredientsList.filter(item => item.type === ingredientType);
     return (
       <>
         {
-          ingredientsList.map(item => (
+          a.map(item => (
             <li
               key={item["_id"]}
               id={item["_id"]}
