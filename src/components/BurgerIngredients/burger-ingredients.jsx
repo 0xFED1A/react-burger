@@ -33,7 +33,7 @@ export default function BurgerIngredients(props) {
   // burger construction
   function populateAvailableIngredients(ingredientType) {
     const ingredientsList =
-      props.ingredientsList.filter(item => item.type == ingredientType);
+      props.ingredientsList.filter(item => item.type === ingredientType);
     return (
       <>
         {

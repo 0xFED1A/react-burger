@@ -38,7 +38,7 @@ export default function Modal(props) {
       closeButton.removeEventListener("click", handleCloseOnButtonClick);
       document.removeEventListener("keydown", handleCloseOnEscape);
     }
-  }, []);
+  });
 
   const modalEntrypointElement = document.getElementById("modal");
   return PortalReactDOM.createPortal(
