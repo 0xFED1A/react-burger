@@ -83,7 +83,7 @@ export default function BurgerConstructor(props) {
           {ingredients.map(item =>(
             <li
               className={`${styles["ingredients-list__item-wrapper"]}`}
-              key={item["_id"]}
+              key={item._id}
             >
               <article className={`${styles["ingredients-list__item"]}`}>
                 <DragIcon type="primary" />
