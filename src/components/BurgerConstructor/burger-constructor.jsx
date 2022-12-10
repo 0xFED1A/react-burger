@@ -40,9 +40,12 @@ export default function BurgerConstructor(props) {
     setModalData({isOpened: false, content: null, header: null})
   }
 
+  const bun = props.ingredientsList.find(ingredient => ingredient.type === 'bun');
+  const ingredients = props.ingredientsList.filter(ingredient => ingredient.type !== 'bun');
   // this function calculates total cost
-  function calculateCost(arr) {
-    return props.ingredientsList.reduce((acc, val) => acc + val.price, 0);
+  function calculateCost(ingredients, bun) {
+    const bunsPrice = bun.price * 2;
+    return ingredients.reduce((acc, val) => acc + val.price, 0) + bunsPrice;
   }
 
   // this function generates markup from passed props
