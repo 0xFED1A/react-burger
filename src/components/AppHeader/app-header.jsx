@@ -13,6 +13,8 @@ export default function AppHeader() {
   return (
     <header className={`${styles.header} pt-4 pb-4`}>
       <nav className={`${styles.nav} ${styles["header__nav"]}`}>
+        {/* eslint-disable */}
+        {/* TODO: no actual data for href attribute */}
         <a
           className={`
             pt-4 pb-4 pr-5 pl-5 text text_type_main-default
@@ -36,10 +38,13 @@ export default function AppHeader() {
           <ListIcon type="secondary" />
           Лента заказов
         </a>
+        {/* eslint-enable */}
       </nav>
       <Logo className="header__logo" />
       {/* i need this wrapper to override mrg: 0 on text class */}
       <div className={styles["profile-link-wrapper"]}>
+        {/* eslint-disable */}
+        {/* TODO: no actual data for href attribute */}
         <a
           className={`
             pt-4 pb-4 pr-5 pl-5 ${styles["profile-link_inactive"]}
@@ -52,6 +57,7 @@ export default function AppHeader() {
           <ProfileIcon type="secondary" />
           Личный кабинет
         </a>
+        {/* eslint-enable */}
       </div>
     </header>
   )
