@@ -1,11 +1,14 @@
 import React from "react";
-import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  Counter,
+  CurrencyIcon
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./ingredients-category.module.css";
 
 export default function IngredientsCategory({
-  sameTypeIngredients,
-  onButtonClick,
-  categoryName
+  categoryName,
+  sameCategoryIngredients,
+  onButtonClick
 }) {
   return (
     <>
@@ -13,7 +16,7 @@ export default function IngredientsCategory({
         <h3 className="text text_type_main-medium">{categoryName}</h3>
         <ul className={`${styles.ingredients} mt-6 pl-4 pr-4`}>
           {
-            sameTypeIngredients.map(item => {
+            sameCategoryIngredients.map(item => (
               <li
                 key={item._id}
                 onClick={() => onButtonClick(item._id)}
@@ -24,7 +27,7 @@ export default function IngredientsCategory({
                     src={item.image}
                     alt={item.name}
                   />
-                  <Counter count={1} size={"default"} extraClass="" />
+                  <Counter count={1} size={"default"} />
                   <div className={`${styles["ingredient__price-box"]} mb-2`}>
                     <span className="text text_type_digits-default">
                       {item.price}
@@ -39,7 +42,7 @@ export default function IngredientsCategory({
                   </h5>
                 </article>
               </li>
-            })
+            ))
           }
         </ul>
       </section>
