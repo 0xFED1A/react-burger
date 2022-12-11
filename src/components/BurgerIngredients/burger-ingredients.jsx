@@ -2,11 +2,8 @@ import React from "react";
 import { useState, useMemo } from "react";
 import Modal from "../Modal/modal"
 import IngredientDetails from "../IngredientDetails/ingerdient-details";
-import {
-  Tab,
-  Counter,
-  CurrencyIcon
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import IngredientsCategory from "../IngredientsCategory/ingredients-category";
+import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from 'prop-types';
 import { ingredientObjectProp } from "../../utils/propTypes";
 import styles from "./burger-ingredients.module.css";
