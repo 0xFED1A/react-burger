@@ -1,19 +1,14 @@
-// React import
 import React from "react";
 import { useState, useMemo } from "react";
-// custom components import
 import Modal from "../Modal/modal"
 import IngredientDetails from "../IngredientDetails/ingerdient-details";
-// UI Kit import
 import {
   Tab,
   Counter,
   CurrencyIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
-// utils import
 import PropTypes from 'prop-types';
 import { ingredientObjectProp } from "../../utils/propTypes";
-// styles import
 import styles from "./burger-ingredients.module.css";
 
 export default function BurgerIngredients({ingredientsList}) {
@@ -33,7 +28,7 @@ export default function BurgerIngredients({ingredientsList}) {
   // leads to opening modal window
   function handleOpenModal(event) {
     const componentToPass = ingredientsList
-      .filter(item => item["_id"] === event.currentTarget.id).pop();
+      .find(item => item._id === event.currentTarget.id);
     const ingredientModalData = {
       isOpened: true,
       content: (<IngredientDetails ingredient={componentToPass} />),
@@ -48,9 +43,18 @@ export default function BurgerIngredients({ingredientsList}) {
     setModalData({isOpened: false, content: null, header: null})
   }
 
-  const buns = useMemo(() => ingredientsList.filter((item) => item.type === 'bun'), [ingredientsList]);
-  const mains = useMemo(() => ingredientsList.filter((item) => item.type === 'main'), [ingredientsList]);
-  const sauces = useMemo(() => ingredientsList.filter((item) => item.type === 'sauce'), [ingredientsList]);
+  const buns = useMemo(
+    () => ingredientsList.filter((item) => item.type === 'bun'),
+    [ingredientsList]
+  );
+  const mains = useMemo(
+    () => ingredientsList.filter((item) => item.type === 'main'),
+    [ingredientsList]
+  );
+  const sauces = useMemo(
+    () => ingredientsList.filter((item) => item.type === 'sauce'),
+    [ingredientsList]
+  );
 
   return (
     <>

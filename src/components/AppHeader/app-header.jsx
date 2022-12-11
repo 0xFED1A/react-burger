@@ -1,5 +1,4 @@
 import React from "react";
-// import components from Practikum UI Kit
 import {
   Logo,
   BurgerIcon,

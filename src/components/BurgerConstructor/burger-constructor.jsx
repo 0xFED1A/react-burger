@@ -1,25 +1,19 @@
-// React import
 import React from "react";
 import { useState, useMemo } from "react";
-// custom components import
 import Modal from "../Modal/modal"
 import OrderDetails from "../OrderDetails/order-details";
-// UI Kit import
 import {
   Button,
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-// utils import
 import PropTypes from 'prop-types';
 import { ingredientObjectProp } from "../../utils/propTypes";
-// styles import
 import styles from "./burger-constructor.module.css";
 import currIcon from "../../images/vector/currency_icon.svg";
 
 export default function BurgerConstructor({ingredientsList}) {
-  // this states is required to control rendering
-  // of Modal component
+  // this states is required to control rendering of Modal component
   const [modalData, setModalData] =
     useState({isOpened: false, content: null, header: null});
 
@@ -53,8 +47,6 @@ export default function BurgerConstructor({ingredientsList}) {
   const calculatedCost = 
     useMemo(() => calculateCost(ingredients, bun), [ingredients, bun]);
 
-  // this function generates markup from passed props
-  // populating ingredients list which allready in current burger
   return (
     <>
       {

@@ -6,22 +6,24 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../ModalOverlay/modal-overlay";
 import PropTypes from 'prop-types';
-
 import styles from "./modal.module.css";
 
 export default function Modal({children, header, onCloseModal}) {
+  // this handler triggers on escape key press
   function handleCloseOnEscape(event) {
     if (event.key.toLowerCase() === "escape") {
       onCloseModal()
     };
   }
 
+  // this handler triggers on overlay click
   function handleCloseOnOverlayClick(event) {
     if(event.target.id === "overlay") {
       onCloseModal()
     }
   };
 
+  // this handler triggers on close button click
   function handleCloseOnButtonClick() {
     onCloseModal()
   }
