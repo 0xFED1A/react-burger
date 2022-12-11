@@ -29,11 +29,9 @@ export default function Modal({children, header, onCloseModal}) {
   }
 
   useEffect(() => {
-    const closeButton = document.querySelector(`.${styles["modal__button-close"]}`);
     document.addEventListener("keydown", handleCloseOnEscape);
 
     return () => {
-      closeButton.removeEventListener("click", handleCloseOnButtonClick);
       document.removeEventListener("keydown", handleCloseOnEscape);
     }
   });
