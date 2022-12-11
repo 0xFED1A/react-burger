@@ -23,9 +23,9 @@ export default function BurgerIngredients({ingredientsList}) {
 
   // this handler is triggered on order button click which
   // leads to opening modal window
-  function handleOpenModal(event) {
+  function handleOpenModal(id) {
     const componentToPass = ingredientsList
-      .find(item => item._id === event.currentTarget.id);
+      .find(item => item._id === id);
     const ingredientModalData = {
       isOpened: true,
       content: (<IngredientDetails ingredient={componentToPass} />),
