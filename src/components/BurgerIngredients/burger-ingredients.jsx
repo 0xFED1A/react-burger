@@ -19,10 +19,16 @@ export default function BurgerIngredients({ingredientsList}) {
   function scrollToIngredientSection(value) {
     const scrollBox =
       document.querySelector(`.${styles["list-wrapper"]}`);
-    const sectionHeadingOffset =
-      document.getElementById(`${value}s-list`).offsetTop;
 
-    scrollBox.scrollTop = sectionHeadingOffset;
+    const sectionElement = document.getElementById(`${value}s-list`);
+    const sectionElementOffset = sectionElement.offsetTop;
+    const sectionElementMarginTop = parseInt(
+      window.getComputedStyle(sectionElement)
+      .getPropertyValue("margin-top")
+    );
+
+    scrollBox.scrollTop =
+      sectionElementOffset - (sectionElementMarginTop + scrollBox.offsetTop);
   }
 
   // this states is required to control rendering
