@@ -14,7 +14,14 @@ export default function IngredientsCategory({
 }) {
   return (
     <>
-      <section className="mt-10">
+      {/* we need to get something like id=`buns-list` */}
+      <section
+        className="mt-10"
+        id={
+          sameCategoryIngredients.length &&
+          `${sameCategoryIngredients[0].type}s-list`
+        }
+      >
         <h3 className="text text_type_main-medium">{categoryName}</h3>
         <ul className={`${styles.ingredients} mt-6 pl-4 pr-4`}>
           {

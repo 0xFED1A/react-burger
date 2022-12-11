@@ -14,10 +14,22 @@ export default function BurgerIngredients({ingredientsList}) {
   const [modalData, setModalData] =
     useState({isOpened: false, content: null, header: null});
 
+  // this functions scrolls box with ingredients
+  // based on passed tab value
+  function scrollToIngredientSection(value) {
+    const scrollBox =
+      document.querySelector(`.${styles["list-wrapper"]}`);
+    const sectionHeadingOffset =
+      document.getElementById(`${value}s-list`).offsetTop;
+
+    scrollBox.scrollTop = sectionHeadingOffset;
+  }
+
   // this states is required to control rendering
   // of Tab component
   const [currentTab, setTab] = useState("bun");
   function tabSwitchHandler(value) {
+    scrollToIngredientSection(value);
     setTab(value);
   }
 
