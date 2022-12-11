@@ -3,6 +3,8 @@ import {
   Counter,
   CurrencyIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from 'prop-types';
+import { ingredientObjectProp } from "../../utils/propTypes";
 import styles from "./ingredients-category.module.css";
 
 export default function IngredientsCategory({
@@ -49,3 +51,9 @@ export default function IngredientsCategory({
     </>
   )
 }
+
+IngredientsCategory.propTypes = {
+  categoryName: PropTypes.string.isRequired,
+  sameCategoryIngredients: PropTypes.arrayOf(ingredientObjectProp.isRequired).isRequired,
+  onButtonClick: PropTypes.func.isRequired
+};
