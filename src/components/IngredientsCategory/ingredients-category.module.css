@@ -1,6 +1,39 @@
 /* rules for ingredients-category component */
 
-/* rules for ingredients-category block */
-.ingredients-category {
+/* rules for ingredients block */
+.ingredients {
+  margin: 0;
+  padding: 0;
 
+  list-style: none;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: row;
+  column-gap: 24px;
+  row-gap: 32px;
+}
+
+/* rules for ingredient block */
+.ingredient {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+}
+
+/* rules for ingredient__price-box element */
+.ingredient__price-box {
+  display: flex;
+
+  align-items: center;
+  column-gap: 8px;
+}
+
+/* rules for ingredient__item-name element */
+.ingredient__item-name {
+  height: 48px;
 }
