@@ -1,6 +1,6 @@
 // React import
 import React from "react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 // custom components import
 import Modal from "../Modal/modal"
 import IngredientDetails from "../IngredientDetails/ingerdient-details";
@@ -48,44 +48,9 @@ export default function BurgerIngredients({ingredientsList}) {
     setModalData({isOpened: false, content: null, header: null})
   }
 
-  // this function generates markup from passed props
-  // populating ingredients list which available for
-  // burger construction
-  function populateAvailableIngredients(ingredientType) {
-    const a =
-      ingredientsList.filter(item => item.type === ingredientType);
-    return (
-      <>
-        {
-          a.map(item => (
-            <li
-              key={item["_id"]}
-              id={item["_id"]}
-              onClick={handleOpenModal}
-            >
-              <article className={styles["list-item"]}>
-                <img
-                  className="pl-4 pr-4 pb-2"
-                  src={item.image}
-                  alt={item.name}
-                />
-                <Counter count={1} size={"default"} extraClass="" />
-                <div className={`${styles["list-item__price-box"]} mb-2`}>
-                  <span className="text text_type_digits-default">
-                    {item.price}
-                  </span>
-                  <CurrencyIcon type="primary" />
-                </div>
-                <h5 className={`${styles["list-item__item-name"]} text text_type_main-default`}>
-                  {item.name}
-                </h5>
-              </article>
-            </li>
-          ))
-        }
-      </>
-    );
-  }
+  const buns = useMemo(() => ingredientsList.filter((item) => item.type === 'bun'), [ingredientsList]);
+  const mains = useMemo(() => ingredientsList.filter((item) => item.type === 'main'), [ingredientsList]);
+  const sauces = useMemo(() => ingredientsList.filter((item) => item.type === 'sauce'), [ingredientsList]);
 
   return (
     <>
@@ -114,19 +79,97 @@ export default function BurgerIngredients({ingredientsList}) {
           <section className="mt-10">
             <h3 className="text text_type_main-medium">Булки</h3>
             <ul className={`${styles.list} mt-6 pl-4 pr-4`}>
-              {populateAvailableIngredients("bun")}
+              {
+                buns.map(item => (
+                  <li
+                    key={item["_id"]}
+                    id={item["_id"]}
+                    onClick={handleOpenModal}
+                  >
+                    <article className={styles["list-item"]}>
+                      <img
+                        className="pl-4 pr-4 pb-2"
+                        src={item.image}
+                        alt={item.name}
+                      />
+                      <Counter count={1} size={"default"} extraClass="" />
+                      <div className={`${styles["list-item__price-box"]} mb-2`}>
+                        <span className="text text_type_digits-default">
+                          {item.price}
+                        </span>
+                        <CurrencyIcon type="primary" />
+                      </div>
+                      <h5 className={`${styles["list-item__item-name"]} text text_type_main-default`}>
+                        {item.name}
+                      </h5>
+                    </article>
+                  </li>
+                ))
+              }
             </ul>
           </section>
           <section className="mt-10">
             <h3 className="text text_type_main-medium">Соусы</h3>
             <ul className={`${styles.list} mt-6 pl-4 pr-4`}>
-              {populateAvailableIngredients("sauce")}
+              {
+                sauces.map(item => (
+                  <li
+                    key={item["_id"]}
+                    id={item["_id"]}
+                    onClick={handleOpenModal}
+                  >
+                    <article className={styles["list-item"]}>
+                      <img
+                        className="pl-4 pr-4 pb-2"
+                        src={item.image}
+                        alt={item.name}
+                      />
+                      <Counter count={1} size={"default"} extraClass="" />
+                      <div className={`${styles["list-item__price-box"]} mb-2`}>
+                        <span className="text text_type_digits-default">
+                          {item.price}
+                        </span>
+                        <CurrencyIcon type="primary" />
+                      </div>
+                      <h5 className={`${styles["list-item__item-name"]} text text_type_main-default`}>
+                        {item.name}
+                      </h5>
+                    </article>
+                  </li>
+                ))
+              }
             </ul>
           </section>
           <section className="mt-10">
             <h3 className="text text_type_main-medium">Основное</h3>
             <ul className={`${styles.list} mt-6 pl-4 pr-4`}>
-              {populateAvailableIngredients("main")}
+              {
+                mains.map(item => (
+                  <li
+                    key={item["_id"]}
+                    id={item["_id"]}
+                    onClick={handleOpenModal}
+                  >
+                    <article className={styles["list-item"]}>
+                      <img
+                        className="pl-4 pr-4 pb-2"
+                        src={item.image}
+                        alt={item.name}
+                      />
+                      <Counter count={1} size={"default"} extraClass="" />
+                      <div className={`${styles["list-item__price-box"]} mb-2`}>
+                        <span className="text text_type_digits-default">
+                          {item.price}
+                        </span>
+                        <CurrencyIcon type="primary" />
+                      </div>
+                      <h5 className={`${styles["list-item__item-name"]} text text_type_main-default`}>
+                        {item.name}
+                      </h5>
+                    </article>
+                  </li>
+                ))
+              }
             </ul>
           </section>
         </div>
@@ -136,5 +179,5 @@ export default function BurgerIngredients({ingredientsList}) {
 }
 
 BurgerIngredients.propTypes = {
-  ingredientsList: PropTypes.arrayOf(ingredientObjectProp).isRequired,
+  ingredientsList: PropTypes.arrayOf(ingredientObjectProp.isRequired).isRequired,
 };
