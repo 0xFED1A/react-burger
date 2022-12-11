@@ -1,15 +1,13 @@
 import React from "react";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import PropTypes from 'prop-types';
 
 import styles from "./modal-overlay.module.css"
 
 export default function ModalOverlay({children, onOverlayClick}) {
-  const overlayDivRef = useRef(null);
 
   useEffect(() => {
-    const overlayDiv = overlayDivRef.current;
-    overlayDiv.addEventListener("mousedown", onOverlayClick);
+    const overlayDiv = document.querySelector(`.${styles["modal-overlay"]}`);
 
     return () => {
       overlayDiv.removeEventListener("mousedown", onOverlayClick);
@@ -17,7 +15,11 @@ export default function ModalOverlay({children, onOverlayClick}) {
   });
 
   return (
-    <div className={styles["modal-overlay"]} ref={overlayDivRef} id="overlay">
+    <div
+      className={styles["modal-overlay"]}
+      id="overlay"
+      onMouseDown={onOverlayClick}
+    >
       {children}
     </div>
   )
