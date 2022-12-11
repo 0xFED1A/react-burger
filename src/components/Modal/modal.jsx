@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import PortalReactDOM from 'react-dom';
 import {
   CloseIcon
@@ -26,13 +26,9 @@ export default function Modal({children, header, onCloseModal}) {
     onCloseModal()
   }
 
-  const closeButtonRef = useRef(null);
-
   useEffect(() => {
+    const closeButton = document.querySelector(`.${styles["modal__button-close"]}`);
     document.addEventListener("keydown", handleCloseOnEscape);
-    const closeButton = closeButtonRef.current;
-    closeButton.addEventListener("click", handleCloseOnButtonClick);
-
 
     return () => {
       closeButton.removeEventListener("click", handleCloseOnButtonClick);
@@ -50,7 +46,7 @@ export default function Modal({children, header, onCloseModal}) {
             <button
               className={`${styles["modal__button-close"]}`}
               type="button"
-              ref={closeButtonRef}
+              onClick={handleCloseOnButtonClick}
             >
               <CloseIcon type="primary" />
             </button>
