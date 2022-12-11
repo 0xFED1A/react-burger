@@ -77,102 +77,21 @@ export default function BurgerIngredients({ingredientsList}) {
           </Tab>
         </div>
         <div className={styles["list-wrapper"]}>
-          <section className="mt-10">
-            <h3 className="text text_type_main-medium">Булки</h3>
-            <ul className={`${styles.list} mt-6 pl-4 pr-4`}>
-              {
-                buns.map(item => (
-                  <li
-                    key={item["_id"]}
-                    id={item["_id"]}
-                    onClick={handleOpenModal}
-                  >
-                    <article className={styles["list-item"]}>
-                      <img
-                        className="pl-4 pr-4 pb-2"
-                        src={item.image}
-                        alt={item.name}
-                      />
-                      <Counter count={1} size={"default"} extraClass="" />
-                      <div className={`${styles["list-item__price-box"]} mb-2`}>
-                        <span className="text text_type_digits-default">
-                          {item.price}
-                        </span>
-                        <CurrencyIcon type="primary" />
-                      </div>
-                      <h5 className={`${styles["list-item__item-name"]} text text_type_main-default`}>
-                        {item.name}
-                      </h5>
-                    </article>
-                  </li>
-                ))
-              }
-            </ul>
-          </section>
-          <section className="mt-10">
-            <h3 className="text text_type_main-medium">Соусы</h3>
-            <ul className={`${styles.list} mt-6 pl-4 pr-4`}>
-              {
-                sauces.map(item => (
-                  <li
-                    key={item["_id"]}
-                    id={item["_id"]}
-                    onClick={handleOpenModal}
-                  >
-                    <article className={styles["list-item"]}>
-                      <img
-                        className="pl-4 pr-4 pb-2"
-                        src={item.image}
-                        alt={item.name}
-                      />
-                      <Counter count={1} size={"default"} extraClass="" />
-                      <div className={`${styles["list-item__price-box"]} mb-2`}>
-                        <span className="text text_type_digits-default">
-                          {item.price}
-                        </span>
-                        <CurrencyIcon type="primary" />
-                      </div>
-                      <h5 className={`${styles["list-item__item-name"]} text text_type_main-default`}>
-                        {item.name}
-                      </h5>
-                    </article>
-                  </li>
-                ))
-              }
-            </ul>
-          </section>
-          <section className="mt-10">
-            <h3 className="text text_type_main-medium">Основное</h3>
-            <ul className={`${styles.list} mt-6 pl-4 pr-4`}>
-              {
-                mains.map(item => (
-                  <li
-                    key={item["_id"]}
-                    id={item["_id"]}
-                    onClick={handleOpenModal}
-                  >
-                    <article className={styles["list-item"]}>
-                      <img
-                        className="pl-4 pr-4 pb-2"
-                        src={item.image}
-                        alt={item.name}
-                      />
-                      <Counter count={1} size={"default"} extraClass="" />
-                      <div className={`${styles["list-item__price-box"]} mb-2`}>
-                        <span className="text text_type_digits-default">
-                          {item.price}
-                        </span>
-                        <CurrencyIcon type="primary" />
-                      </div>
-                      <h5 className={`${styles["list-item__item-name"]} text text_type_main-default`}>
-                        {item.name}
-                      </h5>
-                    </article>
-                  </li>
-                ))
-              }
-            </ul>
-          </section>
+          <IngredientsCategory
+            categoryName="Булки"
+            sameCategoryIngredients={buns}
+            onButtonClick={handleOpenModal}
+          />
+          <IngredientsCategory
+            categoryName="Соусы"
+            sameCategoryIngredients={sauces}
+            onButtonClick={handleOpenModal}
+          />
+          <IngredientsCategory
+            categoryName="Начинки"
+            sameCategoryIngredients={mains}
+            onButtonClick={handleOpenModal}
+          />
         </div>
       </section>
     </>
