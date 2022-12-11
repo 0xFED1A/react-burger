@@ -10,7 +10,10 @@ import styles from "./app.module.css";
 export default function App() {
   const [ingredientsList, setIngredeintsList] = useState(null);
 
-  useEffect(() => {getIngredientsList(setIngredeintsList)}, []);
+  useEffect(() => {
+    const ingredientsList = getIngredientsList();
+    ingredientsList.then(data => setIngredeintsList(data));
+  }, []);
 
   return (ingredientsList &&
     (
