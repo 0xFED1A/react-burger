@@ -1,19 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import App from './components/App/app';
+
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css?module"
+import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css?module";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const rootElement = document.querySelector("#root");
+const rootComponent = ReactDOM.createRoot(rootElement as HTMLElement);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+rootComponent.render(
+  (
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  )
+);
