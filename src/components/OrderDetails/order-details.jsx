@@ -1,17 +1,17 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import styles from "./order-details.module.css"
 import { getOrderData } from "../../utils/api";
 import IngredientsContext from "../../services/ingredients-context";
 
-export default function OrderDetails() {
+export default function OrderDetails({currentBun, currentIngredients}) {
   const [orderNumber, setOrderNumber] = useState(null);
-  const {ingredientsList} = useContext(IngredientsContext);
 
   useEffect(() => {
-    const ingredientsIds = ingredientsList.map(ingredient => ingredient["_id"]);
+    const ingredientsIds =
+      [currentBun, ...currentIngredients, currentBun].map(ingredient => ingredient["_id"]);
     getOrderData(ingredientsIds).then(data => setOrderNumber(data.order.number));
-  }, [ingredientsList]);
+  }, [currentBun, currentIngredients]);
 
 
   return (

@@ -24,7 +24,7 @@ export default function BurgerConstructor() {
   function handleOpenModal() {
     const orderDetailsModalData = {
       isOpened: true,
-      content: (<OrderDetails />),
+      content: (<OrderDetails currentBun={bun} currentIngredients={ingredients}/>),
       header: null
     }
     setModalData(orderDetailsModalData);
