@@ -2,7 +2,8 @@ import React, {useEffect, useState} from "react";
 
 import styles from "./order-details.module.css"
 import { getOrderData } from "../../utils/api";
-import IngredientsContext from "../../services/ingredients-context";
+import PropTypes from 'prop-types';
+import { ingredientObjectProp } from "../../utils/propTypes";
 
 export default function OrderDetails({currentBun, currentIngredients}) {
   const [orderNumber, setOrderNumber] = useState(null);
@@ -36,3 +37,8 @@ export default function OrderDetails({currentBun, currentIngredients}) {
     </>
   )
 }
+
+OrderDetails.propTypes = {
+  currentBun: ingredientObjectProp.isRequired,
+  currentIngredients: PropTypes.arrayOf(ingredientObjectProp.isRequired).isRequired
+};
