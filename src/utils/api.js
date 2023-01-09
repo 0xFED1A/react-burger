@@ -5,7 +5,7 @@ import { BURGER_API_URL } from "./constants";
 // if passes response to checkResponse() function,
 // and result is ok, it simply returns data
 export function getIngredientsList() {
-  const fetchResult = 
+  const fetchResult =
     fetch(`${BURGER_API_URL}/ingredients`)
     .then(response => checkResponse(response))
     .then(serverData => {
@@ -32,4 +32,31 @@ export function checkResponse(response) {
     response.json():
     response.json().then(error => Promise.reject(error))
   );
+}
+
+// this function recieves order details (such as name/number/status)
+// from server
+export function getOrderData(ingredientsIds) {
+  const fetchResult =
+    fetch(
+      `${BURGER_API_URL}/orders`,
+      {
+        method: "POST",
+        body: JSON.stringify(ingredientsIds)
+      }
+    )
+    .then(response => checkResponse(response))
+    .then(serverData => {
+      if (serverData && serverData.success) {
+        return serverData.data;
+      } else {
+        return new Error("Ошибка получения статсуа заказа с сервера: !success");
+      }
+    })
+    .catch(error => {
+      const errMsg =`Ошибка получения данных сервера: ${error.message}`;
+      console.log(errMsg);
+      return new Error(errMsg);
+    });
+  return fetchResult;
 }
