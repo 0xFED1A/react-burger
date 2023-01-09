@@ -8,8 +8,6 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from 'prop-types';
-import { ingredientObjectProp } from "../../utils/propTypes";
 import styles from "./burger-constructor.module.css";
 import currIcon from "../../images/vector/currency_icon.svg";
 

@@ -5,8 +5,6 @@ import IngredientDetails from "../IngredientDetails/ingerdient-details";
 import IngredientsCategory from "../IngredientsCategory/ingredients-category";
 import IngredientsContext from "../../services/ingredients-context";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from 'prop-types';
-import { ingredientObjectProp } from "../../utils/propTypes";
 import styles from "./burger-ingredients.module.css";
 
 export default function BurgerIngredients() {
