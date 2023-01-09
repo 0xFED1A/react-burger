@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useContext} from "react";
 import { useState, useMemo } from "react";
 import Modal from "../Modal/modal"
 import OrderDetails from "../OrderDetails/order-details";
+import IngredientsContext from "../../services/ingredients-context";
 import {
   Button,
   ConstructorElement,
@@ -12,10 +13,13 @@ import { ingredientObjectProp } from "../../utils/propTypes";
 import styles from "./burger-constructor.module.css";
 import currIcon from "../../images/vector/currency_icon.svg";
 
-export default function BurgerConstructor({ingredientsList}) {
+export default function BurgerConstructor() {
   // this states is required to control rendering of Modal component
   const [modalData, setModalData] =
     useState({isOpened: false, content: null, header: null});
+
+  // get ingredients from context
+  const {ingredientsList} = useContext(IngredientsContext);
 
   // this handler is triggered on order button click which
   // leads to opening modal window
@@ -44,7 +48,7 @@ export default function BurgerConstructor({ingredientsList}) {
   }
 
   // memoisation of computations performed by calculateCost() funct
-  const calculatedCost = 
+  const calculatedCost =
     useMemo(() => calculateCost(ingredients, bun), [ingredients, bun]);
 
   return (
@@ -120,7 +124,3 @@ export default function BurgerConstructor({ingredientsList}) {
     </>
   )
 }
-
-BurgerConstructor.propTypes = {
-  ingredientsList: PropTypes.arrayOf(ingredientObjectProp.isRequired).isRequired,
-};
