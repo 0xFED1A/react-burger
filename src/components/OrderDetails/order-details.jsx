@@ -1,23 +1,38 @@
-import React from "react";
+import React, {useContext, useEffect, useState} from "react";
 
 import styles from "./order-details.module.css"
+import { getOrderData } from "../../utils/api";
+import IngredientsContext from "../../services/ingredients-context";
 
 export default function OrderDetails() {
+  const [orderNumber, setOrderNumber] = useState(null);
+  const {ingredientsList} = useContext(IngredientsContext);
+
+  useEffect(() => {
+    const ingredientsIds = ingredientsList.map(ingredient => ingredient["_id"]);
+    getOrderData(ingredientsIds).then(data => setOrderNumber(data.order.number));
+  }, [ingredientsList]);
+
+
   return (
-    <div className={`${styles["order-details"]} mt-4`}>
-      <p className={`${styles["order-details__id"]} text text_type_digits-large`}>
-        034536
-      </p>
-      <p className="text text_type_main-medium mt-8">
-        идентификатор заказа
-      </p>
-      <div className={`${styles["order-details__image"]} mt-15`}></div>
-      <p className="text text_type_main-default mt-15">
-        Ваш заказ начали готовить
-      </p>
-      <p className="text text_type_main-default mt-2 text_color_inactive mb-30">
-        Дождитесь готовности на орбитальной станции
-      </p>
-    </div>
-  );
+    <>
+      { orderNumber &&
+      <div className={`${styles["order-details"]} mt-4`}>
+        <p className={`${styles["order-details__id"]} text text_type_digits-large`}>
+          {orderNumber}
+        </p>
+        <p className="text text_type_main-medium mt-8">
+          идентификатор заказа
+        </p>
+        <div className={`${styles["order-details__image"]} mt-15`}></div>
+        <p className="text text_type_main-default mt-15">
+          Ваш заказ начали готовить
+        </p>
+        <p className="text text_type_main-default mt-2 text_color_inactive mb-30">
+          Дождитесь готовности на орбитальной станции
+        </p>
+      </div>
+      }
+    </>
+  )
 }
