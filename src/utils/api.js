@@ -42,13 +42,16 @@ export function getOrderData(ingredientsIds) {
       `${BURGER_API_URL}/orders`,
       {
         method: "POST",
-        body: JSON.stringify(ingredientsIds)
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({"ingredients": ingredientsIds})
       }
     )
     .then(response => checkResponse(response))
     .then(serverData => {
       if (serverData && serverData.success) {
-        return serverData.data;
+        return serverData
       } else {
         return new Error("Ошибка получения статсуа заказа с сервера: !success");
       }
