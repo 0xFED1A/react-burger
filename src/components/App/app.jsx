@@ -4,6 +4,7 @@ import AppHeader from "../AppHeader/app-header";
 import BurgerIngredients from "../BurgerIngredients/burger-ingredients";
 import BurgerConstructor from "../BurgerConstructor/burger-constructor";
 import { getIngredientsList } from "../../utils/api";
+import IngredientsContext from "../../services/ingredients-context";
 import styles from "./app.module.css";
 
 // App component
@@ -20,12 +21,10 @@ export default function App() {
       <>
         <AppHeader />
         <main className={styles.main}>
-          <BurgerIngredients
-            ingredientsList={ingredientsList}
-          />
-          <BurgerConstructor
-            ingredientsList={ingredientsList}
-          />
+          <IngredientsContext.Provider value={{ingredientsList, setIngredeintsList}}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </IngredientsContext.Provider>
         </main>
       </>
     )
