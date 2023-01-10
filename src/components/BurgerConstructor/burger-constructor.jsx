@@ -2,6 +2,7 @@ import React, {useContext} from "react";
 import { useState, useMemo } from "react";
 import Modal from "../Modal/modal"
 import OrderDetails from "../OrderDetails/order-details";
+import { getOrderData } from "../../utils/api";
 import IngredientsContext from "../../services/ingredients-context";
 import {
   Button,
@@ -18,17 +19,6 @@ export default function BurgerConstructor() {
 
   // get ingredients from context
   const {ingredientsList} = useContext(IngredientsContext);
-
-  // this handler is triggered on order button click which
-  // leads to opening modal window
-  function handleOpenModal() {
-    const orderDetailsModalData = {
-      isOpened: true,
-      content: (<OrderDetails currentBun={bun} currentIngredients={ingredients}/>),
-      header: null
-    }
-    setModalData(orderDetailsModalData);
-  }
 
   // this handler is trigered on any action which
   // leads to closing modal window
@@ -48,6 +38,21 @@ export default function BurgerConstructor() {
   // memoisation of computations performed by calculateCost() funct
   const calculatedCost =
     useMemo(() => calculateCost(ingredients, bun), [ingredients, bun]);
+
+  // this handler is triggered on order button click which
+  // leads to opening modal window and server call
+  function handleOpenModal() {
+    const ingredientsIds =
+      [bun, ...ingredients, bun].map(ingredient => ingredient["_id"]);
+    getOrderData(ingredientsIds).then(data => {
+        const orderDetailsModalData = {
+          isOpened: true,
+          content: (<OrderDetails orderNumber={data.order.number}/>),
+          header: null
+        }
+        setModalData(orderDetailsModalData);
+    });
+  }
 
   return (
     <>

@@ -1,23 +1,10 @@
-import React, {useEffect, useState} from "react";
-
+import React from "react";
+import PropTypes from "prop-types";
 import styles from "./order-details.module.css"
-import { getOrderData } from "../../utils/api";
-import PropTypes from 'prop-types';
-import { ingredientObjectProp } from "../../utils/propTypes";
 
-export default function OrderDetails({currentBun, currentIngredients}) {
-  const [orderNumber, setOrderNumber] = useState(null);
-
-  useEffect(() => {
-    const ingredientsIds =
-      [currentBun, ...currentIngredients, currentBun].map(ingredient => ingredient["_id"]);
-    getOrderData(ingredientsIds).then(data => setOrderNumber(data.order.number));
-  }, [currentBun, currentIngredients]);
-
+export default function OrderDetails({orderNumber}) {
 
   return (
-    <>
-      { orderNumber &&
       <div className={`${styles["order-details"]} mt-4`}>
         <p className={`${styles["order-details__id"]} text text_type_digits-large`}>
           {orderNumber}
@@ -33,12 +20,9 @@ export default function OrderDetails({currentBun, currentIngredients}) {
           Дождитесь готовности на орбитальной станции
         </p>
       </div>
-      }
-    </>
-  )
+  );
 }
 
 OrderDetails.propTypes = {
-  currentBun: ingredientObjectProp.isRequired,
-  currentIngredients: PropTypes.arrayOf(ingredientObjectProp.isRequired).isRequired
+  orderNumber: PropTypes.number.isRequired
 };
