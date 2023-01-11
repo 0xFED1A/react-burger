@@ -1,32 +1,24 @@
-import React from "react";
+import React, {useContext} from "react";
 import { useState, useMemo } from "react";
 import Modal from "../Modal/modal"
 import OrderDetails from "../OrderDetails/order-details";
+import { getOrderData } from "../../utils/api";
+import IngredientsContext from "../../services/ingredients-context";
 import {
   Button,
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from 'prop-types';
-import { ingredientObjectProp } from "../../utils/propTypes";
 import styles from "./burger-constructor.module.css";
 import currIcon from "../../images/vector/currency_icon.svg";
 
-export default function BurgerConstructor({ingredientsList}) {
+export default function BurgerConstructor() {
   // this states is required to control rendering of Modal component
   const [modalData, setModalData] =
     useState({isOpened: false, content: null, header: null});
 
-  // this handler is triggered on order button click which
-  // leads to opening modal window
-  function handleOpenModal() {
-    const orderDetailsModalData = {
-      isOpened: true,
-      content: (<OrderDetails />),
-      header: null
-    }
-    setModalData(orderDetailsModalData);
-  }
+  // get ingredients from context
+  const {ingredientsList} = useContext(IngredientsContext);
 
   // this handler is trigered on any action which
   // leads to closing modal window
@@ -44,8 +36,23 @@ export default function BurgerConstructor({ingredientsList}) {
   }
 
   // memoisation of computations performed by calculateCost() funct
-  const calculatedCost = 
+  const calculatedCost =
     useMemo(() => calculateCost(ingredients, bun), [ingredients, bun]);
+
+  // this handler is triggered on order button click which
+  // leads to opening modal window and server call
+  function handleOpenModal() {
+    const ingredientsIds =
+      [bun, ...ingredients, bun].map(ingredient => ingredient["_id"]);
+    getOrderData(ingredientsIds).then(data => {
+        const orderDetailsModalData = {
+          isOpened: true,
+          content: (<OrderDetails orderNumber={data.order.number}/>),
+          header: null
+        }
+        setModalData(orderDetailsModalData);
+    });
+  }
 
   return (
     <>
@@ -120,7 +127,3 @@ export default function BurgerConstructor({ingredientsList}) {
     </>
   )
 }
-
-BurgerConstructor.propTypes = {
-  ingredientsList: PropTypes.arrayOf(ingredientObjectProp.isRequired).isRequired,
-};

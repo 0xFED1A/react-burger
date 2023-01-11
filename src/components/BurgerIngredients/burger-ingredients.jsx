@@ -1,18 +1,20 @@
 import React from "react";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useContext } from "react";
 import Modal from "../Modal/modal"
 import IngredientDetails from "../IngredientDetails/ingerdient-details";
 import IngredientsCategory from "../IngredientsCategory/ingredients-category";
+import IngredientsContext from "../../services/ingredients-context";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from 'prop-types';
-import { ingredientObjectProp } from "../../utils/propTypes";
 import styles from "./burger-ingredients.module.css";
 
-export default function BurgerIngredients({ingredientsList}) {
+export default function BurgerIngredients() {
   // this states is required to control rendering
   // of Modal component
   const [modalData, setModalData] =
     useState({isOpened: false, content: null, header: null});
+
+  // get ingredients from context
+  const {ingredientsList} = useContext(IngredientsContext);
 
   // this functions scrolls box with ingredients
   // based on passed tab value
@@ -115,7 +117,3 @@ export default function BurgerIngredients({ingredientsList}) {
     </>
   )
 }
-
-BurgerIngredients.propTypes = {
-  ingredientsList: PropTypes.arrayOf(ingredientObjectProp.isRequired).isRequired,
-};
