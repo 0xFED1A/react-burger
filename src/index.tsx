@@ -9,6 +9,9 @@ import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css?modul
 const rootElement = document.querySelector("#root");
 const rootComponent = ReactDOM.createRoot(rootElement as HTMLElement);
 
+const composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] as typeof compose || compose;
+const enhancer = composeEnhancers(applyMiddleware(thunk));
+
 rootComponent.render(
   (
     <React.StrictMode>
