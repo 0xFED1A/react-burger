@@ -27,19 +27,21 @@ export default function IngredientsCategory({
           {
             sameCategoryIngredients.map(item => (
               <li
-                key={item._id}
-                onClick={() => onButtonClick(item._id)}
+                key={item.data._id}
+                onClick={() => onButtonClick(item.data._id)}
               >
                 <article className={styles.ingredient}>
                   <img
                     className="pl-4 pr-4 pb-2"
-                    src={item.image}
-                    alt={item.name}
+                    src={item.data.image}
+                    alt={item.data.name}
                   />
-                  <Counter count={1} size={"default"} />
+                  { item.quantity > 0 &&
+                    <Counter count={item.quantity} size={"default"} />
+                  }
                   <div className={`${styles["ingredient__price-box"]} mb-2`}>
                     <span className="text text_type_digits-default">
-                      {item.price}
+                      {item.data.price}
                     </span>
                     <CurrencyIcon type="primary" />
                   </div>
@@ -47,7 +49,7 @@ export default function IngredientsCategory({
                       ${styles["ingredient__item-name"]}
                       text text_type_main-default
                     `}>
-                    {item.name}
+                    {item.data.name}
                   </h5>
                 </article>
               </li>
@@ -61,6 +63,6 @@ export default function IngredientsCategory({
 
 IngredientsCategory.propTypes = {
   categoryName: PropTypes.string.isRequired,
-  sameCategoryIngredients: PropTypes.arrayOf(ingredientObjectProp.isRequired).isRequired,
-  onButtonClick: PropTypes.func.isRequired
+ // sameCategoryIngredients: PropTypes.arrayOf(ingredientObjectProp.isRequired).isRequired,
+ // onButtonClick: PropTypes.func.isRequired
 };
