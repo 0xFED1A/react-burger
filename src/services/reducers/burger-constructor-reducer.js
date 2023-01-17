@@ -5,8 +5,20 @@ import {
 } from "../actions/burger-constructor-action";
 
 const initialValue = {
-  bun: null,
-  mainsAndSauces: []
+  bun: "60d3b41abdacab0026a733c6",
+  mainsAndSauces: [
+    "60d3b41abdacab0026a733c9",
+    "60d3b41abdacab0026a733c9",
+    "60d3b41abdacab0026a733c9",
+    "60d3b41abdacab0026a733c9",
+    "60d3b41abdacab0026a733ca",
+    "60d3b41abdacab0026a733ca",
+    "60d3b41abdacab0026a733cf",
+    "60d3b41abdacab0026a733cf",
+    "60d3b41abdacab0026a733cf",
+    "60d3b41abdacab0026a733cf",
+    "60d3b41abdacab0026a733cd"
+  ]
 }
 
 // this reducer generates list of ingredients in current burger constructor
