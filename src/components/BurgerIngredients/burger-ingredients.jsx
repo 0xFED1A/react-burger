@@ -1,20 +1,15 @@
 import React from "react";
-import { useState, useMemo, useContext } from "react";
+import { useState, useMemo } from "react";
+import { useSelector } from "react-redux";
 import Modal from "../Modal/modal"
 import IngredientDetails from "../IngredientDetails/ingerdient-details";
 import IngredientsCategory from "../IngredientsCategory/ingredients-category";
-import IngredientsContext from "../../services/ingredients-context";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-ingredients.module.css";
 
 export default function BurgerIngredients() {
   // this states is required to control rendering
   // of Modal component
-  const [modalData, setModalData] =
-    useState({isOpened: false, content: null, header: null});
-
-  // get ingredients from context
-  const {ingredientsList} = useContext(IngredientsContext);
 
   // this functions scrolls box with ingredients
   // based on passed tab value
@@ -43,22 +38,22 @@ export default function BurgerIngredients() {
 
   // this handler is triggered on order button click which
   // leads to opening modal window
-  function handleOpenModal(id) {
-    const componentToPass = ingredientsList
-      .find(item => item._id === id);
-    const ingredientModalData = {
-      isOpened: true,
-      content: (<IngredientDetails ingredient={componentToPass} />),
-      header: "Детали ингредиента"
-    }
-    setModalData(ingredientModalData) ;
-  }
+//function handleOpenModal(id) {
+//  const componentToPass = ingredientsList
+//    .find(item => item._id === id);
+//  const ingredientModalData = {
+//    isOpened: true,
+//    content: (<IngredientDetails ingredient={componentToPass} />),
+//    header: "Детали ингредиента"
+//  }
+//  setModalData(ingredientModalData) ;
+//}
 
   // this handler is trigered on any action which
   // leads to closing modal window
-  function handleCloseModal() {
-    setModalData({isOpened: false, content: null, header: null})
-  }
+//function handleCloseModal() {
+//  setModalData({isOpened: false, content: null, header: null})
+//}
 
   const buns = useMemo(
     () => ingredientsList.filter((item) => item.type === 'bun'),
@@ -75,12 +70,12 @@ export default function BurgerIngredients() {
 
   return (
     <>
-      {
+      {/*
         modalData.isOpened &&
           <Modal header={modalData.header} onCloseModal={handleCloseModal}>
             {modalData.content}
           </Modal>
-      }
+          */}
       <section className={`${styles["burger-ingredients"]} mt-10`}>
         <h1 className={`text text_type_main-large`}>
           Соберите бургер
