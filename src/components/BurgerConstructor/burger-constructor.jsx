@@ -1,14 +1,14 @@
-import React, {useContext} from "react";
+import React from "react";
 import { useState, useMemo } from "react";
+
 import Modal from "../Modal/modal"
 import OrderDetails from "../OrderDetails/order-details";
-import { getOrderData } from "../../utils/api";
-import IngredientsContext from "../../services/ingredients-context";
 import {
   Button,
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+
 import styles from "./burger-constructor.module.css";
 import currIcon from "../../images/vector/currency_icon.svg";
 
