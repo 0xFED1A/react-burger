@@ -19,7 +19,7 @@ export default function IngredientsCategory({
         className="mt-10"
         id={
           sameCategoryIngredients.length &&
-          `${sameCategoryIngredients[0].type}s-list`
+          `${sameCategoryIngredients[0].data.type}s-list`
         }
       >
         <h3 className="text text_type_main-medium">{categoryName}</h3>
