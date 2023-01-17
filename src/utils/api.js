@@ -57,7 +57,6 @@ export function getOrderData(ingredientsIds) {
     })
     .catch(error => {
       const errMsg =`Ошибка получения данных сервера: ${error.message}`;
-      console.log(errMsg);
       return new Error(errMsg);
     });
   return fetchResult;
