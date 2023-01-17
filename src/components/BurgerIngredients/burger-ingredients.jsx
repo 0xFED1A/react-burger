@@ -115,13 +115,25 @@ export default function BurgerIngredients() {
           Соберите бургер
         </h1>
         <div className={`${styles["tab-box"]} mt-5`}>
-          <Tab value="bun" active={currentTab === "bun"} onClick={tabSwitchHandler}>
+          <Tab
+            value="bun"
+            active={currentTab === "bun"}
+            onClick={tabSwitchHandler}
+          >
             Булки
           </Tab>
-          <Tab value="sauce" active={currentTab === "sauce"} onClick={tabSwitchHandler}>
+          <Tab
+            value="sauce"
+            active={currentTab === "sauce"}
+            onClick={tabSwitchHandler}
+          >
             Соусы
           </Tab>
-          <Tab value="main" active={currentTab === "main"} onClick={tabSwitchHandler}>
+          <Tab
+            value="main"
+            active={currentTab === "main"}
+            onClick={tabSwitchHandler}
+          >
             Начинки
           </Tab>
         </div>
