@@ -15,7 +15,7 @@ const initialValue = {
 
 // this reducer generates list of available ingredients fetched from server
 export default function burgerIngredientsReducer(state = initialValue, action) {
-  switch(action.type) {
+  switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return {...state, requesting: true, success: false, error: null};
     }
