@@ -12,7 +12,7 @@ export function getIngredientsFromServer() {
       if (data.constructor.name === "Error") {
         dispatch({type: GET_INGREDIENTS_FAILED, errorMsg: data})
       } else {
-        dispatch({type: GET_INGREDIENTS_SUCCESS, ingredients: data.data})
+        dispatch({type: GET_INGREDIENTS_SUCCESS, ingredients: data})
       }
     });
   }

@@ -9,19 +9,23 @@ const initialValue = {
   mains: [],
   sauces: [],
   requesting: false,
-  success: false
+  success: true,
+  error: null
 }
 
 // this reducer generates list of available ingredients fetched from server
 export default function burgerIngredientsReducer(state = initialValue, action) {
   switch(action.type) {
     case GET_INGREDIENTS_REQUEST: {
-      return {...state, requesting: true, success: false};
+      return {...state, requesting: true, success: false, error: null};
     }
     case GET_INGREDIENTS_FAILED: {
-      //TODO: move console.log() out of reducer!
-      console.log(action.errorMsg);
-      return {...state, requesting: false, success: false};
+      return {
+        ...state,
+        requesting: false,
+        success: false,
+        error: action.errorMsg
+      };
     }
     case GET_INGREDIENTS_SUCCESS: {
       return {
@@ -29,7 +33,8 @@ export default function burgerIngredientsReducer(state = initialValue, action) {
         mains: action.ingredients.filter(item => item.type === "main"),
         sauces: action.ingredients.filter(item => item.type === "sauce"),
         requesting: false,
-        success: true
+        success: true,
+        error: null
       }
     }
     default: {
