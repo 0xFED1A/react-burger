@@ -1,19 +1,72 @@
 import React from "react";
 import { useState, useMemo } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import Modal from "../Modal/modal"
 import IngredientDetails from "../IngredientDetails/ingerdient-details";
 import IngredientsCategory from "../IngredientsCategory/ingredients-category";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  CLEAR_CURRENT_INGREDIENT,
+  SET_CURRENT_INGREDIENT
+} from "../../services/actions/ingredient-details-action";
 
 import styles from "./burger-ingredients.module.css";
 
 export default function BurgerIngredients() {
-  // this states is required to control rendering
-  // of Modal component
-//const [modalData, setModalData] =
-//  useState({isOpened: false, content: null, header: null});
+  // get available components and currently used component from store
+  const {buns, mains, sauces} = useSelector(store => store.ingredients);
+  const {bun, mainsAndSauces} = useSelector(store => store.usedIngredients);
+
+  /*
+   * generate lists of available components. Each list consist of Object
+   * like {data: obj, quantity: num}. Data property is used as props in
+   * IngredientsCategory component, while quantity is a prop for Counter
+   * component
+   */
+
+  // available buns
+  const bunsList = useMemo(
+    () => {
+      const usedBun = bun;
+      return buns.reduce((acc, oneOfAvailableBuns) => {
+        acc.push({
+          data: oneOfAvailableBuns,
+          quantity: oneOfAvailableBuns._id === usedBun ? 1 : 0
+        });
+        return acc;
+      }, []);
+    }, [buns, bun]);
+
+  // available mains with counter for each entry
+  const mainsList = useMemo(
+    () => {
+      return mains.reduce((acc, oneOfAvailableMains) => {
+        acc.push({
+          data: oneOfAvailableMains,
+          quantity:
+            mainsAndSauces.filter(oneOfUsedMains => (
+              oneOfUsedMains === oneOfAvailableMains._id)
+            ).length
+        });
+        return acc;
+      }, []);
+    }, [mains, mainsAndSauces]);
+
+  // available sauces with counter for each entry
+  const saucesList = useMemo(
+    () => {
+      return sauces.reduce((acc, oneOfAvailableSauces) => {
+        acc.push({
+          data: oneOfAvailableSauces,
+          quantity:
+            mainsAndSauces.filter(oneOfUsedSauces => (
+              oneOfUsedSauces === oneOfAvailableSauces._id)
+            ).length
+        });
+        return acc;
+      }, []);
+    }, [sauces, mainsAndSauces]);
 
   // this functions scrolls box with ingredients
   // based on passed tab value
@@ -40,76 +93,29 @@ export default function BurgerIngredients() {
     setTab(value);
   }
 
-  // this handler is triggered on order button click which
-  // leads to opening modal window
-//function handleOpenModal(id) {
-//  const componentToPass = ingredientsList
-//    .find(item => item._id === id);
-//  const ingredientModalData = {
-//    isOpened: true,
-//    content: (<IngredientDetails ingredient={componentToPass} />),
-//    header: "Детали ингредиента"
-//  }
-//  setModalData(ingredientModalData) ;
-//}
+  // get current previewing ingredient id from state
+  const currentPreviewingIngredientId =
+    useSelector(store => store.ingredient.id);
+  const dispatch = useDispatch();
 
-  // this handler is trigered on any action which
-  // leads to closing modal window
-//function handleCloseModal() {
-//  setModalData({isOpened: false, content: null, header: null})
-//}
+  // trigger updating of current previewing ingredient on click
+  function handleOpenModal(previewingIngredientId) {
+    dispatch({type: SET_CURRENT_INGREDIENT, id: previewingIngredientId});
+  }
 
-  const {buns, mains, sauces} = useSelector(store => store.ingredients);
-  const {bun, mainsAndSauces} = useSelector(store => store.usedIngredients);
-
-  const bunsList = useMemo(
-    () => {
-      const usedBun = bun;
-      return buns.reduce((acc, oneOfAvailableBuns) => {
-        acc.push({
-          data: oneOfAvailableBuns,
-          quantity: oneOfAvailableBuns._id === usedBun ? 1 : 0
-        });
-        return acc;
-      }, []);
-    }, [buns, bun]);
-
-  const mainsList = useMemo(
-    () => {
-      return mains.reduce((acc, oneOfAvailableMains) => {
-        acc.push({
-          data: oneOfAvailableMains,
-          quantity:
-            mainsAndSauces.filter(oneOfUsedMains => (
-              oneOfUsedMains === oneOfAvailableMains._id)
-            ).length
-        });
-        return acc;
-      }, []);
-    }, [mains, mainsAndSauces]);
-
-  const saucesList = useMemo(
-    () => {
-      return sauces.reduce((acc, oneOfAvailableSauces) => {
-        acc.push({
-          data: oneOfAvailableSauces,
-          quantity:
-            mainsAndSauces.filter(oneOfUsedSauces => (
-              oneOfUsedSauces === oneOfAvailableSauces._id)
-            ).length
-        });
-        return acc;
-      }, []);
-    }, [sauces, mainsAndSauces]);
+  // trigger reset of current previewing ingredient on modal close
+  function handleCloseModal() {
+    dispatch({type: CLEAR_CURRENT_INGREDIENT});
+  }
 
   return (
     <>
-      {/*
-        modalData.isOpened &&
-          <Modal header={modalData.header} onCloseModal={handleCloseModal}>
-            {modalData.content}
+      {
+        currentPreviewingIngredientId &&
+          <Modal header="Детали ингредиента" onCloseModal={handleCloseModal}>
+            <IngredientDetails />
           </Modal>
-          */}
+      }
       <section className={`${styles["burger-ingredients"]} mt-10`}>
         <h1 className={`text text_type_main-large`}>
           Соберите бургер
@@ -138,23 +144,23 @@ export default function BurgerIngredients() {
           </Tab>
         </div>
         {
-        <div className={styles["list-wrapper"]}>
-          <IngredientsCategory
-            categoryName="Булки"
-            sameCategoryIngredients={bunsList}
-            onButtonClick={/*handleOpenModal*/ null}
-          />
-          <IngredientsCategory
-            categoryName="Соусы"
-            sameCategoryIngredients={saucesList}
-            onButtonClick={/*handleOpenModal*/ null}
-          />
-          <IngredientsCategory
-            categoryName="Начинки"
-            sameCategoryIngredients={mainsList}
-            onButtonClick={/*handleOpenModal*/ null}
-          />
-        </div>
+          <div className={styles["list-wrapper"]}>
+            <IngredientsCategory
+              categoryName="Булки"
+              sameCategoryIngredients={bunsList}
+              onButtonClick={handleOpenModal}
+            />
+            <IngredientsCategory
+              categoryName="Соусы"
+              sameCategoryIngredients={saucesList}
+              onButtonClick={handleOpenModal}
+            />
+            <IngredientsCategory
+              categoryName="Начинки"
+              sameCategoryIngredients={mainsList}
+              onButtonClick={handleOpenModal}
+            />
+          </div>
         }
       </section>
     </>
