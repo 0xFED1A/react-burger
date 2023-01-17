@@ -1,9 +1,19 @@
 import React from "react";
+import { useSelector} from "react-redux";
+
 import { ingredientObjectProp } from "../../utils/propTypes";
 
 import styles from "./ingerdient-details.module.css"
 
-export default function IngredientDetails({ingredient}) {
+export default function IngredientDetails() {
+  const currentPreviewingIngredientId =
+    useSelector(store => store.ingredient.id);
+  const {buns, mains, sauces} =
+    useSelector(store => store.ingredients);
+
+  const ingredient = [...buns, ...mains, ...sauces]
+    .find(item => item._id === currentPreviewingIngredientId);
+
   return (
     <div className={`${styles["ingredient-details"]}`}>
       <img src={ingredient.image_large} alt={ingredient.name} />
