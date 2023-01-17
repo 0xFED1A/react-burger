@@ -32,7 +32,7 @@ export default function BurgerIngredients() {
       return buns.reduce((acc, oneOfAvailableBuns) => {
         acc.push({
           data: oneOfAvailableBuns,
-          quantity: oneOfAvailableBuns._id === usedBun ? 1 : 0
+          quantity: oneOfAvailableBuns._id === usedBun ? 2 : 0
         });
         return acc;
       }, []);
@@ -93,6 +93,16 @@ export default function BurgerIngredients() {
     setTab(value);
   }
 
+   // this function higlights particular tab based on scroll position
+  function handleScroll(event) {
+    const sectionNames = ["bun", "sauce", "main"];
+    const nearestSection = Array.from(event.target.children)
+      .map(child => (Math.abs(child.getBoundingClientRect().y)))
+      .reduce((acc, item, index, array) => (item >= array[acc] ? acc : index), 0);
+    console.log(sectionNames[nearestSection]);
+    setTab(sectionNames[nearestSection]);
+  }
+
   // get current previewing ingredient id from state
   const currentPreviewingIngredientId =
     useSelector(store => store.ingredient.id);
@@ -144,7 +154,7 @@ export default function BurgerIngredients() {
           </Tab>
         </div>
         {
-          <div className={styles["list-wrapper"]}>
+          <div className={styles["list-wrapper"]} onScroll={handleScroll}>
             <IngredientsCategory
               categoryName="Булки"
               sameCategoryIngredients={bunsList}
