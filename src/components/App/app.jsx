@@ -1,30 +1,30 @@
-import React from "react"
-import { useState, useEffect } from "react";
+import React, {useEffect} from "react"
+import {useDispatch, useSelector} from "react-redux";
+
 import AppHeader from "../AppHeader/app-header";
 import BurgerIngredients from "../BurgerIngredients/burger-ingredients";
 import BurgerConstructor from "../BurgerConstructor/burger-constructor";
-import { getIngredientsList } from "../../utils/api";
-import IngredientsContext from "../../services/ingredients-context";
+import {getIngredientsFromServer} from "../../services/actions/burger-ingredients-action";
+
 import styles from "./app.module.css";
 
 // App component
 export default function App() {
-  const [ingredientsList, setIngredeintsList] = useState(null);
+  const dispatch = useDispatch();
+  const {requesting, success, error} = useSelector(store => store.ingredients);
 
-  useEffect(() => {
-    const ingredientsList = getIngredientsList();
-    ingredientsList.then(data => setIngredeintsList(data));
-  }, []);
+  useEffect(() => dispatch(getIngredientsFromServer()), [dispatch]);
 
-  return (ingredientsList &&
+  if (!requesting && !success) {
+    console.log(error);
+  }
+
+  return (success &&
     (
       <>
         <AppHeader />
         <main className={styles.main}>
-          <IngredientsContext.Provider value={{ingredientsList, setIngredeintsList}}>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </IngredientsContext.Provider>
+          <BurgerIngredients />
         </main>
       </>
     )
