@@ -15,18 +15,21 @@ export default function App() {
 
   useEffect(() => dispatch(getIngredientsFromServer()), [dispatch]);
 
-  if (!requesting && !success) {
+  const failCondition = !requesting && !success && error;
+  const successCondition = !requesting && success && !error;
+
+  if (failCondition) {
     console.log(error);
   }
 
-  return (success &&
-    (
+  return (
+    successCondition &&
       <>
         <AppHeader />
         <main className={styles.main}>
           <BurgerIngredients />
+          <BurgerConstructor />
         </main>
       </>
-    )
   );
 }

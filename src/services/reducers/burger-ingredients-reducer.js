@@ -9,7 +9,7 @@ const initialValue = {
   mains: [],
   sauces: [],
   requesting: false,
-  success: true,
+  success: false,
   error: null
 }
 
