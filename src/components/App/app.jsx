@@ -15,15 +15,15 @@ export default function App() {
 
   useEffect(() => dispatch(getIngredientsFromServer()), [dispatch]);
 
-  const failCondition = !requesting && !success && error;
-  const successCondition = !requesting && success && !error;
+  const apiCallFailed = !requesting && !success && error;
+  const apiCallSuccessful = !requesting && success && !error;
 
-  if (failCondition) {
+  if (apiCallFailed) {
     console.log(error);
   }
 
   return (
-    successCondition &&
+    apiCallSuccessful &&
       <>
         <AppHeader />
         <main className={styles.main}>
