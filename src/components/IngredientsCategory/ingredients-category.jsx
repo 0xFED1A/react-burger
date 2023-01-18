@@ -1,10 +1,9 @@
 import React from "react";
-import {
-  Counter,
-  CurrencyIcon
-} from "@ya.praktikum/react-developer-burger-ui-components";
+
+import Ingredient from "../Ingredient/ingredient";
 import PropTypes from 'prop-types';
 import { ingredientObjectProp } from "../../utils/propTypes";
+
 import styles from "./ingredients-category.module.css";
 
 export default function IngredientsCategory({
@@ -30,28 +29,12 @@ export default function IngredientsCategory({
                 key={item.data._id}
                 onClick={() => onButtonClick(item.data._id)}
               >
-                <article className={styles.ingredient}>
-                  <img
-                    className="pl-4 pr-4 pb-2"
-                    src={item.data.image}
-                    alt={item.data.name}
-                  />
-                  { item.quantity > 0 &&
-                    <Counter count={item.quantity} size={"default"} />
-                  }
-                  <div className={`${styles["ingredient__price-box"]} mb-2`}>
-                    <span className="text text_type_digits-default">
-                      {item.data.price}
-                    </span>
-                    <CurrencyIcon type="primary" />
-                  </div>
-                  <h5 className={`
-                      ${styles["ingredient__item-name"]}
-                      text text_type_main-default
-                    `}>
-                    {item.data.name}
-                  </h5>
-                </article>
+                <Ingredient
+                  image={item.data.image}
+                  name={item.data.name}
+                  price={item.data.price}
+                  quantity={item.quantity}
+                />
               </li>
             ))
           }
