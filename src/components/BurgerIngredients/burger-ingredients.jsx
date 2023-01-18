@@ -20,9 +20,9 @@ export default function BurgerIngredients() {
 
   /*
    * generate lists of available components. Each list consist of Object
-   * like {data: obj, quantity: num}. Data property is used as props in
-   * IngredientsCategory component, while quantity is a prop for Counter
-   * component
+   * like {id: string,  quantity: num}.
+   * id property is used as props in Ingredient component, while quantity is
+   * a prop for Counter component which resides inside Ingredient component
    */
 
   // available buns
@@ -31,7 +31,7 @@ export default function BurgerIngredients() {
       const usedBun = bun;
       return buns.reduce((acc, oneOfAvailableBuns) => {
         acc.push({
-          data: oneOfAvailableBuns,
+          id: oneOfAvailableBuns._id,
           quantity: oneOfAvailableBuns._id === usedBun ? 2 : 0
         });
         return acc;
@@ -43,7 +43,7 @@ export default function BurgerIngredients() {
     () => {
       return mains.reduce((acc, oneOfAvailableMains) => {
         acc.push({
-          data: oneOfAvailableMains,
+          id: oneOfAvailableMains._id,
           quantity:
             mainsAndSauces.filter(oneOfUsedMains => (
               oneOfUsedMains === oneOfAvailableMains._id)
@@ -58,7 +58,7 @@ export default function BurgerIngredients() {
     () => {
       return sauces.reduce((acc, oneOfAvailableSauces) => {
         acc.push({
-          data: oneOfAvailableSauces,
+          id: oneOfAvailableSauces._id,
           quantity:
             mainsAndSauces.filter(oneOfUsedSauces => (
               oneOfUsedSauces === oneOfAvailableSauces._id)
@@ -98,7 +98,6 @@ export default function BurgerIngredients() {
     const nearestSection = Array.from(event.target.children)
       .map(child => (Math.abs(child.getBoundingClientRect().y)))
       .reduce((acc, item, index, array) => (item >= array[acc] ? acc : index), 0);
-    console.log(sectionNames[nearestSection]);
     setTab(sectionNames[nearestSection]);
   }
 
@@ -154,18 +153,26 @@ export default function BurgerIngredients() {
         </div>
         {
           <div className={styles["list-wrapper"]} onScroll={handleScroll}>
+              {/*
+                categoryType prop is used inside IngredientsCategory for
+                html id generation purpose. It is required to performs
+                tab switching function
+              */}
             <IngredientsCategory
               categoryName="Булки"
+              categoryType={"buns"}
               sameCategoryIngredients={bunsList}
               onButtonClick={handleOpenModal}
             />
             <IngredientsCategory
               categoryName="Соусы"
+              categoryType={"sauces"}
               sameCategoryIngredients={saucesList}
               onButtonClick={handleOpenModal}
             />
             <IngredientsCategory
               categoryName="Начинки"
+              categoryType={"mains"}
               sameCategoryIngredients={mainsList}
               onButtonClick={handleOpenModal}
             />
