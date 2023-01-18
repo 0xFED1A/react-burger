@@ -55,16 +55,14 @@ export default function BurgerConstructor() {
     ));
   }, [bun, mainsAndSauces, buns, mains, sauces]);
 
-//// this function calculates total cost
-//function calculateCost(usedComponentsList) {
-//  //   return usedComponentsList.reduce((acc, val) => acc + val.price, 0);
-//  console.log(usedComponentsList);
-//  usedComponentsList.reduce((acc, val) => console.log(acc, " ", val), 0);
-//}
-//
-//// memoisation of computations performed by calculateCost() funct
-//const calculatedCost =
-//  useMemo(() => calculateCost(usedComponentsList), [usedComponentsList]);
+  // this function calculates total cost
+  function calculateCost(usedComponentsList) {
+    return usedComponentsList.reduce((acc, val) => acc + val.price, 0);
+  }
+
+  // memoisation of computations performed by calculateCost() funct
+  const calculatedCost =
+    useMemo(() => calculateCost(usedComponentsList), [usedComponentsList]);
 
   return (
     <>
@@ -122,7 +120,9 @@ export default function BurgerConstructor() {
           </article>
         }
         <div className={`${styles["ingredients-order-info"]} mt-10`}>
-          <span className="text text_type_digits-medium mr-2">{null}</span>
+          <span className="text text_type_digits-medium mr-2">
+            {calculatedCost}
+          </span>
           <img
             src={currIcon}
             alt="Валюта"
