@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Modal from "../Modal/modal"
 import OrderDetails from "../OrderDetails/order-details";
@@ -13,73 +14,86 @@ import styles from "./burger-constructor.module.css";
 import currIcon from "../../images/vector/currency_icon.svg";
 
 export default function BurgerConstructor() {
-  // this states is required to control rendering of Modal component
-  const [modalData, setModalData] =
-    useState({isOpened: false, content: null, header: null});
-
-  // get ingredients from context
-  const {ingredientsList} = useContext(IngredientsContext);
-
-  // this handler is trigered on any action which
-  // leads to closing modal window
-  function handleCloseModal() {
-    setModalData({isOpened: false, content: null, header: null})
-  }
-
-  const bun = ingredientsList.find(ingredient => ingredient.type === 'bun');
-  const ingredients = ingredientsList.filter(ingredient => ingredient.type !== 'bun');
-
-  // this function calculates total cost
-  function calculateCost(ingredients, bun) {
-    const bunsPrice = bun.price * 2;
-    return ingredients.reduce((acc, val) => acc + val.price, 0) + bunsPrice;
-  }
-
-  // memoisation of computations performed by calculateCost() funct
-  const calculatedCost =
-    useMemo(() => calculateCost(ingredients, bun), [ingredients, bun]);
-
+//// this states is required to control rendering of Modal component
+//const [modalData, setModalData] =
+//  useState({isOpened: false, content: null, header: null});
+//
+//// get ingredients from context
+//  const {ingredientsList} = useContext(IngredientsContext);
+//
+//// this handler is trigered on any action which
+//// leads to closing modal window
+//function handleCloseModal() {
+//  setModalData({isOpened: false, content: null, header: null})
+//}
+  //
   // this handler is triggered on order button click which
   // leads to opening modal window and server call
-  function handleOpenModal() {
-    const ingredientsIds =
-      [bun, ...ingredients, bun].map(ingredient => ingredient["_id"]);
-    getOrderData(ingredientsIds).then(data => {
-        const orderDetailsModalData = {
-          isOpened: true,
-          content: (<OrderDetails orderNumber={data.order.number}/>),
-          header: null
-        }
-        setModalData(orderDetailsModalData);
-    });
-  }
+//function handleOpenModal() {
+//  const ingredientsIds =
+//    [bun, ...ingredients, bun].map(ingredient => ingredient["_id"]);
+//  getOrderData(ingredientsIds).then(data => {
+//      const orderDetailsModalData = {
+//        isOpened: true,
+//        content: (<OrderDetails orderNumber={data.order.number}/>),
+//        header: null
+//      }
+//      setModalData(orderDetailsModalData);
+//  });
+//}
+
+  // get available components and currently used component from store
+  // then prepare data for rendering, keeping it in usedComponentsList
+  const {buns, mains, sauces} = useSelector(store => store.ingredients);
+  const {bun, mainsAndSauces} = useSelector(store => store.usedIngredients);
+
+  const usedComponentsList = useMemo(() => {
+    const allAvailableComponentsData = [...buns, ...mains, ...sauces];
+    const allUsedComponentsIds = [bun, ...mainsAndSauces, bun];
+    return allUsedComponentsIds.map(id => (
+      allAvailableComponentsData.filter(data => data._id === id).pop()
+    ));
+  }, [bun, mainsAndSauces, buns, mains, sauces]);
+
+//// this function calculates total cost
+//function calculateCost(usedComponentsList) {
+//  //   return usedComponentsList.reduce((acc, val) => acc + val.price, 0);
+//  console.log(usedComponentsList);
+//  usedComponentsList.reduce((acc, val) => console.log(acc, " ", val), 0);
+//}
+//
+//// memoisation of computations performed by calculateCost() funct
+//const calculatedCost =
+//  useMemo(() => calculateCost(usedComponentsList), [usedComponentsList]);
 
   return (
     <>
-      {
+      {/*
         modalData.isOpened &&
           <Modal header={modalData.header} onCloseModal={handleCloseModal}>
             {modalData.content}
           </Modal>
-      }
+          */}
       <section
         className={`${styles["burger-constructor"]} mt-25 pl-4 pr-4`}
         aria-label="Конструктор бургеров"
       >
         <article className={`${styles["ingredients-list__item"]} ml-8 mb-4`}>
+          {
           <ConstructorElement
-            text={bun.name + " (верх)"}
-            thumbnail={bun.image}
+            text={usedComponentsList[0].name + " (верх)"}
+            thumbnail={usedComponentsList[0].image}
             type="top"
-            price={bun.price}
+            price={usedComponentsList[0].price}
             isLocked={true}
           />
+          }
         </article>
         <ul
           className={`${styles["ingredients-list"]}`}
           id="ingredients-list"
         >
-          {ingredients.map(item =>(
+          {usedComponentsList.slice(1, -1).map(item =>(
             <li
               className={`${styles["ingredients-list__item-wrapper"]}`}
               key={item._id}
@@ -96,17 +110,19 @@ export default function BurgerConstructor() {
             </li>
           ))}
         </ul>
-        <article className={`${styles["ingredients-list__item"]} ml-8 mt-4`}>
-          <ConstructorElement
-            text={bun.name + " (низ)"}
-            thumbnail={bun.image}
-            type="bottom"
-            price={bun.price}
-            isLocked={true}
-          />
-        </article>
+        {
+          <article className={`${styles["ingredients-list__item"]} ml-8 mt-4`}>
+            <ConstructorElement
+              text={usedComponentsList[usedComponentsList.length - 1].name + " (низ)"}
+              thumbnail={usedComponentsList[usedComponentsList.length - 1].image}
+              type="bottom"
+              price={usedComponentsList[usedComponentsList.length - 1].price}
+              isLocked={true}
+            />
+          </article>
+        }
         <div className={`${styles["ingredients-order-info"]} mt-10`}>
-          <span className="text text_type_digits-medium mr-2">{calculatedCost}</span>
+          <span className="text text_type_digits-medium mr-2">{null}</span>
           <img
             src={currIcon}
             alt="Валюта"
@@ -118,7 +134,7 @@ export default function BurgerConstructor() {
             type="primary"
             size="large"
             extraClass="mr-8 ml-10"
-            onClick={handleOpenModal}
+            onClick={null}
           >
             Оформить заказ
           </Button>
