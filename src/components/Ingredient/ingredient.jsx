@@ -18,12 +18,13 @@ export default function Ingredient({id, isFlat, quantity, position, isLocked}) {
   const {image, name, price} =
     allAvailableComponentsData.filter(ingredient => ingredient._id === id).pop();
 
-  //TODO: move ingredientDragConfig to /src/utils/constants.js
+  // TODO: move ingredientDragConfig to /src/utils/constants.js
   const ingredientDragConfig = {
     type: "ingredient",
     item: {id},
     collect: monitor => ({isDragging: monitor.isDragging()})
-  }
+  };
+
   const [{ isDragging }, dragRef] = useDrag(ingredientDragConfig);
   /*
    * there are two types of Ingredient component markups available

@@ -5,41 +5,6 @@
   width: 600px;
 }
 
-/* rules for ingredients-list block */
-.ingredients-list {
-  max-height: 464px;
-
-  margin: 0;
-  padding: 0;
-
-  list-style-type: none;
-
-  display: flex;
-
-  flex-direction: column;
-  row-gap: 16px;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: thin;
-  scrollbar-color: var(--text-inactive-color)
-    var(--background-element);
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-}
-
-.ingredients-list::-webkit-scrollbar {
-  width: 8px;
-}
-
-.ingredients-list::-webkit-scrollbar-thumb {
-  background: var(--text-inactive-color);
-}
-
-.ingredients-list::-webkit-scrollbar-track {
-  background: var(--background-element);
-}
-
 .ingredients-list__item-wrapper {
   display: block;
   scroll-snap-align: start end;

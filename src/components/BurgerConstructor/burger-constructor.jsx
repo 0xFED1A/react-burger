@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "../Modal/modal"
 import OrderDetails from "../OrderDetails/order-details";
 import Ingredient from "../Ingredient/ingredient";
+import BurgerConstructorList from "../BurgerConstructorList/burger-constructor-list";
 import { sendIngredientToServer } from "../../services/actions/order-details-action";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -86,10 +87,7 @@ export default function BurgerConstructor() {
           position={"top"}
           isLocked={true}
         />
-        <ul
-          className={`${styles["ingredients-list"]}`}
-          id="ingredients-list"
-        >
+        <BurgerConstructorList>
           {mainsAndSauces.map((item, key) =>(
             <li
               className={`${styles["ingredients-list__item-wrapper"]}`}
@@ -102,7 +100,7 @@ export default function BurgerConstructor() {
               />
             </li>
           ))}
-        </ul>
+        </BurgerConstructorList>
         <Ingredient
           id={bun}
           isFlat={true}
