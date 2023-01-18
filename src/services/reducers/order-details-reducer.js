@@ -8,7 +8,7 @@ const initialValue = {
   number: 0,
   name: "",
   requesting: false,
-  success: true,
+  success: false,
   error: null
 }
 
@@ -31,7 +31,8 @@ export default function orderDetailsReducer(state = initialValue, action) {
         number: action.orderDetails.order.number,
         name: action.orderDetails.name,
         requesting: false,
-        success: true
+        success: true,
+        error: null
       }
     }
     default: {
