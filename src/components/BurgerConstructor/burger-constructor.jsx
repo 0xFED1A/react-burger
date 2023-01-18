@@ -91,10 +91,10 @@ export default function BurgerConstructor() {
           className={`${styles["ingredients-list"]}`}
           id="ingredients-list"
         >
-          {usedComponentsList.slice(1, -1).map(item =>(
+          {usedComponentsList.slice(1, -1).map((item, key) =>(
             <li
               className={`${styles["ingredients-list__item-wrapper"]}`}
-              key={item._id}
+              key={key}
             >
               <article className={`${styles["ingredients-list__item"]}`}>
                 <DragIcon type="primary" />
@@ -111,8 +111,13 @@ export default function BurgerConstructor() {
         {
           <article className={`${styles["ingredients-list__item"]} ml-8 mt-4`}>
             <ConstructorElement
-              text={usedComponentsList[usedComponentsList.length - 1].name + " (низ)"}
-              thumbnail={usedComponentsList[usedComponentsList.length - 1].image}
+              text={
+                usedComponentsList[usedComponentsList.length - 1].name +
+                  " (низ)"
+              }
+              thumbnail={
+                usedComponentsList[usedComponentsList.length - 1].image
+              }
               type="bottom"
               price={usedComponentsList[usedComponentsList.length - 1].price}
               isLocked={true}
