@@ -13,33 +13,38 @@ import currIcon from "../../images/vector/currency_icon.svg";
 
 export default function BurgerConstructor() {
 
-  // get available components and currently used component from store
-  // then prepare data for rendering, keeping it in usedComponentsList
-  const {buns, mains, sauces} = useSelector(store => store.ingredients);
+  // get currently used components form usedIngredients store,
+  // then get all available components data for price calculation
   const {bun, mainsAndSauces} = useSelector(store => store.usedIngredients);
+  const {buns, mains, sauces} = useSelector(store => store.ingredients);
 
-  const usedComponentsList = useMemo(() => {
+  // this array contains prices for each yield from parsing currenlty used
+  // components
+  const usedComponentsPrices = useMemo(() => {
     const allAvailableComponentsData = [...buns, ...mains, ...sauces];
     const allUsedComponentsIds = [bun, ...mainsAndSauces, bun];
     return allUsedComponentsIds.map(id => (
-      allAvailableComponentsData.filter(data => data._id === id).pop()
+      allAvailableComponentsData.filter(data => data._id === id).pop().price
     ));
   }, [bun, mainsAndSauces, buns, mains, sauces]);
 
-  // this function calculates total cost
-  function calculateCost(usedComponentsList) {
-    return usedComponentsList.reduce((acc, val) => acc + val.price, 0);
+  // this function calculates total cost, it takes array of prices as
+  // arg, and then simply reduces array
+  function calculateCost(prices) {
+    return prices.reduce((acc, val) => acc + val, 0);
   }
 
   // memoisation of computations performed by calculateCost() funct
   const calculatedCost =
-    useMemo(() => calculateCost(usedComponentsList), [usedComponentsList]);
+    useMemo(() => calculateCost(usedComponentsPrices), [usedComponentsPrices]);
 
-  // current order number
+  // here we want ot get current order number, we need it to pass as prop
+  // to modal
   const currenOrderNumber = useSelector(store => store.order.number);
   const dispatch = useDispatch();
 
-  // current order API call status
+  // current order API call status, we wont open modal window unless
+  // apiCallSuccessful equals true
   const {requesting, success, error} = useSelector(store => store.order);
   const apiCallSuccessful = !requesting && success && !error;
 
@@ -49,7 +54,7 @@ export default function BurgerConstructor() {
   // this handler is triggered on order button click which
   // leads to opening modal window and server call
   function handleOpenModal() {
-    dispatch(sendIngredientToServer(usedComponentsList));
+    dispatch(sendIngredientToServer([bun, ...mainsAndSauces, bun]));
     setIsModalOpened(true);
   }
 
@@ -71,39 +76,37 @@ export default function BurgerConstructor() {
         className={`${styles["burger-constructor"]} mt-25 pl-4 pr-4`}
         aria-label="Конструктор бургеров"
       >
+        {/* isFlat prop used for conditional rendering of Ingredient componet
+            other props is required for ConstructorElement component inside
+            Ingredient component markup
+        */}
         <Ingredient
+          id={bun}
           isFlat={true}
-          name={usedComponentsList[0].name}
-          image={usedComponentsList[0].image}
-          price={usedComponentsList[0].price}
-          type={"top"}
+          position={"top"}
           isLocked={true}
         />
         <ul
           className={`${styles["ingredients-list"]}`}
           id="ingredients-list"
         >
-          {usedComponentsList.slice(1, -1).map((item, key) =>(
+          {mainsAndSauces.map((item, key) =>(
             <li
               className={`${styles["ingredients-list__item-wrapper"]}`}
               key={key}
             >
               <Ingredient
+                id={item}
                 isFlat={true}
-                name={item.name}
-                image={item.image}
-                price={item.price}
                 isLocked={false}
               />
             </li>
           ))}
         </ul>
         <Ingredient
+          id={bun}
           isFlat={true}
-          name={usedComponentsList[usedComponentsList.length - 1].name}
-          image={usedComponentsList[usedComponentsList.length - 1].image}
-          price={usedComponentsList[usedComponentsList.length - 1].price}
-          type={"bottom"}
+          position={"bottom"}
           isLocked={true}
         />
         <div className={`${styles["ingredients-order-info"]} mt-10`}>
