@@ -90,7 +90,6 @@ export default function BurgerIngredients() {
   const [currentTab, setTab] = useState("bun");
   function tabSwitchHandler(value) {
     scrollToIngredientSection(value);
-    setTab(value);
   }
 
    // this function higlights particular tab based on scroll position
