@@ -4,12 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Modal from "../Modal/modal"
 import OrderDetails from "../OrderDetails/order-details";
+import Ingredient from "../Ingredient/ingredient";
 import { sendIngredientToServer } from "../../services/actions/order-details-action";
-import {
-  Button,
-  ConstructorElement,
-  DragIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import styles from "./burger-constructor.module.css";
 import currIcon from "../../images/vector/currency_icon.svg";
@@ -74,17 +71,14 @@ export default function BurgerConstructor() {
         className={`${styles["burger-constructor"]} mt-25 pl-4 pr-4`}
         aria-label="Конструктор бургеров"
       >
-        <article className={`${styles["ingredients-list__item"]} ml-8 mb-4`}>
-          {
-          <ConstructorElement
-            text={usedComponentsList[0].name + " (верх)"}
-            thumbnail={usedComponentsList[0].image}
-            type="top"
-            price={usedComponentsList[0].price}
-            isLocked={true}
-          />
-          }
-        </article>
+        <Ingredient
+          isFlat={true}
+          name={usedComponentsList[0].name}
+          image={usedComponentsList[0].image}
+          price={usedComponentsList[0].price}
+          type={"top"}
+          isLocked={true}
+        />
         <ul
           className={`${styles["ingredients-list"]}`}
           id="ingredients-list"
@@ -94,34 +88,24 @@ export default function BurgerConstructor() {
               className={`${styles["ingredients-list__item-wrapper"]}`}
               key={key}
             >
-              <article className={`${styles["ingredients-list__item"]}`}>
-                <DragIcon type="primary" />
-                <ConstructorElement
-                  text={item.name}
-                  thumbnail={item.image}
-                  price={item.price}
-                  isLocked={false}
-                />
-              </article>
+              <Ingredient
+                isFlat={true}
+                name={item.name}
+                image={item.image}
+                price={item.price}
+                isLocked={false}
+              />
             </li>
           ))}
         </ul>
-        {
-          <article className={`${styles["ingredients-list__item"]} ml-8 mt-4`}>
-            <ConstructorElement
-              text={
-                usedComponentsList[usedComponentsList.length - 1].name +
-                  " (низ)"
-              }
-              thumbnail={
-                usedComponentsList[usedComponentsList.length - 1].image
-              }
-              type="bottom"
-              price={usedComponentsList[usedComponentsList.length - 1].price}
-              isLocked={true}
-            />
-          </article>
-        }
+        <Ingredient
+          isFlat={true}
+          name={usedComponentsList[usedComponentsList.length - 1].name}
+          image={usedComponentsList[usedComponentsList.length - 1].image}
+          price={usedComponentsList[usedComponentsList.length - 1].price}
+          type={"bottom"}
+          isLocked={true}
+        />
         <div className={`${styles["ingredients-order-info"]} mt-10`}>
           <span className="text text_type_digits-medium mr-2">
             {calculatedCost}
