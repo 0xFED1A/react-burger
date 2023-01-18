@@ -8,31 +8,25 @@ import styles from "./ingredients-category.module.css";
 
 export default function IngredientsCategory({
   categoryName,
+  categoryType,
   sameCategoryIngredients,
   onButtonClick
 }) {
   return (
-    <>
-      {/* we need to get something like id=`buns-list` */}
       <section
         className="mt-10"
-        id={
-          sameCategoryIngredients.length &&
-          `${sameCategoryIngredients[0].data.type}s-list`
-        }
+        id={ sameCategoryIngredients.length && `${categoryType}-list`}
       >
         <h3 className="text text_type_main-medium">{categoryName}</h3>
         <ul className={`${styles.ingredients} mt-6 pl-4 pr-4`}>
           {
             sameCategoryIngredients.map(item => (
               <li
-                key={item.data._id}
-                onClick={() => onButtonClick(item.data._id)}
+                key={item.id}
+                onClick={() => onButtonClick(item.id)}
               >
                 <Ingredient
-                  image={item.data.image}
-                  name={item.data.name}
-                  price={item.data.price}
+                  id={item.id}
                   quantity={item.quantity}
                 />
               </li>
@@ -40,7 +34,6 @@ export default function IngredientsCategory({
           }
         </ul>
       </section>
-    </>
   )
 }
 
