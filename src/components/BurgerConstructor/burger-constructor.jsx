@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Modal from "../Modal/modal"
 import OrderDetails from "../OrderDetails/order-details";
+import { sendIngredientToServer } from "../../services/actions/order-details-action";
 import {
   Button,
   ConstructorElement,
@@ -14,33 +15,6 @@ import styles from "./burger-constructor.module.css";
 import currIcon from "../../images/vector/currency_icon.svg";
 
 export default function BurgerConstructor() {
-//// this states is required to control rendering of Modal component
-//const [modalData, setModalData] =
-//  useState({isOpened: false, content: null, header: null});
-//
-//// get ingredients from context
-//  const {ingredientsList} = useContext(IngredientsContext);
-//
-//// this handler is trigered on any action which
-//// leads to closing modal window
-//function handleCloseModal() {
-//  setModalData({isOpened: false, content: null, header: null})
-//}
-  //
-  // this handler is triggered on order button click which
-  // leads to opening modal window and server call
-//function handleOpenModal() {
-//  const ingredientsIds =
-//    [bun, ...ingredients, bun].map(ingredient => ingredient["_id"]);
-//  getOrderData(ingredientsIds).then(data => {
-//      const orderDetailsModalData = {
-//        isOpened: true,
-//        content: (<OrderDetails orderNumber={data.order.number}/>),
-//        header: null
-//      }
-//      setModalData(orderDetailsModalData);
-//  });
-//}
 
   // get available components and currently used component from store
   // then prepare data for rendering, keeping it in usedComponentsList
@@ -64,14 +38,38 @@ export default function BurgerConstructor() {
   const calculatedCost =
     useMemo(() => calculateCost(usedComponentsList), [usedComponentsList]);
 
+  // current order number
+  const currenOrderNumber = useSelector(store => store.order.number);
+  const dispatch = useDispatch();
+
+  // current order API call status
+  const {requesting, success, error} = useSelector(store => store.order);
+  const apiCallSuccessful = !requesting && success && !error;
+
+  // current modal window state
+  const [isModalOpened, setIsModalOpened] = useState(false);
+
+  // this handler is triggered on order button click which
+  // leads to opening modal window and server call
+  function handleOpenModal() {
+    dispatch(sendIngredientToServer(usedComponentsList));
+    setIsModalOpened(true);
+  }
+
+  // this handler is trigered on any action which
+  // leads to closing modal window
+  function handleCloseModal() {
+    setIsModalOpened(false);
+  }
+
   return (
     <>
-      {/*
-        modalData.isOpened &&
-          <Modal header={modalData.header} onCloseModal={handleCloseModal}>
-            {modalData.content}
+      {
+        apiCallSuccessful && isModalOpened &&
+          <Modal header={null} onCloseModal={handleCloseModal}>
+            <OrderDetails orderNumber={currenOrderNumber} />
           </Modal>
-          */}
+      }
       <section
         className={`${styles["burger-constructor"]} mt-25 pl-4 pr-4`}
         aria-label="Конструктор бургеров"
@@ -139,7 +137,7 @@ export default function BurgerConstructor() {
             type="primary"
             size="large"
             extraClass="mr-8 ml-10"
-            onClick={null}
+            onClick={handleOpenModal}
           >
             Оформить заказ
           </Button>
