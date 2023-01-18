@@ -1,4 +1,5 @@
 import React from "react";
+import { useDrag } from "react-dnd";
 
 import {
   Counter,
@@ -19,9 +20,23 @@ export default function Ingredient({
   isLocked
 })
 {
+  //TODO: move ingredientDragConfig to /src/utils/constants.js
+  const ingredientDragConfig = {
+    type: "ingredient",
+    item: {id:"abc"},
+    collect: monitor => ({isDragging: monitor.isDragging()})
+  }
+  const [{ isDragging }, dragRef] = useDrag(ingredientDragConfig);
+  /*
+   * there are two types of Ingredient component markups available
+   * first one is supposed to be used in BurgerIngredients comopnent,
+   * while second is "flat", and supposed to be used in BurgerConstructor
+   * component ONLY!
+   */
+  console.log(isDragging);
   return (
     !isFlat ?
-      <article className={styles.ingredient}>
+      <article className={styles.ingredient} ref={dragRef} draggable>
         <img className="pl-4 pr-4 pb-2" src={image} alt={name} />
         { quantity > 0 &&
         <Counter count={quantity} size={"default"} />
@@ -41,10 +56,14 @@ export default function Ingredient({
         </h5>
       </article>
     :
-    <article className={`
+    <article
+      className={`
         ${styles["ingredient_flat"]}
         ${type === "top" ? "ml-8 mb-4" : type === "bottom" ? "ml-8 mt-4" : ""}
-      `}>
+      `}
+      ref={dragRef}
+      draggablee
+    >
       {!isLocked &&
         <DragIcon type="primary" />
       }
