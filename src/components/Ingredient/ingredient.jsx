@@ -1,5 +1,6 @@
 import React from "react";
 import { useDrag } from "react-dnd";
+import { useSelector } from "react-redux";
 
 import {
   Counter,
@@ -10,20 +11,17 @@ import {
 
 import styles from "./ingredient.module.css";
 
-export default function Ingredient({
-  isFlat,
-  name,
-  image,
-  price,
-  quantity,
-  type,
-  isLocked
-})
-{
+export default function Ingredient({id, isFlat, quantity, position, isLocked}) {
+  // get ingredient data from store for rendering
+  const {buns, mains, sauces} = useSelector(store => store.ingredients);
+  const allAvailableComponentsData = [...buns, ...mains, ...sauces];
+  const {image, name, price} =
+    allAvailableComponentsData.filter(ingredient => ingredient._id === id).pop();
+
   //TODO: move ingredientDragConfig to /src/utils/constants.js
   const ingredientDragConfig = {
     type: "ingredient",
-    item: {id:"abc"},
+    item: {id},
     collect: monitor => ({isDragging: monitor.isDragging()})
   }
   const [{ isDragging }, dragRef] = useDrag(ingredientDragConfig);
@@ -33,10 +31,9 @@ export default function Ingredient({
    * while second is "flat", and supposed to be used in BurgerConstructor
    * component ONLY!
    */
-  console.log(isDragging);
   return (
     !isFlat ?
-      <article className={styles.ingredient} ref={dragRef} draggable>
+      <article className={styles.ingredient} ref={dragRef} draggable={true}>
         <img className="pl-4 pr-4 pb-2" src={image} alt={name} />
         { quantity > 0 &&
         <Counter count={quantity} size={"default"} />
@@ -59,18 +56,18 @@ export default function Ingredient({
     <article
       className={`
         ${styles["ingredient_flat"]}
-        ${type === "top" ? "ml-8 mb-4" : type === "bottom" ? "ml-8 mt-4" : ""}
+        ${position === "top" ? "ml-8 mb-4" : position === "bottom" ? "ml-8 mt-4" : ""}
       `}
       ref={dragRef}
-      draggablee
+      draggable={true}
     >
       {!isLocked &&
         <DragIcon type="primary" />
       }
       <ConstructorElement
-        text={`${name}${type === "top" ? " верх" : type === "bottom" ? " низ" : ""}`}
+        text={`${name}${position === "top" ? " верх" : position === "bottom" ? " низ" : ""}`}
         thumbnail={image}
-        type={type}
+        type={position}
         price={price}
         isLocked={isLocked}
       />
