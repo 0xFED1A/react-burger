@@ -45,15 +45,6 @@
   scroll-snap-align: start end;
 }
 
-/* rules for ingredients-list__item element */
-.ingredients-list__item {
-  display: flex;
-
-  flex-direction: row;
-  align-items: center;
-  column-gap: 8px;
-}
-
 /* rules for ingredients-order-info block */
 .ingredients-order-info {
   display: flex;
