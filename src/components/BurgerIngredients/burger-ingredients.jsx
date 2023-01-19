@@ -19,7 +19,7 @@ export default function BurgerIngredients() {
   const {bun, mainsAndSauces} = useSelector(store => store.usedIngredients);
 
   /*
-   * generate lists of available components. Each list consist of Object
+   * generate lists of used components. Each list consist of Object
    * like {id: string,  quantity: num}.
    * id property is used as props in Ingredient component, while quantity is
    * a prop for Counter component which resides inside Ingredient component
