@@ -127,7 +127,7 @@ export default function Ingredient({id, isFlat, quantity, position, isLocked, in
         <DragIcon type="primary" />
       }
       <ConstructorElement
-        text={`${name}${position === "top" ? " верх" : position === "bottom" ? " низ" : ""}`}
+        text={`${name}${position === "top" ? " (верх)" : position === "bottom" ? " (низ)" : ""}`}
         thumbnail={image}
         type={position}
         price={price}
