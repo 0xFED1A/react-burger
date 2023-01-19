@@ -15,3 +15,7 @@ export const ingredientObjectProp = PropTypes.shape({
   _id: PropTypes.string.isRequired
 });
 
+export const sameCategoryIngredientProp = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  quantity: PropTypes.number.isRequired
+})

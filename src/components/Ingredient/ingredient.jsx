@@ -1,6 +1,7 @@
 import React from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useSelector, useDispatch } from "react-redux";
+import PropTypes from 'prop-types';
 
 import { ADD_INGREDIENT, REMOVE_INGREDIENT, SWAP_INGREDIENT_POSITION } from "../../services/actions/burger-constructor-action";
 import {
@@ -136,3 +137,16 @@ export default function Ingredient({id, isFlat, quantity, position, isLocked, in
     </article>
   );
 }
+
+Ingredient.propTypes = {
+  // props like "id" and "isFlat" is always required
+  id: PropTypes.string.isRequired,
+  isFlat: PropTypes.bool.isRequired,
+  // other props is not required, because such props are
+  // not necessary for Ingredients inside
+  // IngredientsCategory component
+  index: PropTypes.number,
+  quantity: PropTypes.number,
+  onCloseModal: PropTypes.func,
+  position: PropTypes.string
+};

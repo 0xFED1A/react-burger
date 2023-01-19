@@ -97,7 +97,6 @@ export default function BurgerConstructor() {
               <Ingredient
                 id={item}
                 index={key}
-                position
                 isFlat={true}
                 isLocked={false}
               />

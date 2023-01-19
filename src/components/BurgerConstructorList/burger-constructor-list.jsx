@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
+import PropTypes from 'prop-types';
 
 import { ADD_INGREDIENT } from "../../services/actions/burger-constructor-action";
 
@@ -50,4 +51,11 @@ export default function BurgerConstructorList({children}) {
       {children}
     </ul>
   )
+}
+
+BurgerConstructorList.propTypes = {
+  // we dont really care on prop type here, we just want it to be
+  // renderable, so it might be HTMLElement or node, but i stick
+  // with HTMLElement
+  chilred: PropTypes.instanceOf(HTMLElement)
 }

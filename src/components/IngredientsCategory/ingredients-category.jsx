@@ -1,8 +1,8 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 import Ingredient from "../Ingredient/ingredient";
-import PropTypes from 'prop-types';
-import { ingredientObjectProp } from "../../utils/propTypes";
+import { sameCategoryIngredientProp } from "../../utils/propTypes";
 
 import styles from "./ingredients-category.module.css";
 
@@ -27,6 +27,7 @@ export default function IngredientsCategory({
               >
                 <Ingredient
                   id={item.id}
+                  isFlat={false}
                   quantity={item.quantity}
                 />
               </li>
@@ -39,6 +40,8 @@ export default function IngredientsCategory({
 
 IngredientsCategory.propTypes = {
   categoryName: PropTypes.string.isRequired,
- // sameCategoryIngredients: PropTypes.arrayOf(ingredientObjectProp.isRequired).isRequired,
- // onButtonClick: PropTypes.func.isRequired
+  categoryType: PropTypes.string.isRequired,
+  sameCategoryIngredients:
+    PropTypes.arrayOf(sameCategoryIngredientProp.isRequired).isRequired,
+  onButtonClick: PropTypes.func.isRequired
 };
