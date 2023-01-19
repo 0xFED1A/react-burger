@@ -83,6 +83,7 @@ export default function BurgerConstructor() {
         */}
         <Ingredient
           id={bun}
+          index={0}
           isFlat={true}
           position={"top"}
           isLocked={true}
@@ -95,6 +96,8 @@ export default function BurgerConstructor() {
             >
               <Ingredient
                 id={item}
+                index={key}
+                position
                 isFlat={true}
                 isLocked={false}
               />
@@ -103,6 +106,7 @@ export default function BurgerConstructor() {
         </BurgerConstructorList>
         <Ingredient
           id={bun}
+          index={mainsAndSauces.length}
           isFlat={true}
           position={"bottom"}
           isLocked={true}
