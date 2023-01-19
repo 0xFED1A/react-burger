@@ -1,6 +1,10 @@
 /* rules for burger-constructor-list component */
 
 /* rules for ingredients-list block */
+.ingredients-list_type_minhight-set {
+  min-height: 80px;
+}
+
 .ingredients-list {
   max-height: 464px;
 
