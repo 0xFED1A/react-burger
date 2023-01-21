@@ -97,16 +97,30 @@ export default function BurgerIngredients() {
     scrollToIngredientSection(value);
   }
 
-   // this function higlights particular tab based on scroll position
+  // ok, im not sure if i correctly understand this task, but
+  // i think, that i need to swtich tabs selection when section headings
+  // top left corner is positioned at the same spot with tabs selectors
+  // bottom left corner. If so, it is kinda works
   function handleScroll(event) {
     const sectionNames = [
       INGREDIENT_TYPE_BUN,
-      INGREDIENT_TYPE_MAIN,
-      INGREDIENT_TYPE_SAUCE
+      INGREDIENT_TYPE_SAUCE,
+      INGREDIENT_TYPE_MAIN
     ];
+    const sections = Array.from(event.target.children);
+    const sectionMarginTop = parseInt(
+      window.getComputedStyle(sections[0])
+      .getPropertyValue("margin-top")
+    );
+
+    const tabBox = document.querySelector(`.${styles["tab-box"]}`);
+    const tabBoxHeight = parseInt(window.getComputedStyle(tabBox).getPropertyValue("height"));
+    const tabBoxPosition
+      = tabBox.getBoundingClientRect().y + window.scrollY + tabBoxHeight + sectionMarginTop;
+
     const nearestSection = Array.from(event.target.children)
-      .map(child => (Math.abs(child.getBoundingClientRect().y)))
-      .reduce((acc, item, index, array) => (item >= array[acc] ? acc : index), 0);
+      .map(child => (child.getBoundingClientRect().y + window.scrollY) - tabBoxPosition | 0)
+      .findLastIndex(item => item === 0 || item < 0);
     setTab(sectionNames[nearestSection]);
   }
 
