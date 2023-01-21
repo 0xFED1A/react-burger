@@ -53,10 +53,8 @@ export default function Ingredient({id, isFlat, quantity, position, isLocked, in
     [INGREDIENT_TYPE_BUN] : [
       INGREDIENT_TYPE_MAIN,
       INGREDIENT_TYPE_SAUCE,
-      INGREDIENT_TYPE_BUN,
       INGREDIENT_TYPE_MAIN_FLAT,
       INGREDIENT_TYPE_SAUCE_FLAT,
-      INGREDIENT_TYPE_BUN_FLAT
     ]
 
   const ingredientDragConfig = {
