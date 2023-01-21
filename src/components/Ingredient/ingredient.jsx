@@ -95,11 +95,14 @@ export default function Ingredient({id, isFlat, quantity, position, isLocked, in
           })
         }
       }
-    }
+    },
+    collect: monitor => ({isOver: monitor.isOver()})
   }
-  const [{}, dropRef] = useDrop(ingredientDropConfig)
+  const [{isOver}, dropRef] = useDrop(ingredientDropConfig)
 
   const opacity = isDragging ? {opacity: "50%"} : {opacity: "100"};
+  const marginTop = isOver && !isBun ? {paddingTop: 80} : null;
+  const dropStyles = {...opacity, ...marginTop};
 
   /*
    * there are two types of Ingredient component markups available
@@ -141,7 +144,7 @@ export default function Ingredient({id, isFlat, quantity, position, isLocked, in
       `}
       ref={node => {dragRef(node); dropRef(node)}}
       draggable={true}
-      style={opacity}
+      style={dropStyles}
     >
       {!isLocked &&
         <DragIcon type="primary" />
