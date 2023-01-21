@@ -153,7 +153,7 @@ export default function BurgerIngredients() {
             Соусы
           </Tab>
           <Tab
-            value={INGREDIENT_TYPE_SAUCE}
+            value={INGREDIENT_TYPE_MAIN}
             active={currentTab === INGREDIENT_TYPE_MAIN}
             onClick={tabSwitchHandler}
           >

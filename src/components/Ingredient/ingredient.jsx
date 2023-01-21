@@ -37,7 +37,7 @@ export default function Ingredient({id, isFlat, quantity, position, isLocked, in
   const {buns, mains, sauces} = useSelector(store => store.ingredients);
   const allAvailableComponentsData = [...buns, ...mains, ...sauces];
   const {image, name, price, type} =
-    allAvailableComponentsData.filter(ingredient => ingredient._id === id).pop();
+    allAvailableComponentsData.find(ingredient => ingredient._id === id);
 
   const dispatch = useDispatch();
 

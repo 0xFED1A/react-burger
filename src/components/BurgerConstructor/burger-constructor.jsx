@@ -25,7 +25,7 @@ export default function BurgerConstructor() {
     const allAvailableComponentsData = [...buns, ...mains, ...sauces];
     const allUsedComponentsIds = [bun, ...mainsAndSauces, bun];
     return allUsedComponentsIds.map(id => (
-      allAvailableComponentsData.filter(data => data._id === id).pop().price
+      allAvailableComponentsData.find(data => data._id === id).price
     ));
   }, [bun, mainsAndSauces, buns, mains, sauces]);
 
