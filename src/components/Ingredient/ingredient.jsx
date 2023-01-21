@@ -12,7 +12,6 @@ import {
   INGREDIENT_TYPE_BUN,
   INGREDIENT_TYPE_SAUCE,
   INGREDIENT_TYPE_MAIN,
-  INGREDIENT_TYPE_BUN_FLAT,
   INGREDIENT_TYPE_MAIN_FLAT,
   INGREDIENT_TYPE_SAUCE_FLAT
 } from "../../utils/constants";
@@ -94,13 +93,19 @@ export default function Ingredient({id, isFlat, quantity, position, isLocked, in
         }
       }
     },
-    collect: monitor => ({isOver: monitor.isOver()})
+    collect: monitor => ({
+      isOver: monitor.isOver(),
+      isSame: monitor.getItem() ? monitor.getItem().position === index : false,
+      isTargetLower: monitor.getItem() ? monitor.getItem().position < index : false,
+    })
   }
-  const [{isOver}, dropRef] = useDrop(ingredientDropConfig)
+  const [{isOver, isSame, isTargetLower}, dropRef] = useDrop(ingredientDropConfig)
 
-  const opacity = isDragging ? {opacity: "50%"} : {opacity: "100"};
-  const marginTop = isOver && !isBun ? {paddingTop: 80} : null;
-  const dropStyles = {...opacity, ...marginTop};
+  const opacity = isDragging ? {opacity: "50%"} : {opacity: "100%"};
+  const padding = isBun || isSame ?
+    {padding: 0} : isOver && isTargetLower ?
+    {paddingBottom: 80} : isOver && !isTargetLower ? {paddingTop: 80} : null;
+  const dropStyles = {...opacity, ...padding};
 
   /*
    * there are two types of Ingredient component markups available
