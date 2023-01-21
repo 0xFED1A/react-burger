@@ -48,6 +48,11 @@ export default function BurgerConstructor() {
   // apiCallSuccessful equals true
   const {requesting, success, error} = useSelector(store => store.order);
   const apiCallSuccessful = !requesting && success && !error;
+  const apiCallFailed = !requesting && !success && error;
+
+  if (apiCallFailed) {
+    console.log(error);
+  }
 
   // current modal window state
   const [isModalOpened, setIsModalOpened] = useState(false);

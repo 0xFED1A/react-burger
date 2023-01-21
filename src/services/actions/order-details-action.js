@@ -8,12 +8,14 @@ export const SEND_ORDER_DATA_FAILED = "SEND_ORDER_DATA_FAILED";
 export function sendIngredientToServer(ingredientsIds) {
   return function(dispatch) {
     dispatch({type: SEND_ORDER_DATA_REQUEST});
-    getOrderData(ingredientsIds).then(data => {
-      if (data.constructor.name === "Error") {
-        dispatch({type: SEND_ORDER_DATA_FAILED, errorMsg: data});
-      } else {
+    getOrderData(ingredientsIds)
+      .then(data => {
         dispatch({type: SEND_ORDER_DATA_SUCCESS, orderDetails: data});
-      }
-    });
+      })
+      .catch(error => {
+        const errorMsg =`Ошибка получения данных сервера: ${error.message}`;
+        dispatch({type: SEND_ORDER_DATA_FAILED, errorMsg});
+      });
+    ;
   }
 }
