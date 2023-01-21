@@ -8,12 +8,14 @@ export const GET_INGREDIENTS_FAILED = "GET_ITEMS_FAILED";
 export function getIngredientsFromServer() {
   return function(dispatch) {
     dispatch({type: GET_INGREDIENTS_REQUEST});
-    getIngredientsList().then(data => {
-      if (data.constructor.name === "Error") {
-        dispatch({type: GET_INGREDIENTS_FAILED, errorMsg: data});
-      } else {
+    getIngredientsList()
+      .then(data => {
         dispatch({type: GET_INGREDIENTS_SUCCESS, ingredients: data});
-      }
-    });
+      })
+      .catch(error => {
+        const errorMsg =`Ошибка получения данных сервера: ${error.message}`;
+        dispatch({type: GET_INGREDIENTS_FAILED, errorMsg});
+      });
+    ;
   }
 }

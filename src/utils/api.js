@@ -15,10 +15,6 @@ export function getIngredientsList() {
         return new Error("Ошибка получения данных с сервера: !success")
       }
     })
-    .catch(error => {
-      const errMsg =`Ошибка получения данных сервера: ${error.message}`;
-      return new Error(errMsg);
-    });
   return fetchResult;
 }
 
