@@ -4,6 +4,10 @@ import { useDrop } from "react-dnd";
 import PropTypes from 'prop-types';
 
 import { ADD_INGREDIENT } from "../../services/actions/burger-constructor-action";
+import {
+  INGREDIENT_TYPE_MAIN,
+  INGREDIENT_TYPE_SAUCE
+} from "../../utils/constants";
 
 import styles from "./burger-constructor-list.module.css";
 
@@ -17,7 +21,7 @@ export default function BurgerConstructorList({children}) {
     // this component accepts only mains and sauces, both
     // of them should be !isFlat, it means it should be dragged
     // from BurgerIngredients components
-    accept: ["main", "sauce"],
+    accept: [INGREDIENT_TYPE_MAIN, INGREDIENT_TYPE_SAUCE],
     drop: item => dispatch({
         type: ADD_INGREDIENT,
         id: item.id,

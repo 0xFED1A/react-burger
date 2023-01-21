@@ -10,6 +10,11 @@ import {
   CLEAR_CURRENT_INGREDIENT,
   SET_CURRENT_INGREDIENT
 } from "../../services/actions/ingredient-details-action";
+import {
+  INGREDIENT_TYPE_BUN,
+  INGREDIENT_TYPE_MAIN,
+  INGREDIENT_TYPE_SAUCE
+} from "../../utils/constants";
 
 import styles from "./burger-ingredients.module.css";
 
@@ -87,14 +92,18 @@ export default function BurgerIngredients() {
 
   // this states is required to control rendering
   // of Tab component
-  const [currentTab, setTab] = useState("bun");
+  const [currentTab, setTab] = useState(INGREDIENT_TYPE_BUN);
   function tabSwitchHandler(value) {
     scrollToIngredientSection(value);
   }
 
    // this function higlights particular tab based on scroll position
   function handleScroll(event) {
-    const sectionNames = ["bun", "sauce", "main"];
+    const sectionNames = [
+      INGREDIENT_TYPE_BUN,
+      INGREDIENT_TYPE_MAIN,
+      INGREDIENT_TYPE_SAUCE
+    ];
     const nearestSection = Array.from(event.target.children)
       .map(child => (Math.abs(child.getBoundingClientRect().y)))
       .reduce((acc, item, index, array) => (item >= array[acc] ? acc : index), 0);
@@ -130,22 +139,22 @@ export default function BurgerIngredients() {
         </h1>
         <div className={`${styles["tab-box"]} mt-5`}>
           <Tab
-            value="bun"
-            active={currentTab === "bun"}
+            value={INGREDIENT_TYPE_BUN}
+            active={currentTab === INGREDIENT_TYPE_BUN}
             onClick={tabSwitchHandler}
           >
             Булки
           </Tab>
           <Tab
-            value="sauce"
-            active={currentTab === "sauce"}
+            value={INGREDIENT_TYPE_SAUCE}
+            active={currentTab === INGREDIENT_TYPE_SAUCE}
             onClick={tabSwitchHandler}
           >
             Соусы
           </Tab>
           <Tab
-            value="main"
-            active={currentTab === "main"}
+            value={INGREDIENT_TYPE_SAUCE}
+            active={currentTab === INGREDIENT_TYPE_MAIN}
             onClick={tabSwitchHandler}
           >
             Начинки
@@ -160,19 +169,19 @@ export default function BurgerIngredients() {
               */}
             <IngredientsCategory
               categoryName="Булки"
-              categoryType={"buns"}
+              categoryType={`${INGREDIENT_TYPE_BUN}s`}
               sameCategoryIngredients={bunsList}
               onButtonClick={handleOpenModal}
             />
             <IngredientsCategory
               categoryName="Соусы"
-              categoryType={"sauces"}
+              categoryType={`${INGREDIENT_TYPE_SAUCE}s`}
               sameCategoryIngredients={saucesList}
               onButtonClick={handleOpenModal}
             />
             <IngredientsCategory
               categoryName="Начинки"
-              categoryType={"mains"}
+              categoryType={`${INGREDIENT_TYPE_MAIN}s`}
               sameCategoryIngredients={mainsList}
               onButtonClick={handleOpenModal}
             />

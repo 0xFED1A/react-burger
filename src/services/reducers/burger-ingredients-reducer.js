@@ -3,6 +3,12 @@ import {
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_SUCCESS,
 } from "../actions/burger-ingredients-action";
+import {
+  INGREDIENT_TYPE_BUN,
+  INGREDIENT_TYPE_SAUCE,
+  INGREDIENT_TYPE_MAIN
+} from "../../utils/constants";
+
 
 const initialValue = {
   buns: [],
@@ -29,9 +35,9 @@ export default function burgerIngredientsReducer(state = initialValue, action) {
     }
     case GET_INGREDIENTS_SUCCESS: {
       return {
-        buns: action.ingredients.filter(item => item.type === "bun"),
-        mains: action.ingredients.filter(item => item.type === "main"),
-        sauces: action.ingredients.filter(item => item.type === "sauce"),
+        buns: action.ingredients.filter(item => item.type === INGREDIENT_TYPE_BUN),
+        mains: action.ingredients.filter(item => item.type === INGREDIENT_TYPE_MAIN),
+        sauces: action.ingredients.filter(item => item.type === INGREDIENT_TYPE_SAUCE),
         requesting: false,
         success: true,
         error: null

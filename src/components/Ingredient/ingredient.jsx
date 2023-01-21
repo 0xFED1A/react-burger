@@ -3,7 +3,20 @@ import { useDrag, useDrop } from "react-dnd";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from 'prop-types';
 
-import { ADD_INGREDIENT, REMOVE_INGREDIENT, SWAP_INGREDIENT_POSITION } from "../../services/actions/burger-constructor-action";
+import {
+  ADD_INGREDIENT,
+  REMOVE_INGREDIENT,
+  SWAP_INGREDIENT_POSITION
+} from "../../services/actions/burger-constructor-action";
+import {
+  INGREDIENT_TYPE_BUN,
+  INGREDIENT_TYPE_SAUCE,
+  INGREDIENT_TYPE_MAIN,
+  INGREDIENT_TYPE_BUN_FLAT,
+  INGREDIENT_TYPE_MAIN_FLAT,
+  INGREDIENT_TYPE_SAUCE_FLAT
+} from "../../utils/constants";
+
 import {
   Counter,
   CurrencyIcon,
@@ -35,9 +48,16 @@ export default function Ingredient({id, isFlat, quantity, position, isLocked, in
 
   // isBun is used to control list of accepted types in drop target, but it is also
   // used as part of action argument for reducer
-  const isBun = type === "bun";
+  const isBun = type === INGREDIENT_TYPE_BUN;
   const accept = isBun ?
-    ["bun"] : ["main", "sauce", "bun", "flat-main", "flat-sauce", "flat-bun"];
+    [INGREDIENT_TYPE_BUN] : [
+      INGREDIENT_TYPE_MAIN,
+      INGREDIENT_TYPE_SAUCE,
+      INGREDIENT_TYPE_BUN,
+      INGREDIENT_TYPE_MAIN_FLAT,
+      INGREDIENT_TYPE_SAUCE_FLAT,
+      INGREDIENT_TYPE_BUN_FLAT
+    ]
 
   const ingredientDragConfig = {
     // we really need to send type to reducer, we dont want to accidently copy
