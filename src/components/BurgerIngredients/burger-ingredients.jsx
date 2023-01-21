@@ -97,10 +97,17 @@ export default function BurgerIngredients() {
     scrollToIngredientSection(value);
   }
 
-  // ok, im not sure if i correctly understand this task, but
-  // i think, that i need to swtich tabs selection when section headings
-  // top left corner is positioned at the same spot with tabs selectors
-  // bottom left corner. If so, it is kinda works
+  /*
+   * ok, im not sure if i correctly understand this task, but
+   * i think, that i need to higlight the last scrolled tab,
+   * if so, the "lastScrolledHeading " variable works just fine.
+   *
+   * however, i might misunderstood this task, and i should higlight
+   * tabs based on nearest postion to tabBox. If so, "nearestSectionHeading"
+   * will be ok.
+   *
+   * Plz, check em both
+   */
   function handleScroll(event) {
     const sectionNames = [
       INGREDIENT_TYPE_BUN,
@@ -118,10 +125,19 @@ export default function BurgerIngredients() {
     const tabBoxPosition
       = tabBox.getBoundingClientRect().y + window.scrollY + tabBoxHeight + sectionMarginTop;
 
-    const nearestSection = Array.from(event.target.children)
-      .map(child => (child.getBoundingClientRect().y + window.scrollY) - tabBoxPosition | 0)
-      .findLastIndex(item => item === 0 || item < 0);
-    setTab(sectionNames[nearestSection]);
+    const lastScrolledHeading =
+      Array.from(event.target.children)
+        .map(child => (child.getBoundingClientRect().y + window.scrollY) - tabBoxPosition | 0)
+        .findLastIndex(item => item === 0 || item < 0);
+
+    /*
+     *  const nearestSectionHeading = Array.from(event.target.children)
+     *    .map(child => (child.getBoundingClientRect().y + window.scrollY) - tabBoxPosition | 0)
+     *    .reduce((acc, val, key, array) => (Math.abs(val) < Math.abs(array[acc]) ? key : acc) , 0)
+     */
+
+//  setTab(sectionNames[nearestSectionHeading]);
+    setTab(sectionNames[lastScrolledHeading]);
   }
 
   // get current previewing ingredient id from state
