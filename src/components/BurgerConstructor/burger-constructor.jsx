@@ -1,112 +1,124 @@
-import React, {useContext} from "react";
+import React from "react";
 import { useState, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import Modal from "../Modal/modal"
 import OrderDetails from "../OrderDetails/order-details";
-import { getOrderData } from "../../utils/api";
-import IngredientsContext from "../../services/ingredients-context";
-import {
-  Button,
-  ConstructorElement,
-  DragIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import Ingredient from "../Ingredient/ingredient";
+import BurgerConstructorList from "../BurgerConstructorList/burger-constructor-list";
+import { sendIngredientToServer } from "../../services/actions/order-details-action";
+import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
+
 import styles from "./burger-constructor.module.css";
 import currIcon from "../../images/vector/currency_icon.svg";
 
 export default function BurgerConstructor() {
-  // this states is required to control rendering of Modal component
-  const [modalData, setModalData] =
-    useState({isOpened: false, content: null, header: null});
 
-  // get ingredients from context
-  const {ingredientsList} = useContext(IngredientsContext);
+  // get currently used components form usedIngredients store,
+  // then get all available components data for price calculation
+  const {bun, mainsAndSauces} = useSelector(store => store.usedIngredients);
+  const {buns, mains, sauces} = useSelector(store => store.ingredients);
 
-  // this handler is trigered on any action which
-  // leads to closing modal window
-  function handleCloseModal() {
-    setModalData({isOpened: false, content: null, header: null})
-  }
+  // this array contains prices for each yield from parsing currenlty used
+  // components
+  const usedComponentsPrices = useMemo(() => {
+    const allAvailableComponentsData = [...buns, ...mains, ...sauces];
+    const allUsedComponentsIds = [bun, ...mainsAndSauces, bun];
+    return allUsedComponentsIds.map(id => (
+      allAvailableComponentsData.find(data => data._id === id).price
+    ));
+  }, [bun, mainsAndSauces, buns, mains, sauces]);
 
-  const bun = ingredientsList.find(ingredient => ingredient.type === 'bun');
-  const ingredients = ingredientsList.filter(ingredient => ingredient.type !== 'bun');
-
-  // this function calculates total cost
-  function calculateCost(ingredients, bun) {
-    const bunsPrice = bun.price * 2;
-    return ingredients.reduce((acc, val) => acc + val.price, 0) + bunsPrice;
+  // this function calculates total cost, it takes array of prices as
+  // arg, and then simply reduces array
+  function calculateCost(prices) {
+    return prices.reduce((acc, val) => acc + val, 0);
   }
 
   // memoisation of computations performed by calculateCost() funct
   const calculatedCost =
-    useMemo(() => calculateCost(ingredients, bun), [ingredients, bun]);
+    useMemo(() => calculateCost(usedComponentsPrices), [usedComponentsPrices]);
+
+  // here we want ot get current order number, we need it to pass as prop
+  // to modal
+  const currenOrderNumber = useSelector(store => store.order.number);
+  const dispatch = useDispatch();
+
+  // current order API call status, we wont open modal window unless
+  // apiCallSuccessful equals true
+  const {requesting, success, error} = useSelector(store => store.order);
+  const apiCallSuccessful = !requesting && success && !error;
+  const apiCallFailed = !requesting && !success && error;
+
+  if (apiCallFailed) {
+    console.log(error);
+  }
+
+  // current modal window state
+  const [isModalOpened, setIsModalOpened] = useState(false);
 
   // this handler is triggered on order button click which
   // leads to opening modal window and server call
   function handleOpenModal() {
-    const ingredientsIds =
-      [bun, ...ingredients, bun].map(ingredient => ingredient["_id"]);
-    getOrderData(ingredientsIds).then(data => {
-        const orderDetailsModalData = {
-          isOpened: true,
-          content: (<OrderDetails orderNumber={data.order.number}/>),
-          header: null
-        }
-        setModalData(orderDetailsModalData);
-    });
+    dispatch(sendIngredientToServer([bun, ...mainsAndSauces, bun]));
+    setIsModalOpened(true);
+  }
+
+  // this handler is trigered on any action which
+  // leads to closing modal window
+  function handleCloseModal() {
+    setIsModalOpened(false);
   }
 
   return (
     <>
       {
-        modalData.isOpened &&
-          <Modal header={modalData.header} onCloseModal={handleCloseModal}>
-            {modalData.content}
+        apiCallSuccessful && isModalOpened &&
+          <Modal header={null} onCloseModal={handleCloseModal}>
+            <OrderDetails orderNumber={currenOrderNumber} />
           </Modal>
       }
       <section
         className={`${styles["burger-constructor"]} mt-25 pl-4 pr-4`}
         aria-label="Конструктор бургеров"
       >
-        <article className={`${styles["ingredients-list__item"]} ml-8 mb-4`}>
-          <ConstructorElement
-            text={bun.name + " (верх)"}
-            thumbnail={bun.image}
-            type="top"
-            price={bun.price}
-            isLocked={true}
-          />
-        </article>
-        <ul
-          className={`${styles["ingredients-list"]}`}
-          id="ingredients-list"
-        >
-          {ingredients.map(item =>(
+        {/* isFlat prop used for conditional rendering of Ingredient componet
+            other props is required for ConstructorElement component inside
+            Ingredient component markup
+        */}
+        <Ingredient
+          id={bun}
+          index={0}
+          isFlat={true}
+          position={"top"}
+          isLocked={true}
+        />
+        <BurgerConstructorList>
+          {mainsAndSauces.map((item, key) =>(
             <li
               className={`${styles["ingredients-list__item-wrapper"]}`}
-              key={item._id}
+              key={key}
             >
-              <article className={`${styles["ingredients-list__item"]}`}>
-                <DragIcon type="primary" />
-                <ConstructorElement
-                  text={item.name}
-                  thumbnail={item.image}
-                  price={item.price}
-                  isLocked={false}
-                />
-              </article>
+              <Ingredient
+                id={item}
+                index={key}
+                isFlat={true}
+                isLocked={false}
+              />
             </li>
           ))}
-        </ul>
-        <article className={`${styles["ingredients-list__item"]} ml-8 mt-4`}>
-          <ConstructorElement
-            text={bun.name + " (низ)"}
-            thumbnail={bun.image}
-            type="bottom"
-            price={bun.price}
-            isLocked={true}
-          />
-        </article>
+        </BurgerConstructorList>
+        <Ingredient
+          id={bun}
+          index={mainsAndSauces.length}
+          isFlat={true}
+          position={"bottom"}
+          isLocked={true}
+        />
         <div className={`${styles["ingredients-order-info"]} mt-10`}>
-          <span className="text text_type_digits-medium mr-2">{calculatedCost}</span>
+          <span className="text text_type_digits-medium mr-2">
+            {calculatedCost}
+          </span>
           <img
             src={currIcon}
             alt="Валюта"

@@ -9,6 +9,9 @@ Stellar Burgers - это учебный проект, в котором учащ
 ## В проекте используются
 
 - React
+- React DnD
+- React Redux
+- Redux Thunk
 - Javascript
 - HTML/CSS3
 - Git

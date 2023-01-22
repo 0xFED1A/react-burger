@@ -1,0 +1,33 @@
+/* rules for ingredient component */
+
+/* rules for ingredient block */
+.ingredient {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+}
+
+/* rules for ingredient_flat modifier */
+.ingredient_flat {
+  display: flex;
+
+  flex-direction: row;
+  align-items: center;
+  column-gap: 8px;
+}
+
+/* rules for ingredient__price-box element */
+.ingredient__price-box {
+  display: flex;
+
+  align-items: center;
+  column-gap: 8px;
+}
+
+/* rules for ingredient__item-name element */
+.ingredient__item-name {
+  height: 48px;
+}
