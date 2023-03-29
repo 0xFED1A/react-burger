@@ -95,3 +95,28 @@ export const FORGOT_PASS_DATA = {
     }
   ]
 }
+export const RESET_PASS_DATA = {
+  heading: "Восстановление пароля",
+  inputs: [
+    {
+      name: "password",
+      placeholder: "Введите новый пароль",
+      type: "password",
+      icon: "ShowIcon"
+    },
+    {
+      name: "code",
+      placeholder: "Введите код из письма",
+      type: "text",
+      icon: null
+    }
+  ],
+  buttonCaption: "Сохранить",
+  links: [
+    {
+      caption: "Вспомнили пароль?",
+      linkName: "Войти",
+      route: "/login"
+    }
+  ]
+}
