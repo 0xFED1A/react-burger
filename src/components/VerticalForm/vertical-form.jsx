@@ -10,19 +10,16 @@ import styles from "./vertical-form.module.css"
 
 export default function VerticalForm({heading, inputs, buttonCaption, links}) {
   const initialInputValues =
-    inputs.map(inputData => {return {name: inputData.name, value: "abc"}});
+    inputs.map(inputData => {return {name: inputData.name, value: ""}});
   const [inputValues, setInputValues] = useState(initialInputValues);
 
   function inputHandler(event) {
     const indexOfTriggeredInput =
       inputValues.map(obj => obj.name).indexOf(event.target.name);
     setInputValues(prevState => {
-      return (
-        [
-          ...prevState,
-          prevState[indexOfTriggeredInput].value = event.target.value
-        ]
-      );
+      let newState = [...prevState];
+      newState[indexOfTriggeredInput].value = event.target.value;
+      return newState;
     });
   }
 
