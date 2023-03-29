@@ -17,10 +17,10 @@ export default function Register() {
     {
       name: "Пароль",
       type: "password",
-      icon: "show/hide"
+      icon: "ShowIcon"
     },
   ]
-  const buttonCaption = "Войти";
+  const buttonCaption = "Зарегестрироваться";
   const links = [
     {
       caption: "Уже зарегистрированы?",
