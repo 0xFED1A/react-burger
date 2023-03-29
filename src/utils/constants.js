@@ -46,3 +46,33 @@ export const REGISTER_DATA = {
     }
   ]
 }
+export const LOGIN_DATA = {
+  heading: "Вход",
+  inputs: [
+    {
+      name: "email",
+      placeholder: "E-mail",
+      type: "email",
+      icon: null
+    },
+    {
+      name: "password",
+      placeholder: "Пароль",
+      type: "password",
+      icon: "ShowIcon"
+    }
+  ],
+  buttonCaption: "Войти",
+  links: [
+    {
+      caption: "Вы — новый пользователь?",
+      linkName: "Зарегистрироваться",
+      route: "/register"
+    },
+    {
+      caption: "Забыли пароль?",
+      linkName: "Восстановить пароль",
+      route: "/forgot-password"
+    },
+  ]
+}
