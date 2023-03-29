@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { compose, createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import { BrowserRouter } from 'react-router-dom';
 
 import App from './components/App/app';
 import rootReducer from './services/reducers/root-reducer';
@@ -23,7 +24,9 @@ rootComponent.render(
   (
     <React.StrictMode>
       <Provider store={store}>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </Provider>
     </React.StrictMode>
   )
