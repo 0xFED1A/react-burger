@@ -1,36 +1,12 @@
 import React from "react";
 import VerticalForm from "../components/VerticalForm/vertical-form";
 
+import { REGISTER_DATA } from "../utils/constants";
+
 export default function Register() {
-  const heading = "Регистрация";
-  const inputs = [
-    {
-      name: "name",
-      placeholder: "Имя",
-      type: "text",
-      icon: null
-    },
-    {
-      name: "email",
-      placeholder: "E-mail",
-      type: "email",
-      icon: null
-    },
-    {
-      name: "password",
-      placeholder: "Пароль",
-      type: "password",
-      icon: "ShowIcon"
-    },
-  ]
-  const buttonCaption = "Зарегестрироваться";
-  const links = [
-    {
-      caption: "Уже зарегистрированы?",
-      linkName: "Войти",
-      route: "/login"
-    }
-  ];
+  const {heading, inputs, buttonCaption, links} =
+    REGISTER_DATA;
+
   return(
     <VerticalForm
       heading={heading}

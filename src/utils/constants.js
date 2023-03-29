@@ -13,3 +13,36 @@ export const INGREDIENT_TYPE_MAIN_FLAT = "flat-main";
 // export ingredient positions
 export const POSITION_TYPE_TOP = "top";
 export const POSITION_TYPE_BOTTOM = "bottom"
+
+// export pages data
+export const REGISTER_DATA = {
+  heading: "Регистрация",
+  inputs: [
+    {
+      name: "name",
+      placeholder: "Имя",
+      type: "text",
+      icon: null
+    },
+    {
+      name: "email",
+      placeholder: "E-mail",
+      type: "email",
+      icon: null
+    },
+    {
+      name: "password",
+      placeholder: "Пароль",
+      type: "password",
+      icon: "ShowIcon"
+    }
+  ],
+  buttonCaption: "Зарегестрироваться",
+  links: [
+    {
+      caption: "Уже зарегистрированы?",
+      linkName: "Войти",
+      route: "/login"
+    }
+  ]
+}
