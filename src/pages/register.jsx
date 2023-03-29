@@ -1,7 +1,39 @@
 import React from "react";
+import VerticalForm from "../components/VerticalForm/vertical-form";
 
 export default function Register() {
+  const heading = "Регистрация";
+  const inputs = [
+    {
+      name: "Имя",
+      type: "text",
+      icon: null
+    },
+    {
+      name: "E-mail",
+      type: "email",
+      icon: null
+    },
+    {
+      name: "Пароль",
+      type: "password",
+      icon: "show/hide"
+    },
+  ]
+  const buttonCaption = "Войти";
+  const links = [
+    {
+      caption: "Уже зарегистрированы?",
+      linkName: "Войти",
+      route: "/login"
+    }
+  ];
   return(
-    <h1>Register stub</h1>
-  )
+    <VerticalForm
+      heading={heading}
+      inputs={inputs}
+      buttonCaption={buttonCaption}
+      links={links}
+    />
+  );
 }
