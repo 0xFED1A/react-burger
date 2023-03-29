@@ -12,7 +12,7 @@ export default function Register() {
       email: event.target.email.value,
       password: event.target.password.value,
       name: event.target.name.value
-    }
+    };
     fetch(
       'https://norma.nomoreparties.space/api/auth/register',
       {
