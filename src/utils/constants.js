@@ -76,3 +76,22 @@ export const LOGIN_DATA = {
     },
   ]
 }
+export const FORGOT_PASS_DATA = {
+  heading: "Восстановление пароля",
+  inputs: [
+    {
+      name: "email",
+      placeholder: "Укажите e-mail",
+      type: "email",
+      icon: null
+    }
+  ],
+  buttonCaption: "Восстановить",
+  links: [
+    {
+      caption: "Вспомнили пароль?",
+      linkName: "Войти",
+      route: "/login"
+    }
+  ]
+}
