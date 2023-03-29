@@ -21,9 +21,12 @@ export default function App() {
   return (
       <>
         <AppHeader />
-        <main className={styles.main}>
           <Routes>
-            <Route path='/' element={<Index />} />
+            <Route path='/' element={
+              <main className={styles.main}>
+                <Index />
+              </main>
+            } />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/forgot-password' element={<ForgotPassword />} />
@@ -32,7 +35,6 @@ export default function App() {
             <Route path='/ingredients/:id' element={<Ingredients />} />
             <Route path='*' element={<FourOFour />} />
           </Routes>
-        </main>
       </>
   );
 }
