@@ -9,10 +9,31 @@
 
 .inputs-group {
   width: 100%;
+  margin: 0;
+  padding: 0;
 
   border: 0;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  width: fit-content;
+}
+
+.links-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.links-pair {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.link {
+  padding: 0;
 }

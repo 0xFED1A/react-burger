@@ -2,9 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import {
-  ShowIcon,
-  HideIcon,
-  EditIcon
+  Input,
+  Button
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import styles from "./vertical-form.module.css"
@@ -19,30 +18,45 @@ export default function VerticalForm({heading, inputs, buttonCaption, links}) {
         <fieldset className={styles["inputs-group"]}>
           {
             inputs.map(inputData =>
-              <input
-                className=""
+              <Input
+                extraClass="mt-6"
                 type={inputData.type}
                 placeholder={inputData.name}
+                icon={inputData.icon}
                 value=""
                 spellCheck={false}
               />
             )
           }
-          <button
-            className=""
-            type="submit"
+          <Button
+            extraClass={`mt-6 ${styles.button}`}
+            htmlType="submit"
+            type="primary"
+            size="medium"
           >
             {buttonCaption}
-          </button>
+          </Button>
+        </fieldset>
+        <div className={`mt-20 ${styles["links-group"]}`}>
           {
             links.map(linksData =>
-              <div className="">
-                <p className="">{linksData.caption}</p>
-                <Link to={linksData.route}>{linksData.linkName}</Link>
+              <div className={`mb-4 ${styles["links-pair"]}`}>
+                <p className={`text text_type_main-default text_color_inactive`}>
+                  {linksData.caption}
+                </p>
+                <Button
+                  extraClass={`ml-2 ${styles.link}`}
+                  htmlType="button"
+                  type="secondary"
+                  size="medium"
+                  onClick={null}
+                >
+                  {linksData.linkName}
+                </Button>
               </div>
             )
           }
-        </fieldset>
+        </div>
       </form>
   )
 }
