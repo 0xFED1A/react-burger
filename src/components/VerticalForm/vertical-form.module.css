@@ -1,0 +1,18 @@
+.inputs-form {
+  width: 480px;
+  margin: 180px auto 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputs-group {
+  width: 100%;
+
+  border: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
