@@ -58,8 +58,8 @@ export default function VerticalForm({heading, inputs, buttonCaption, links}) {
         </fieldset>
         <div className={`mt-20 ${styles["links-group"]}`}>
           {
-            links.map(linksData =>
-              <div className={`mb-4 ${styles["links-pair"]}`}>
+            links.map((linksData, key) =>
+              <div key={key} className={`mb-4 ${styles["links-pair"]}`}>
                 <p className={`text text_type_main-default text_color_inactive`}>
                   {linksData.caption}
                 </p>
