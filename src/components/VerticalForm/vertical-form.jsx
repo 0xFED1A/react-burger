@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import {
   Input,
@@ -22,6 +22,8 @@ export default function VerticalForm({heading, inputs, buttonCaption, links}) {
       return newState;
     });
   }
+
+  const navigate = useNavigate();
 
   return (
       <form
@@ -66,7 +68,7 @@ export default function VerticalForm({heading, inputs, buttonCaption, links}) {
                   htmlType="button"
                   type="secondary"
                   size="medium"
-                  onClick={null}
+                  onClick={() => navigate(linksData.route)}
                 >
                   {linksData.linkName}
                 </Button>
