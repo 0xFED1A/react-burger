@@ -5,17 +5,20 @@ export default function Register() {
   const heading = "Регистрация";
   const inputs = [
     {
-      name: "Имя",
+      name: "name",
+      placeholder: "Имя",
       type: "text",
       icon: null
     },
     {
-      name: "E-mail",
+      name: "email",
+      placeholder: "E-mail",
       type: "email",
       icon: null
     },
     {
-      name: "Пароль",
+      name: "password",
+      placeholder: "Пароль",
       type: "password",
       icon: "ShowIcon"
     },

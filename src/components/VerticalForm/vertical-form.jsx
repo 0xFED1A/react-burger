@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 
 import {
@@ -9,6 +9,23 @@ import {
 import styles from "./vertical-form.module.css"
 
 export default function VerticalForm({heading, inputs, buttonCaption, links}) {
+  const initialInputValues =
+    inputs.map(inputData => {return {name: inputData.name, value: "abc"}});
+  const [inputValues, setInputValues] = useState(initialInputValues);
+
+  function inputHandler(event) {
+    const indexOfTriggeredInput =
+      inputValues.map(obj => obj.name).indexOf(event.target.name);
+    setInputValues(prevState => {
+      return (
+        [
+          ...prevState,
+          prevState[indexOfTriggeredInput].value = event.target.value
+        ]
+      );
+    });
+  }
+
   return (
       <form
         className={styles["inputs-form"]}
@@ -20,10 +37,13 @@ export default function VerticalForm({heading, inputs, buttonCaption, links}) {
             inputs.map(inputData =>
               <Input
                 extraClass="mt-6"
+                name={inputData.name}
+                key={inputData.name}
                 type={inputData.type}
-                placeholder={inputData.name}
+                value={inputValues.find(val => val.name === inputData.name).value}
+                placeholder={inputData.placeholder}
                 icon={inputData.icon}
-                value=""
+                onChange={inputHandler}
                 spellCheck={false}
               />
             )
