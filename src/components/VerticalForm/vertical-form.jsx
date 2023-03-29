@@ -8,7 +8,7 @@ import {
 
 import styles from "./vertical-form.module.css"
 
-export default function VerticalForm({heading, inputs, buttonCaption, links}) {
+export default function VerticalForm({heading, inputs, buttonCaption, links, callback}) {
   const initialInputValues =
     inputs.map(inputData => {return {name: inputData.name, value: ""}});
   const [inputValues, setInputValues] = useState(initialInputValues);
@@ -23,11 +23,17 @@ export default function VerticalForm({heading, inputs, buttonCaption, links}) {
     });
   }
 
+  function formSubmitHandler(event) {
+    event.preventDefault();
+    callback(event);
+  }
+
   const navigate = useNavigate();
 
   return (
       <form
         className={styles["inputs-form"]}
+        onSubmit={formSubmitHandler}
         noValidate
       >
         <h2 className="text text_type_main-medium">{heading}</h2>
@@ -52,6 +58,7 @@ export default function VerticalForm({heading, inputs, buttonCaption, links}) {
             htmlType="submit"
             type="primary"
             size="medium"
+            onClick={null}
           >
             {buttonCaption}
           </Button>
